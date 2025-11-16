@@ -1,4 +1,4 @@
-module goark
+module github.com/morehao/goark
 
 go 1.23.3
 
