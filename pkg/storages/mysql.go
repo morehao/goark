@@ -10,10 +10,12 @@ import (
 
 var (
 	DBDemo *gorm.DB
+	DBIam  *gorm.DB
 )
 
 const (
 	DBNameDemo = "demo"
+	DBNameIam  = "ark_iam"
 )
 
 func InitMultiMysql(configs []dbmysql.MysqlConfig) error {
@@ -34,6 +36,8 @@ func InitMultiMysql(configs []dbmysql.MysqlConfig) error {
 		switch cfg.Database {
 		case DBNameDemo:
 			DBDemo = client
+		case DBNameIam:
+			DBIam = client
 		default:
 			return fmt.Errorf("unknown database: " + cfg.Database)
 		}
