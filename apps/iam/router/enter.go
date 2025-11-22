@@ -7,4 +7,5 @@ func RegisterRouter(routerGroup *gin.RouterGroup) {
 	sseRouter(routerGroup)
 	clientRouter(routerGroup)
 	userRouter(routerGroup)
+	tenantRouter(routerGroup)
 }
