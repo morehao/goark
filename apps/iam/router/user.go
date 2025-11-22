@@ -10,9 +10,9 @@ import (
 func userRouter(routerGroup *gin.RouterGroup) {
 	userCtr := ctruser.NewUserCtr()
 
-	routerGroup.POST("/user/create", userCtr.Create)    // 新建用户管理
-	routerGroup.POST("/user/delete", userCtr.Delete)    // 删除用户管理
-	routerGroup.POST("/user/update", userCtr.Update)    // 更新用户管理
-	routerGroup.GET("/user/detail", userCtr.Detail)     // 根据ID获取用户管理
-	routerGroup.GET("/user/pageList", userCtr.PageList) // 获取用户管理列表
+	routerGroup.POST("/user/create", userCtr.Create)
+	routerGroup.POST("/user/delete", userCtr.Delete)
+	routerGroup.POST("/user/update", userCtr.Update)
+	routerGroup.GET("/user/detail", userCtr.Detail)
+	routerGroup.GET("/user/pageList", userCtr.PageList)
 }

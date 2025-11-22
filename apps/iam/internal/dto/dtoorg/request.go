@@ -10,12 +10,15 @@ type CompanyCreateReq struct {
 }
 
 type CompanyUpdateReq struct {
-	ID uint `json:"id" validate:"required" label:"数据自增id"` // 数据自增id
+	// ID 数据自增id
+	ID uint `json:"id" validate:"required" label:"数据自增id"`
+
 	objorg.CompanyBaseInfo
 }
 
 type CompanyDetailReq struct {
-	ID uint `json:"id" form:"id" validate:"required" label:"数据自增id"` // 数据自增id
+	// ID 数据自增id
+	ID uint `json:"id" form:"id" validate:"required" label:"数据自增id"`
 }
 
 type CompanyPageListReq struct {
@@ -23,22 +26,31 @@ type CompanyPageListReq struct {
 }
 
 type CompanyDeleteReq struct {
-	ID uint `json:"id" form:"id" validate:"required" label:"数据自增id"` // 数据自增id
+	// ID 数据自增id
+	ID uint `json:"id" form:"id" validate:"required" label:"数据自增id"`
 }
 
 type DepartmentCreateReq struct {
 	objorg.DepartmentBaseInfo
 }
+
 type DepartmentUpdateReq struct {
-	ID uint `json:"id" validate:"required" label:"数据自增id"` // 数据自增id
+	// ID 数据自增id
+	ID uint `json:"id" validate:"required" label:"数据自增id"`
+
 	objorg.DepartmentBaseInfo
 }
+
 type DepartmentDetailReq struct {
-	ID uint `json:"id" form:"id" validate:"required" label:"数据自增id"` // 数据自增id
+	// ID 数据自增id
+	ID uint `json:"id" form:"id" validate:"required" label:"数据自增id"`
 }
+
 type DepartmentPageListReq struct {
 	objcommon.PageQuery
 }
+
 type DepartmentDeleteReq struct {
-	ID uint `json:"id" form:"id" validate:"required" label:"数据自增id"` // 数据自增id
+	// ID 数据自增id
+	ID uint `json:"id" form:"id" validate:"required" label:"数据自增id"`
 }

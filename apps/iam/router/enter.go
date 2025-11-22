@@ -2,11 +2,8 @@ package router
 
 import "github.com/gin-gonic/gin"
 
-// RouterGroups 路由组配置
 type RouterGroups struct {
-	// AuthGroup 需要鉴权的路由组
-	AuthGroup *gin.RouterGroup
-	// NoAuthGroup 不需要鉴权的路由组
+	AuthGroup   *gin.RouterGroup
 	NoAuthGroup *gin.RouterGroup
 }
 

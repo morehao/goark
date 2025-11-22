@@ -4,7 +4,7 @@
  * @LastEditors: morehao morehao@qq.com
  * @LastEditTime: 2025-11-08 17:46:54
  * @FilePath: /golib/Users/morehao/Documents/practice/go/go-gin-web/apps/demoapp/client/httpbingo/httpbingo.go
- * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+ * @Description: 这默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
 package httpbingo
 

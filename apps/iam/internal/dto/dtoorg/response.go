@@ -6,40 +6,59 @@ import (
 )
 
 type CompanyCreateResp struct {
-	ID uint `json:"id"` // 数据自增id
+	// ID 数据自增id
+	ID uint `json:"id"`
 }
 
 type CompanyDetailResp struct {
-	ID uint `json:"id" validate:"required"` // 数据自增id
+	// ID 数据自增id
+	ID uint `json:"id" validate:"required"`
+
 	objorg.CompanyBaseInfo
 	objcommon.OperatorBaseInfo
 }
 
 type CompanyPageListItem struct {
-	ID uint `json:"id" validate:"required"` // 数据自增id
+	// ID 数据自增id
+	ID uint `json:"id" validate:"required"`
+
 	objorg.CompanyBaseInfo
 	objcommon.OperatorBaseInfo
 }
 
 type CompanyPageListResp struct {
-	List  []CompanyPageListItem `json:"list"`  // 数据列表
-	Total int64                 `json:"total"` // 数据总条数
+	// List 数据列表
+	List []CompanyPageListItem `json:"list"`
+
+	// Total 数据总条数
+	Total int64 `json:"total"`
 }
 
 type DepartmentCreateResp struct {
-	ID uint `json:"id"` // 数据自增id
+	// ID 数据自增id
+	ID uint `json:"id"`
 }
+
 type DepartmentDetailResp struct {
-	ID uint `json:"id" validate:"required"` // 数据自增id
+	// ID 数据自增id
+	ID uint `json:"id" validate:"required"`
+
 	objorg.DepartmentBaseInfo
 	objcommon.OperatorBaseInfo
 }
+
 type DepartmentPageListItem struct {
-	ID uint `json:"id" validate:"required"` // 数据自增id
+	// ID 数据自增id
+	ID uint `json:"id" validate:"required"`
+
 	objorg.DepartmentBaseInfo
 	objcommon.OperatorBaseInfo
 }
+
 type DepartmentPageListResp struct {
-	List  []DepartmentPageListItem `json:"list"`  // 数据列表
-	Total int64                    `json:"total"` // 数据总条数
+	// List 数据列表
+	List []DepartmentPageListItem `json:"list"`
+
+	// Total 数据总条数
+	Total int64 `json:"total"`
 }

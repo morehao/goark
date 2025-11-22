@@ -6,40 +6,59 @@ import (
 )
 
 type MenuCreateResp struct {
-	ID uint `json:"id"` // 数据自增id
+	// ID 数据自增id
+	ID uint `json:"id"`
 }
 
 type MenuDetailResp struct {
-	ID uint `json:"id" validate:"required"` // 数据自增id
+	// ID 数据自增id
+	ID uint `json:"id" validate:"required"`
+
 	objpermission.MenuBaseInfo
 	objcommon.OperatorBaseInfo
 }
 
 type MenuPageListItem struct {
-	ID uint `json:"id" validate:"required"` // 数据自增id
+	// ID 数据自增id
+	ID uint `json:"id" validate:"required"`
+
 	objpermission.MenuBaseInfo
 	objcommon.OperatorBaseInfo
 }
 
 type MenuPageListResp struct {
-	List  []MenuPageListItem `json:"list"`  // 数据列表
-	Total int64              `json:"total"` // 数据总条数
+	// List 数据列表
+	List []MenuPageListItem `json:"list"`
+
+	// Total 数据总条数
+	Total int64 `json:"total"`
 }
 
 type RoleCreateResp struct {
-	ID uint `json:"id"` // 数据自增id
+	// ID 数据自增id
+	ID uint `json:"id"`
 }
+
 type RoleDetailResp struct {
-	ID uint `json:"id" validate:"required"` // 数据自增id
+	// ID 数据自增id
+	ID uint `json:"id" validate:"required"`
+
 	objpermission.RoleBaseInfo
 	objcommon.OperatorBaseInfo
 }
+
 type RolePageListItem struct {
-	ID uint `json:"id" validate:"required"` // 数据自增id
+	// ID 数据自增id
+	ID uint `json:"id" validate:"required"`
+
 	objpermission.RoleBaseInfo
 	objcommon.OperatorBaseInfo
 }
+
 type RolePageListResp struct {
-	List  []RolePageListItem `json:"list"`  // 数据列表
-	Total int64              `json:"total"` // 数据总条数
+	// List 数据列表
+	List []RolePageListItem `json:"list"`
+
+	// Total 数据总条数
+	Total int64 `json:"total"`
 }
