@@ -1,4 +1,4 @@
-mysql_dsn: root:123456@tcp(127.0.0.1:3306)/ark_iam?charset=utf8mb4&parseTime=True&loc=Local
+mysql_dsn: root:123456@tcp(127.0.0.1:3306)/ark_dev?charset=utf8mb4&parseTime=True&loc=Local
 layer_parent_dir_map:
   controller: internal
   service: internal
@@ -7,9 +7,9 @@ layer_name_map:
   model: iammodel
   dao: iamdao
 module:
-  package_name: tenants
-  description: 租户
-  table_name: iam_tenants
+  package_name: company
+  description: 公司
+  table_name: iam_companies
   table_prefix: iam_ 
 model:
   package_name: tenants
