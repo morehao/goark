@@ -30,7 +30,11 @@ func main() {
 		routerGroup.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler, ginSwagger.InstanceName("demoapp")))
 	}
 	routerGroup.Use(middleware.AccessLog())
-	router.RegisterRouter(routerGroup)
+	routerGroups := &router.RouterGroups{
+		AuthGroup:   routerGroup,
+		NoAuthGroup: routerGroup,
+	}
+	router.RegisterRouter(routerGroups)
 	if err := engine.Run(fmt.Sprintf(":%s", config.Conf.Server.Port)); err != nil {
 		glog.Errorf(context.Background(), "%s run fail, port:%s", config.Conf.Server.Name, config.Conf.Server.Port)
 		panic(err)
