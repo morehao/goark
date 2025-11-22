@@ -6,7 +6,7 @@ USE ark_iam;
 -- ============================================
 
 -- 租户表(最高层级)
-CREATE TABLE iam_tenants (
+CREATE TABLE iam_tenant (
     id BIGINT PRIMARY KEY AUTO_INCREMENT COMMENT '租户ID',
     tenant_code VARCHAR(32) UNIQUE NOT NULL COMMENT '租户编码',
     tenant_name VARCHAR(64) NOT NULL COMMENT '租户名称',
@@ -25,7 +25,7 @@ CREATE TABLE iam_tenants (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='租户表';
 
 -- 公司表(租户主体)
-CREATE TABLE iam_companies (
+CREATE TABLE iam_company (
     id BIGINT PRIMARY KEY AUTO_INCREMENT COMMENT '公司ID(租户ID)',
     tenant_id BIGINT NOT NULL COMMENT '所属租户ID',
     company_code VARCHAR(32) NOT NULL COMMENT '公司编码',
@@ -56,7 +56,7 @@ CREATE TABLE iam_companies (
 -- ============================================
 
 -- 自然人表(跨公司的人员身份)
-CREATE TABLE iam_persons (
+CREATE TABLE iam_person (
     id BIGINT PRIMARY KEY AUTO_INCREMENT COMMENT '自然人ID',
     
     -- 身份信息
@@ -93,7 +93,7 @@ CREATE TABLE iam_persons (
 -- ============================================
 
 -- 部门表
-CREATE TABLE iam_departments (
+CREATE TABLE iam_department (
     id BIGINT PRIMARY KEY AUTO_INCREMENT COMMENT '部门ID',
     company_id BIGINT NOT NULL COMMENT '所属公司ID(租户ID)',
     parent_id BIGINT DEFAULT 0 COMMENT '父部门ID,0表示根部门',
@@ -123,11 +123,11 @@ CREATE TABLE iam_departments (
 -- ============================================
 
 -- 用户账号表(公司内的账号或平台管理员账号,一个自然人可在多个公司有账号)
-CREATE TABLE iam_users (
+CREATE TABLE iam_user (
     id BIGINT PRIMARY KEY AUTO_INCREMENT COMMENT '用户ID',
     person_id BIGINT NOT NULL COMMENT '自然人ID',
     company_id BIGINT NOT NULL DEFAULT 0 COMMENT '所属公司ID(租户ID), 0表示平台管理员账号',
-    dept_id BIGINT COMMENT '主部门ID(冗余字段,方便查询,实际关联关系在iam_user_departments表)',
+    dept_id BIGINT COMMENT '主部门ID(冗余字段,方便查询,实际关联关系在iam_user_department表)',
     
     -- 账号信息
     username VARCHAR(32) NOT NULL COMMENT '用户名(公司用户:公司内唯一,平台管理员:全局唯一,需应用层保证)',
@@ -162,7 +162,7 @@ CREATE TABLE iam_users (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='用户账号表';
 
 -- 用户部门关联表(支持用户跨部门,每个用户只能有一个主部门,需应用层保证)
-CREATE TABLE iam_user_departments (
+CREATE TABLE iam_user_department (
     id BIGINT PRIMARY KEY AUTO_INCREMENT COMMENT '关联ID',
     user_id BIGINT NOT NULL COMMENT '用户ID',
     company_id BIGINT NOT NULL COMMENT '公司ID(租户ID,冗余)',
@@ -186,7 +186,7 @@ CREATE TABLE iam_user_departments (
 -- ============================================
 
 -- 角色表
-CREATE TABLE iam_roles (
+CREATE TABLE iam_role (
     id BIGINT PRIMARY KEY AUTO_INCREMENT COMMENT '角色ID',
     company_id BIGINT NOT NULL COMMENT '所属公司ID(租户ID)',
     role_code VARCHAR(32) NOT NULL COMMENT '角色编码',
@@ -209,7 +209,7 @@ CREATE TABLE iam_roles (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='角色表';
 
 -- 用户角色关联表
-CREATE TABLE iam_user_roles (
+CREATE TABLE iam_user_role (
     id BIGINT PRIMARY KEY AUTO_INCREMENT COMMENT '关联ID',
     company_id BIGINT NOT NULL COMMENT '公司ID(租户ID,冗余)',
     user_id BIGINT NOT NULL COMMENT '用户ID',
@@ -228,7 +228,7 @@ CREATE TABLE iam_user_roles (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='用户角色关联表';
 
 -- 菜单表
-CREATE TABLE iam_menus (
+CREATE TABLE iam_menu (
     id BIGINT PRIMARY KEY AUTO_INCREMENT COMMENT '菜单ID',
     company_id BIGINT NOT NULL COMMENT '所属公司ID(租户ID)',
     parent_id BIGINT DEFAULT 0 COMMENT '父菜单ID',
@@ -265,7 +265,7 @@ CREATE TABLE iam_menus (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='菜单表';
 
 -- 角色菜单关联表
-CREATE TABLE iam_role_menus (
+CREATE TABLE iam_role_menu (
     id BIGINT PRIMARY KEY AUTO_INCREMENT COMMENT '关联ID',
     company_id BIGINT NOT NULL COMMENT '公司ID(租户ID,冗余)',
     role_id BIGINT NOT NULL COMMENT '角色ID',
@@ -287,7 +287,7 @@ CREATE TABLE iam_role_menus (
 -- ============================================
 
 -- 操作日志表
-CREATE TABLE iam_operation_logs (
+CREATE TABLE iam_operation_log (
     id BIGINT PRIMARY KEY AUTO_INCREMENT COMMENT '日志ID',
     company_id BIGINT NOT NULL COMMENT '公司ID(租户ID)',
     user_id BIGINT COMMENT '操作人ID',
@@ -323,7 +323,7 @@ CREATE TABLE iam_operation_logs (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='操作日志表';
 
 -- 登录日志表
-CREATE TABLE iam_login_logs (
+CREATE TABLE iam_login_log (
     id BIGINT PRIMARY KEY AUTO_INCREMENT COMMENT '日志ID',
     company_id BIGINT NOT NULL COMMENT '公司ID(租户ID)',
     user_id BIGINT COMMENT '用户ID',
