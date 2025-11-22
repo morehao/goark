@@ -7,14 +7,14 @@ layer_name_map:
   model: iammodel
   dao: iamdao
 module:
-  package_name: user
-  description: 用户管理
-  table_name: iam_user
+  package_name: permission
+  description: 角色菜单关系
+  table_name: iam_role_menu
   table_prefix: iam_ 
 model:
-  package_name: user
-  description: 用户角色关系
-  table_name: iam_user_role
+  package_name: permission
+  description: 角色菜单关系
+  table_name: iam_role_menu
   table_prefix: iam_ 
 api:
   package_name: tenants

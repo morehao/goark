@@ -1,4 +1,4 @@
-package daouser
+package daopermission
 
 import (
 	"fmt"

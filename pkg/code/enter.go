@@ -32,4 +32,6 @@ func init() {
 	registerError(companyErrorMsgMap)
 	registerError(departmentErrorMsgMap)
 	registerError(userErrorMsgMap)
+	registerError(menuErrorMsgMap)
+	registerError(roleErrorMsgMap)
 }

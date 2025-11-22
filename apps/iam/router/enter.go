@@ -7,4 +7,6 @@ func RegisterRouter(routerGroup *gin.RouterGroup) {
 	companyRouter(routerGroup)
 	departmentRouter(routerGroup)
 	userRouter(routerGroup)
+	menuRouter(routerGroup)
+	roleRouter(routerGroup)
 }

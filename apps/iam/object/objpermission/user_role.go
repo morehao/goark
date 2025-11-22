@@ -1,4 +1,4 @@
-package objuser
+package objpermission
 
 type UserRoleBaseInfo struct {
 	CompanyID uint `json:"companyId" form:"companyId"` // 公司ID(租户ID,冗余)
