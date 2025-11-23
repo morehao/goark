@@ -8,13 +8,13 @@ layer_name_map:
   dao: iamdao
 module:
   package_name: permission
-  description: 角色菜单关系
-  table_name: iam_role_menu
+  description: 角色管理
+  table_name: iam_role
   table_prefix: iam_ 
 model:
   package_name: permission
-  description: 角色菜单关系
-  table_name: iam_role_menu
+  description: 用户角色关联
+  table_name: iam_user_role
   table_prefix: iam_ 
 api:
   package_name: tenants

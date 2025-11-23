@@ -125,7 +125,7 @@ func (ctr *userCtr) Detail(ctx *gin.Context) {
 // @Produce application/json
 // @Param req query dtouser.UserPageListReq true "用户管理列表"
 // @Success 200 {object} gincontext.DtoRender{data=dtouser.UserPageListResp} "{"code": 0,"data": "ok","msg": "success"}"
-// @Router /iam/v1/user/pageList [get]
+// @Router /iam/v1/user/pageList [post]
 func (ctr *userCtr) PageList(ctx *gin.Context) {
 	var req dtouser.UserPageListReq
 	if err := ctx.ShouldBindQuery(&req); err != nil {

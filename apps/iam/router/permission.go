@@ -14,16 +14,15 @@ func menuRouter(routerGroup *gin.RouterGroup) {
 	routerGroup.POST("/menu/delete", menuCtr.Delete)
 	routerGroup.POST("/menu/update", menuCtr.Update)
 	routerGroup.GET("/menu/detail", menuCtr.Detail)
-	routerGroup.GET("/menu/pageList", menuCtr.PageList)
+	routerGroup.POST("/menu/pageList", menuCtr.PageList)
 }
 
 // roleRouter 初始化角色管理路由信息
 func roleRouter(routerGroup *gin.RouterGroup) {
 	roleCtr := ctrpermission.NewRoleCtr()
-
 	routerGroup.POST("/role/create", roleCtr.Create)
 	routerGroup.POST("/role/delete", roleCtr.Delete)
 	routerGroup.POST("/role/update", roleCtr.Update)
 	routerGroup.GET("/role/detail", roleCtr.Detail)
-	routerGroup.GET("/role/pageList", roleCtr.PageList)
+	routerGroup.POST("/role/pageList", roleCtr.PageList)
 }

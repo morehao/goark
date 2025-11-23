@@ -125,7 +125,7 @@ func (ctr *tenantCtr) Detail(ctx *gin.Context) {
 // @Produce application/json
 // @Param req query dtotenant.TenantPageListReq true "租户管理列表"
 // @Success 200 {object} gincontext.DtoRender{data=dtotenant.TenantPageListResp} "{"code": 0,"data": "ok","msg": "success"}"
-// @Router /iam/v1/tenant/pageList [get]
+// @Router /iam/v1/tenant/pageList [post]
 func (ctr *tenantCtr) PageList(ctx *gin.Context) {
 	var req dtotenant.TenantPageListReq
 	if err := ctx.ShouldBindQuery(&req); err != nil {

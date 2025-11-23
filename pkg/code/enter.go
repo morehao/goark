@@ -27,6 +27,7 @@ func GetError(code int) *gerror.Error {
 }
 
 func init() {
+	// 业务错误码从110100开始
 	registerError(gerror.DBErrorMsgMap)
 	registerError(gerror.SystemErrorMsgMap)
 	registerError(gerror.AuthErrorMsgMap)

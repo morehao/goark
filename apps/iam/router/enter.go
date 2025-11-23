@@ -7,20 +7,20 @@ import (
 )
 
 type RouterGroups struct {
-	AuthGroup   *gin.RouterGroup
-	NoAuthGroup *gin.RouterGroup
+	AuthGroup	*gin.RouterGroup
+	NoAuthGroup	*gin.RouterGroup
 }
 
 func RegisterRouter(groups *RouterGroups, appName string) {
 	if config.Conf.Server.Env == "dev" {
 		ginrouter.RegisterSwagger(groups.AuthGroup, appName)
 	}
-	v1Auth := groups.AuthGroup.Group("/v1")
+	v1AuthGroup := groups.AuthGroup.Group("/v1")
 	// v1NoAuth := groups.NoAuthGroup.Group("/v1")
-	tenantRouter(v1Auth)
-	companyRouter(v1Auth)
-	departmentRouter(v1Auth)
-	userRouter(v1Auth)
-	menuRouter(v1Auth)
-	roleRouter(v1Auth)
+	tenantRouter(v1AuthGroup)
+	companyRouter(v1AuthGroup)
+	departmentRouter(v1AuthGroup)
+	userRouter(v1AuthGroup)
+	menuRouter(v1AuthGroup)
+	roleRouter(v1AuthGroup)
 }

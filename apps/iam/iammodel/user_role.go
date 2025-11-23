@@ -4,7 +4,7 @@ import (
 	"gorm.io/gorm"
 )
 
-// UserRoleEntity 用户角色关系表结构体
+// UserRoleEntity 用户角色关联表结构体
 type UserRoleEntity struct {
 	gorm.Model
 	CompanyID uint `gorm:"column:company_id;type:bigint;not null;default '';comment: 公司ID(租户ID,冗余)"`

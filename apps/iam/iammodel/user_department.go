@@ -4,7 +4,7 @@ import (
 	"gorm.io/gorm"
 )
 
-// UserDepartmentEntity 人员部门关系表结构体
+// UserDepartmentEntity 用户部门关系表结构体
 type UserDepartmentEntity struct {
 	gorm.Model
 	CompanyID uint   `gorm:"column:company_id;type:bigint;not null;default '';comment: 公司ID(租户ID,冗余)"`

@@ -125,7 +125,7 @@ func (ctr *companyCtr) Detail(ctx *gin.Context) {
 // @Produce application/json
 // @Param req query dtoorg.CompanyPageListReq true "公司管理列表"
 // @Success 200 {object} gincontext.DtoRender{data=dtoorg.CompanyPageListResp} "{"code": 0,"data": "ok","msg": "success"}"
-// @Router /iam/v1/company/pageList [get]
+// @Router /iam/v1/company/pageList [post]
 func (ctr *companyCtr) PageList(ctx *gin.Context) {
 	var req dtoorg.CompanyPageListReq
 	if err := ctx.ShouldBindQuery(&req); err != nil {

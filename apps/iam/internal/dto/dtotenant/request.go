@@ -10,14 +10,13 @@ type TenantCreateReq struct {
 }
 
 type TenantUpdateReq struct {
-	// ID 数据自增id
+	// ID 数据自增 ID
 	ID uint `json:"id" validate:"required" label:"数据自增id"`
-
 	objtenant.TenantBaseInfo
 }
 
 type TenantDetailReq struct {
-	// ID 数据自增id
+	// ID 数据自增 ID
 	ID uint `json:"id" form:"id" validate:"required" label:"数据自增id"`
 }
 
@@ -26,6 +25,6 @@ type TenantPageListReq struct {
 }
 
 type TenantDeleteReq struct {
-	// ID 数据自增id
+	// ID 数据自增 ID
 	ID uint `json:"id" form:"id" validate:"required" label:"数据自增id"`
 }
