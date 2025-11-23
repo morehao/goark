@@ -19,7 +19,7 @@ import (
 )
 
 func Get(ctx *gin.Context, req *GetRequest) (*GetResponse, error) {
-	_, _ = dbclient.DemoRedis.Get(ctx, "").Result()
+	_, _ = dbclient.RedisCli.Get(ctx, "").Result()
 	_, _ = daouser.NewUserDao().GetListByCond(ctx, &daouser.UserCond{})
 
 	cfg := config.Conf

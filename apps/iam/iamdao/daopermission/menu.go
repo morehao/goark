@@ -10,7 +10,7 @@ import (
 	"github.com/morehao/goark/pkg/code"
 
 	"github.com/morehao/golib/gerror"
-	"github.com/morehao/golib/gutils"
+	"github.com/morehao/golib/gutil"
 	"gorm.io/gorm"
 )
 
@@ -46,7 +46,7 @@ func (d *MenuDao) WithTx(db *gorm.DB) *MenuDao {
 func (d *MenuDao) Insert(ctx context.Context, entity *iammodel.MenuEntity) error {
 	db := d.DB(ctx).Table(d.TableName())
 	if err := db.Create(entity).Error; err != nil {
-		return code.GetError(gerror.DBInsertErr).Wrapf(err, "[MenuDao] Insert fail, entity:%s", gutils.ToJsonString(entity))
+		return code.GetError(gerror.DBInsertErr).Wrapf(err, "[MenuDao] Insert fail, entity:%s", gutil.ToJsonString(entity))
 	}
 	return nil
 }
@@ -58,7 +58,7 @@ func (d *MenuDao) BatchInsert(ctx context.Context, entityList iammodel.MenuEntit
 
 	db := d.DB(ctx).Table(d.TableName())
 	if err := db.Create(entityList).Error; err != nil {
-		return code.GetError(gerror.DBInsertErr).Wrapf(err, "[MenuDao] BatchInsert fail, entityList:%s", gutils.ToJsonString(entityList))
+		return code.GetError(gerror.DBInsertErr).Wrapf(err, "[MenuDao] BatchInsert fail, entityList:%s", gutil.ToJsonString(entityList))
 	}
 	return nil
 }
@@ -66,7 +66,7 @@ func (d *MenuDao) BatchInsert(ctx context.Context, entityList iammodel.MenuEntit
 func (d *MenuDao) UpdateByID(ctx context.Context, id uint, entity *iammodel.MenuEntity) error {
 	db := d.DB(ctx).Table(d.TableName())
 	if err := db.Where("id = ?", id).Updates(entity).Error; err != nil {
-		return code.GetError(gerror.DBUpdateErr).Wrapf(err, "[MenuDao] UpdateByID fail, id:%d entity:%s", id, gutils.ToJsonString(entity))
+		return code.GetError(gerror.DBUpdateErr).Wrapf(err, "[MenuDao] UpdateByID fail, id:%d entity:%s", id, gutil.ToJsonString(entity))
 	}
 	return nil
 }
@@ -74,7 +74,7 @@ func (d *MenuDao) UpdateByID(ctx context.Context, id uint, entity *iammodel.Menu
 func (d *MenuDao) UpdateMap(ctx context.Context, id uint, updateMap map[string]interface{}) error {
 	db := d.DB(ctx).Table(d.TableName())
 	if err := db.Where("id = ?", id).Updates(updateMap).Error; err != nil {
-		return code.GetError(gerror.DBUpdateErr).Wrapf(err, "[MenuDao] UpdateMap fail, id:%d, updateMap:%s", id, gutils.ToJsonString(updateMap))
+		return code.GetError(gerror.DBUpdateErr).Wrapf(err, "[MenuDao] UpdateMap fail, id:%d, updateMap:%s", id, gutil.ToJsonString(updateMap))
 	}
 	return nil
 }
@@ -107,7 +107,7 @@ func (d *MenuDao) GetByCond(ctx context.Context, cond *MenuCond) (*iammodel.Menu
 	d.BuildCondition(db, cond)
 
 	if err := db.Find(&entity).Error; err != nil {
-		return nil, code.GetError(gerror.DBFindErr).Wrapf(err, "[MenuDao] GetById fail, cond:%s", gutils.ToJsonString(cond))
+		return nil, code.GetError(gerror.DBFindErr).Wrapf(err, "[MenuDao] GetById fail, cond:%s", gutil.ToJsonString(cond))
 	}
 	return &entity, nil
 }
@@ -119,7 +119,7 @@ func (d *MenuDao) GetListByCond(ctx context.Context, cond *MenuCond) (iammodel.M
 	d.BuildCondition(db, cond)
 
 	if err := db.Find(&entityList).Error; err != nil {
-		return nil, code.GetError(gerror.DBFindErr).Wrapf(err, "[MenuDao] GetListByCond fail, cond:%s", gutils.ToJsonString(cond))
+		return nil, code.GetError(gerror.DBFindErr).Wrapf(err, "[MenuDao] GetListByCond fail, cond:%s", gutil.ToJsonString(cond))
 	}
 	return entityList, nil
 }
@@ -131,14 +131,14 @@ func (d *MenuDao) GetPageListByCond(ctx context.Context, cond *MenuCond) (iammod
 
 	var count int64
 	if err := db.Count(&count).Error; err != nil {
-		return nil, 0, code.GetError(gerror.DBFindErr).Wrapf(err, "[MenuDao] GetPageListByCond count fail, cond:%s", gutils.ToJsonString(cond))
+		return nil, 0, code.GetError(gerror.DBFindErr).Wrapf(err, "[MenuDao] GetPageListByCond count fail, cond:%s", gutil.ToJsonString(cond))
 	}
 	if cond.PageSize > 0 && cond.Page > 0 {
 		db.Offset((cond.Page - 1) * cond.PageSize).Limit(cond.PageSize)
 	}
 	var entityList iammodel.MenuEntityList
 	if err := db.Find(&entityList).Error; err != nil {
-		return nil, 0, code.GetError(gerror.DBFindErr).Wrapf(err, "[MenuDao] GetPageListByCond find fail, cond:%s", gutils.ToJsonString(cond))
+		return nil, 0, code.GetError(gerror.DBFindErr).Wrapf(err, "[MenuDao] GetPageListByCond find fail, cond:%s", gutil.ToJsonString(cond))
 	}
 	return entityList, count, nil
 }
@@ -149,7 +149,7 @@ func (d *MenuDao) CountByCond(ctx context.Context, cond *MenuCond) (int64, error
 	d.BuildCondition(db, cond)
 	var count int64
 	if err := db.Count(&count).Error; err != nil {
-		return 0, code.GetError(gerror.DBFindErr).Wrapf(err, "[MenuDao] CountByCond fail, cond:%s", gutils.ToJsonString(cond))
+		return 0, code.GetError(gerror.DBFindErr).Wrapf(err, "[MenuDao] CountByCond fail, cond:%s", gutil.ToJsonString(cond))
 	}
 	return count, nil
 }

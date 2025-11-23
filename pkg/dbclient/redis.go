@@ -7,14 +7,7 @@ import (
 )
 
 var (
-	RedisCli  *redis.Client
-	DemoRedis *redis.Client
-	IAMRedis  *redis.Client
-)
-
-const (
-	RedisServiceNameDemo = "demoapp"
-	RedisServiceNameIAM  = "iam"
+	RedisCli *redis.Client
 )
 
 func InitRedis(config dbredis.RedisConfig, logConfig *glog.LogConfig) error {

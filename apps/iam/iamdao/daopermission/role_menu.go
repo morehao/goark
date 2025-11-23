@@ -10,7 +10,7 @@ import (
 	"github.com/morehao/goark/pkg/code"
 
 	"github.com/morehao/golib/gerror"
-	"github.com/morehao/golib/gutils"
+	"github.com/morehao/golib/gutil"
 	"gorm.io/gorm"
 )
 
@@ -46,7 +46,7 @@ func (d *RoleMenuDao) WithTx(db *gorm.DB) *RoleMenuDao {
 func (d *RoleMenuDao) Insert(ctx context.Context, entity *iammodel.RoleMenuEntity) error {
 	db := d.DB(ctx).Table(d.TableName())
 	if err := db.Create(entity).Error; err != nil {
-		return code.GetError(gerror.DBInsertErr).Wrapf(err, "[RoleMenuDao] Insert fail, entity:%s", gutils.ToJsonString(entity))
+		return code.GetError(gerror.DBInsertErr).Wrapf(err, "[RoleMenuDao] Insert fail, entity:%s", gutil.ToJsonString(entity))
 	}
 	return nil
 }
@@ -58,7 +58,7 @@ func (d *RoleMenuDao) BatchInsert(ctx context.Context, entityList iammodel.RoleM
 
 	db := d.DB(ctx).Table(d.TableName())
 	if err := db.Create(entityList).Error; err != nil {
-		return code.GetError(gerror.DBInsertErr).Wrapf(err, "[RoleMenuDao] BatchInsert fail, entityList:%s", gutils.ToJsonString(entityList))
+		return code.GetError(gerror.DBInsertErr).Wrapf(err, "[RoleMenuDao] BatchInsert fail, entityList:%s", gutil.ToJsonString(entityList))
 	}
 	return nil
 }
@@ -66,7 +66,7 @@ func (d *RoleMenuDao) BatchInsert(ctx context.Context, entityList iammodel.RoleM
 func (d *RoleMenuDao) UpdateByID(ctx context.Context, id uint, entity *iammodel.RoleMenuEntity) error {
 	db := d.DB(ctx).Table(d.TableName())
 	if err := db.Where("id = ?", id).Updates(entity).Error; err != nil {
-		return code.GetError(gerror.DBUpdateErr).Wrapf(err, "[RoleMenuDao] UpdateByID fail, id:%d entity:%s", id, gutils.ToJsonString(entity))
+		return code.GetError(gerror.DBUpdateErr).Wrapf(err, "[RoleMenuDao] UpdateByID fail, id:%d entity:%s", id, gutil.ToJsonString(entity))
 	}
 	return nil
 }
@@ -74,7 +74,7 @@ func (d *RoleMenuDao) UpdateByID(ctx context.Context, id uint, entity *iammodel.
 func (d *RoleMenuDao) UpdateMap(ctx context.Context, id uint, updateMap map[string]interface{}) error {
 	db := d.DB(ctx).Table(d.TableName())
 	if err := db.Where("id = ?", id).Updates(updateMap).Error; err != nil {
-		return code.GetError(gerror.DBUpdateErr).Wrapf(err, "[RoleMenuDao] UpdateMap fail, id:%d, updateMap:%s", id, gutils.ToJsonString(updateMap))
+		return code.GetError(gerror.DBUpdateErr).Wrapf(err, "[RoleMenuDao] UpdateMap fail, id:%d, updateMap:%s", id, gutil.ToJsonString(updateMap))
 	}
 	return nil
 }
@@ -107,7 +107,7 @@ func (d *RoleMenuDao) GetByCond(ctx context.Context, cond *RoleMenuCond) (*iammo
 	d.BuildCondition(db, cond)
 
 	if err := db.Find(&entity).Error; err != nil {
-		return nil, code.GetError(gerror.DBFindErr).Wrapf(err, "[RoleMenuDao] GetById fail, cond:%s", gutils.ToJsonString(cond))
+		return nil, code.GetError(gerror.DBFindErr).Wrapf(err, "[RoleMenuDao] GetById fail, cond:%s", gutil.ToJsonString(cond))
 	}
 	return &entity, nil
 }
@@ -119,7 +119,7 @@ func (d *RoleMenuDao) GetListByCond(ctx context.Context, cond *RoleMenuCond) (ia
 	d.BuildCondition(db, cond)
 
 	if err := db.Find(&entityList).Error; err != nil {
-		return nil, code.GetError(gerror.DBFindErr).Wrapf(err, "[RoleMenuDao] GetListByCond fail, cond:%s", gutils.ToJsonString(cond))
+		return nil, code.GetError(gerror.DBFindErr).Wrapf(err, "[RoleMenuDao] GetListByCond fail, cond:%s", gutil.ToJsonString(cond))
 	}
 	return entityList, nil
 }
@@ -131,14 +131,14 @@ func (d *RoleMenuDao) GetPageListByCond(ctx context.Context, cond *RoleMenuCond)
 
 	var count int64
 	if err := db.Count(&count).Error; err != nil {
-		return nil, 0, code.GetError(gerror.DBFindErr).Wrapf(err, "[RoleMenuDao] GetPageListByCond count fail, cond:%s", gutils.ToJsonString(cond))
+		return nil, 0, code.GetError(gerror.DBFindErr).Wrapf(err, "[RoleMenuDao] GetPageListByCond count fail, cond:%s", gutil.ToJsonString(cond))
 	}
 	if cond.PageSize > 0 && cond.Page > 0 {
 		db.Offset((cond.Page - 1) * cond.PageSize).Limit(cond.PageSize)
 	}
 	var entityList iammodel.RoleMenuEntityList
 	if err := db.Find(&entityList).Error; err != nil {
-		return nil, 0, code.GetError(gerror.DBFindErr).Wrapf(err, "[RoleMenuDao] GetPageListByCond find fail, cond:%s", gutils.ToJsonString(cond))
+		return nil, 0, code.GetError(gerror.DBFindErr).Wrapf(err, "[RoleMenuDao] GetPageListByCond find fail, cond:%s", gutil.ToJsonString(cond))
 	}
 	return entityList, count, nil
 }
@@ -149,7 +149,7 @@ func (d *RoleMenuDao) CountByCond(ctx context.Context, cond *RoleMenuCond) (int6
 	d.BuildCondition(db, cond)
 	var count int64
 	if err := db.Count(&count).Error; err != nil {
-		return 0, code.GetError(gerror.DBFindErr).Wrapf(err, "[RoleMenuDao] CountByCond fail, cond:%s", gutils.ToJsonString(cond))
+		return 0, code.GetError(gerror.DBFindErr).Wrapf(err, "[RoleMenuDao] CountByCond fail, cond:%s", gutil.ToJsonString(cond))
 	}
 	return count, nil
 }

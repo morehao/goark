@@ -10,7 +10,7 @@ import (
 	"github.com/morehao/goark/pkg/code"
 	"github.com/morehao/golib/gcontext/gincontext"
 	"github.com/morehao/golib/glog"
-	"github.com/morehao/golib/gutils"
+	"github.com/morehao/golib/gutil"
 )
 
 type CompanySvc interface {
@@ -47,7 +47,7 @@ func (svc *companySvc) Create(ctx *gin.Context, req *dtoorg.CompanyCreateReq) (*
 	}
 
 	if err := daoorg.NewCompanyDao().Insert(ctx, insertEntity); err != nil {
-		glog.Errorf(ctx, "[svcorg.CompanyCreate] daoCompany Create fail, err:%v, req:%s", err, gutils.ToJsonString(req))
+		glog.Errorf(ctx, "[svcorg.CompanyCreate] daoCompany Create fail, err:%v, req:%s", err, gutil.ToJsonString(req))
 		return nil, code.GetError(code.CompanyCreateError)
 	}
 	return &dtoorg.CompanyCreateResp{
@@ -60,7 +60,7 @@ func (svc *companySvc) Delete(ctx *gin.Context, req *dtoorg.CompanyDeleteReq) er
 	userID := gincontext.GetUserID(ctx)
 
 	if err := daoorg.NewCompanyDao().Delete(ctx, req.ID, userID); err != nil {
-		glog.Errorf(ctx, "[svcorg.Delete] daoCompany Delete fail, err:%v, req:%s", err, gutils.ToJsonString(req))
+		glog.Errorf(ctx, "[svcorg.Delete] daoCompany Delete fail, err:%v, req:%s", err, gutil.ToJsonString(req))
 		return code.GetError(code.CompanyDeleteError)
 	}
 	return nil
@@ -83,7 +83,7 @@ func (svc *companySvc) Update(ctx *gin.Context, req *dtoorg.CompanyUpdateReq) er
 		UnifiedSocialCreditCode: req.UnifiedSocialCreditCode,
 	}
 	if err := daoorg.NewCompanyDao().UpdateByID(ctx, req.ID, updateEntity); err != nil {
-		glog.Errorf(ctx, "[svcorg.CompanyUpdate] daoCompany UpdateByID fail, err:%v, req:%s", err, gutils.ToJsonString(req))
+		glog.Errorf(ctx, "[svcorg.CompanyUpdate] daoCompany UpdateByID fail, err:%v, req:%s", err, gutil.ToJsonString(req))
 		return code.GetError(code.CompanyUpdateError)
 	}
 	return nil
@@ -93,7 +93,7 @@ func (svc *companySvc) Update(ctx *gin.Context, req *dtoorg.CompanyUpdateReq) er
 func (svc *companySvc) Detail(ctx *gin.Context, req *dtoorg.CompanyDetailReq) (*dtoorg.CompanyDetailResp, error) {
 	detailEntity, err := daoorg.NewCompanyDao().GetById(ctx, req.ID)
 	if err != nil {
-		glog.Errorf(ctx, "[svcorg.CompanyDetail] daoCompany GetById fail, err:%v, req:%s", err, gutils.ToJsonString(req))
+		glog.Errorf(ctx, "[svcorg.CompanyDetail] daoCompany GetById fail, err:%v, req:%s", err, gutil.ToJsonString(req))
 		return nil, code.GetError(code.CompanyGetDetailError)
 	}
 	// 判断是否存在
@@ -131,7 +131,7 @@ func (svc *companySvc) PageList(ctx *gin.Context, req *dtoorg.CompanyPageListReq
 	}
 	dataList, total, err := daoorg.NewCompanyDao().GetPageListByCond(ctx, cond)
 	if err != nil {
-		glog.Errorf(ctx, "[svcorg.CompanyPageList] daoCompany GetPageListByCond fail, err:%v, req:%s", err, gutils.ToJsonString(req))
+		glog.Errorf(ctx, "[svcorg.CompanyPageList] daoCompany GetPageListByCond fail, err:%v, req:%s", err, gutil.ToJsonString(req))
 		return nil, code.GetError(code.CompanyGetPageListError)
 	}
 	list := make([]dtoorg.CompanyPageListItem, 0, len(dataList))

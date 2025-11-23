@@ -10,7 +10,7 @@ import (
 	"github.com/morehao/goark/pkg/code"
 	"github.com/morehao/golib/gcontext/gincontext"
 	"github.com/morehao/golib/glog"
-	"github.com/morehao/golib/gutils"
+	"github.com/morehao/golib/gutil"
 )
 
 type TenantSvc interface {
@@ -41,7 +41,7 @@ func (svc *tenantSvc) Create(ctx *gin.Context, req *dtotenant.TenantCreateReq) (
 	}
 
 	if err := daotenant.NewTenantDao().Insert(ctx, insertEntity); err != nil {
-		glog.Errorf(ctx, "[svctenant.TenantCreate] daoTenant Create fail, err:%v, req:%s", err, gutils.ToJsonString(req))
+		glog.Errorf(ctx, "[svctenant.TenantCreate] daoTenant Create fail, err:%v, req:%s", err, gutil.ToJsonString(req))
 		return nil, code.GetError(code.TenantCreateError)
 	}
 	return &dtotenant.TenantCreateResp{
@@ -54,7 +54,7 @@ func (svc *tenantSvc) Delete(ctx *gin.Context, req *dtotenant.TenantDeleteReq) e
 	userID := gincontext.GetUserID(ctx)
 
 	if err := daotenant.NewTenantDao().Delete(ctx, req.ID, userID); err != nil {
-		glog.Errorf(ctx, "[svctenant.Delete] daoTenant Delete fail, err:%v, req:%s", err, gutils.ToJsonString(req))
+		glog.Errorf(ctx, "[svctenant.Delete] daoTenant Delete fail, err:%v, req:%s", err, gutil.ToJsonString(req))
 		return code.GetError(code.TenantDeleteError)
 	}
 	return nil
@@ -71,7 +71,7 @@ func (svc *tenantSvc) Update(ctx *gin.Context, req *dtotenant.TenantUpdateReq) e
 		TenantName:  req.TenantName,
 	}
 	if err := daotenant.NewTenantDao().UpdateByID(ctx, req.ID, updateEntity); err != nil {
-		glog.Errorf(ctx, "[svctenant.TenantUpdate] daoTenant UpdateByID fail, err:%v, req:%s", err, gutils.ToJsonString(req))
+		glog.Errorf(ctx, "[svctenant.TenantUpdate] daoTenant UpdateByID fail, err:%v, req:%s", err, gutil.ToJsonString(req))
 		return code.GetError(code.TenantUpdateError)
 	}
 	return nil
@@ -81,7 +81,7 @@ func (svc *tenantSvc) Update(ctx *gin.Context, req *dtotenant.TenantUpdateReq) e
 func (svc *tenantSvc) Detail(ctx *gin.Context, req *dtotenant.TenantDetailReq) (*dtotenant.TenantDetailResp, error) {
 	detailEntity, err := daotenant.NewTenantDao().GetById(ctx, req.ID)
 	if err != nil {
-		glog.Errorf(ctx, "[svctenant.TenantDetail] daoTenant GetById fail, err:%v, req:%s", err, gutils.ToJsonString(req))
+		glog.Errorf(ctx, "[svctenant.TenantDetail] daoTenant GetById fail, err:%v, req:%s", err, gutil.ToJsonString(req))
 		return nil, code.GetError(code.TenantGetDetailError)
 	}
 	// 判断是否存在
@@ -113,7 +113,7 @@ func (svc *tenantSvc) PageList(ctx *gin.Context, req *dtotenant.TenantPageListRe
 	}
 	dataList, total, err := daotenant.NewTenantDao().GetPageListByCond(ctx, cond)
 	if err != nil {
-		glog.Errorf(ctx, "[svctenant.TenantPageList] daoTenant GetPageListByCond fail, err:%v, req:%s", err, gutils.ToJsonString(req))
+		glog.Errorf(ctx, "[svctenant.TenantPageList] daoTenant GetPageListByCond fail, err:%v, req:%s", err, gutil.ToJsonString(req))
 		return nil, code.GetError(code.TenantGetPageListError)
 	}
 	list := make([]dtotenant.TenantPageListItem, 0, len(dataList))
