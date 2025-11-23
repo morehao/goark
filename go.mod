@@ -10,13 +10,15 @@ require (
 	github.com/redis/go-redis/v9 v9.9.0
 	github.com/stretchr/testify v1.10.0
 	github.com/swaggo/files v1.0.1
-	github.com/swaggo/gin-swagger v1.6.0
+	github.com/swaggo/gin-swagger v1.6.1
 	github.com/swaggo/swag v1.16.4
 	go.opentelemetry.io/otel v1.36.0
 	go.opentelemetry.io/otel/sdk v1.36.0
 	go.opentelemetry.io/otel/trace v1.36.0
 	gorm.io/gorm v1.30.0
 )
+
+replace github.com/morehao/golib v1.2.19 => ../golib
 
 require (
 	filippo.io/edwards25519 v1.1.0 // indirect

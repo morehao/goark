@@ -3,12 +3,12 @@ package code
 import "github.com/morehao/golib/gerror"
 
 const (
-	CompanyCreateError      = 100100
-	CompanyDeleteError      = 100101
-	CompanyUpdateError      = 100102
-	CompanyGetDetailError   = 100103
-	CompanyGetPageListError = 100104
-	CompanyNotExistError    = 100105
+	CompanyCreateError      = 110200
+	CompanyDeleteError      = 110201
+	CompanyUpdateError      = 110202
+	CompanyGetDetailError   = 110203
+	CompanyGetPageListError = 110204
+	CompanyNotExistError    = 110205
 )
 
 var companyErrorMsgMap = gerror.CodeMsgMap{
@@ -21,12 +21,12 @@ var companyErrorMsgMap = gerror.CodeMsgMap{
 }
 
 const (
-	DepartmentCreateError      = 100100
-	DepartmentDeleteError      = 100101
-	DepartmentUpdateError      = 100102
-	DepartmentGetDetailError   = 100103
-	DepartmentGetPageListError = 100104
-	DepartmentNotExistError    = 100105
+	DepartmentCreateError      = 110300
+	DepartmentDeleteError      = 110301
+	DepartmentUpdateError      = 110302
+	DepartmentGetDetailError   = 110303
+	DepartmentGetPageListError = 110304
+	DepartmentNotExistError    = 110305
 )
 
 var departmentErrorMsgMap = gerror.CodeMsgMap{

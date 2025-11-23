@@ -5,6 +5,13 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "iam",
+            "type": "go",
+            "request": "launch",
+            "mode": "auto",
+            "program": "${workspaceFolder}/apps/iam/cmd"
+        },
+        {
             "name": "demoapp",
             "type": "go",
             "request": "launch",

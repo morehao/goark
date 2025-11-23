@@ -1,6 +1,7 @@
 package daoorg
 
 import (
+	"context"
 	"fmt"
 	"time"
 
@@ -8,7 +9,7 @@ import (
 	"github.com/morehao/goark/apps/iam/iammodel"
 	"github.com/morehao/goark/pkg/code"
 
-	"github.com/gin-gonic/gin"
+	"github.com/morehao/golib/gerror"
 	"github.com/morehao/golib/gutils"
 	"gorm.io/gorm"
 )
@@ -42,113 +43,113 @@ func (d *UserDepartmentDao) WithTx(db *gorm.DB) *UserDepartmentDao {
 	}
 }
 
-func (d *UserDepartmentDao) Insert(ctx *gin.Context, entity *iammodel.UserDepartmentEntity) error {
+func (d *UserDepartmentDao) Insert(ctx context.Context, entity *iammodel.UserDepartmentEntity) error {
 	db := d.DB(ctx).Table(d.TableName())
 	if err := db.Create(entity).Error; err != nil {
-		return code.GetError(code.DBInsertErr).Wrapf(err, "[UserDepartmentDao] Insert fail, entity:%s", gutils.ToJsonString(entity))
+		return code.GetError(gerror.DBInsertErr).Wrapf(err, "[UserDepartmentDao] Insert fail, entity:%s", gutils.ToJsonString(entity))
 	}
 	return nil
 }
 
-func (d *UserDepartmentDao) BatchInsert(ctx *gin.Context, entityList iammodel.UserDepartmentEntityList) error {
+func (d *UserDepartmentDao) BatchInsert(ctx context.Context, entityList iammodel.UserDepartmentEntityList) error {
 	if len(entityList) == 0 {
-		return code.GetError(code.DBInsertErr).Wrapf(nil, "[UserDepartmentDao] BatchInsert fail, entityList is empty")
+		return code.GetError(gerror.DBInsertErr).Wrapf(nil, "[UserDepartmentDao] BatchInsert fail, entityList is empty")
 	}
 
 	db := d.DB(ctx).Table(d.TableName())
 	if err := db.Create(entityList).Error; err != nil {
-		return code.GetError(code.DBInsertErr).Wrapf(err, "[UserDepartmentDao] BatchInsert fail, entityList:%s", gutils.ToJsonString(entityList))
+		return code.GetError(gerror.DBInsertErr).Wrapf(err, "[UserDepartmentDao] BatchInsert fail, entityList:%s", gutils.ToJsonString(entityList))
 	}
 	return nil
 }
 
-func (d *UserDepartmentDao) UpdateByID(ctx *gin.Context, id uint, entity *iammodel.UserDepartmentEntity) error {
+func (d *UserDepartmentDao) UpdateByID(ctx context.Context, id uint, entity *iammodel.UserDepartmentEntity) error {
 	db := d.DB(ctx).Table(d.TableName())
 	if err := db.Where("id = ?", id).Updates(entity).Error; err != nil {
-		return code.GetError(code.DBUpdateErr).Wrapf(err, "[UserDepartmentDao] UpdateByID fail, id:%d entity:%s", id, gutils.ToJsonString(entity))
+		return code.GetError(gerror.DBUpdateErr).Wrapf(err, "[UserDepartmentDao] UpdateByID fail, id:%d entity:%s", id, gutils.ToJsonString(entity))
 	}
 	return nil
 }
 
-func (d *UserDepartmentDao) UpdateMap(ctx *gin.Context, id uint, updateMap map[string]interface{}) error {
+func (d *UserDepartmentDao) UpdateMap(ctx context.Context, id uint, updateMap map[string]interface{}) error {
 	db := d.DB(ctx).Table(d.TableName())
 	if err := db.Where("id = ?", id).Updates(updateMap).Error; err != nil {
-		return code.GetError(code.DBUpdateErr).Wrapf(err, "[UserDepartmentDao] UpdateMap fail, id:%d, updateMap:%s", id, gutils.ToJsonString(updateMap))
+		return code.GetError(gerror.DBUpdateErr).Wrapf(err, "[UserDepartmentDao] UpdateMap fail, id:%d, updateMap:%s", id, gutils.ToJsonString(updateMap))
 	}
 	return nil
 }
 
-func (d *UserDepartmentDao) Delete(ctx *gin.Context, id, deletedBy uint) error {
+func (d *UserDepartmentDao) Delete(ctx context.Context, id, deletedBy uint) error {
 	db := d.DB(ctx).Table(d.TableName())
 	updatedField := map[string]interface{}{
 		"deleted_time": time.Now(),
 		"deleted_by":   deletedBy,
 	}
 	if err := db.Where("id = ?", id).Updates(updatedField).Error; err != nil {
-		return code.GetError(code.DBUpdateErr).Wrapf(err, "[UserDepartmentDao] Delete fail, id:%d, deletedBy:%d", id, deletedBy)
+		return code.GetError(gerror.DBDeleteErr).Wrapf(err, "[UserDepartmentDao] Delete fail, id:%d, deletedBy:%d", id, deletedBy)
 	}
 	return nil
 }
 
-func (d *UserDepartmentDao) GetById(ctx *gin.Context, id uint) (*iammodel.UserDepartmentEntity, error) {
+func (d *UserDepartmentDao) GetById(ctx context.Context, id uint) (*iammodel.UserDepartmentEntity, error) {
 	var entity iammodel.UserDepartmentEntity
 	db := d.DB(ctx).Table(d.TableName())
 	if err := db.Where("id = ?", id).Find(&entity).Error; err != nil {
-		return nil, code.GetError(code.DBFindErr).Wrapf(err, "[UserDepartmentDao] GetById fail, id:%d", id)
+		return nil, code.GetError(gerror.DBFindErr).Wrapf(err, "[UserDepartmentDao] GetById fail, id:%d", id)
 	}
 	return &entity, nil
 }
 
-func (d *UserDepartmentDao) GetByCond(ctx *gin.Context, cond *UserDepartmentCond) (*iammodel.UserDepartmentEntity, error) {
+func (d *UserDepartmentDao) GetByCond(ctx context.Context, cond *UserDepartmentCond) (*iammodel.UserDepartmentEntity, error) {
 	var entity iammodel.UserDepartmentEntity
 	db := d.DB(ctx).Table(d.TableName())
 
 	d.BuildCondition(db, cond)
 
 	if err := db.Find(&entity).Error; err != nil {
-		return nil, code.GetError(code.DBFindErr).Wrapf(err, "[UserDepartmentDao] GetById fail, cond:%s", gutils.ToJsonString(cond))
+		return nil, code.GetError(gerror.DBFindErr).Wrapf(err, "[UserDepartmentDao] GetById fail, cond:%s", gutils.ToJsonString(cond))
 	}
 	return &entity, nil
 }
 
-func (d *UserDepartmentDao) GetListByCond(ctx *gin.Context, cond *UserDepartmentCond) (iammodel.UserDepartmentEntityList, error) {
+func (d *UserDepartmentDao) GetListByCond(ctx context.Context, cond *UserDepartmentCond) (iammodel.UserDepartmentEntityList, error) {
 	var entityList iammodel.UserDepartmentEntityList
 	db := d.DB(ctx).Table(d.TableName())
 
 	d.BuildCondition(db, cond)
 
 	if err := db.Find(&entityList).Error; err != nil {
-		return nil, code.GetError(code.DBFindErr).Wrapf(err, "[UserDepartmentDao] GetListByCond fail, cond:%s", gutils.ToJsonString(cond))
+		return nil, code.GetError(gerror.DBFindErr).Wrapf(err, "[UserDepartmentDao] GetListByCond fail, cond:%s", gutils.ToJsonString(cond))
 	}
 	return entityList, nil
 }
 
-func (d *UserDepartmentDao) GetPageListByCond(ctx *gin.Context, cond *UserDepartmentCond) (iammodel.UserDepartmentEntityList, int64, error) {
+func (d *UserDepartmentDao) GetPageListByCond(ctx context.Context, cond *UserDepartmentCond) (iammodel.UserDepartmentEntityList, int64, error) {
 	db := d.DB(ctx).Table(d.TableName())
 
 	d.BuildCondition(db, cond)
 
 	var count int64
 	if err := db.Count(&count).Error; err != nil {
-		return nil, 0, code.GetError(code.DBFindErr).Wrapf(err, "[UserDepartmentDao] GetPageListByCond count fail, cond:%s", gutils.ToJsonString(cond))
+		return nil, 0, code.GetError(gerror.DBFindErr).Wrapf(err, "[UserDepartmentDao] GetPageListByCond count fail, cond:%s", gutils.ToJsonString(cond))
 	}
 	if cond.PageSize > 0 && cond.Page > 0 {
 		db.Offset((cond.Page - 1) * cond.PageSize).Limit(cond.PageSize)
 	}
 	var entityList iammodel.UserDepartmentEntityList
 	if err := db.Find(&entityList).Error; err != nil {
-		return nil, 0, code.GetError(code.DBFindErr).Wrapf(err, "[UserDepartmentDao] GetPageListByCond find fail, cond:%s", gutils.ToJsonString(cond))
+		return nil, 0, code.GetError(gerror.DBFindErr).Wrapf(err, "[UserDepartmentDao] GetPageListByCond find fail, cond:%s", gutils.ToJsonString(cond))
 	}
 	return entityList, count, nil
 }
 
-func (d *UserDepartmentDao) CountByCond(ctx *gin.Context, cond *UserDepartmentCond) (int64, error) {
+func (d *UserDepartmentDao) CountByCond(ctx context.Context, cond *UserDepartmentCond) (int64, error) {
 	db := d.DB(ctx).Table(d.TableName())
 
 	d.BuildCondition(db, cond)
 	var count int64
 	if err := db.Count(&count).Error; err != nil {
-		return 0, code.GetError(code.DBFindErr).Wrapf(err, "[UserDepartmentDao] CountByCond fail, cond:%s", gutils.ToJsonString(cond))
+		return 0, code.GetError(gerror.DBFindErr).Wrapf(err, "[UserDepartmentDao] CountByCond fail, cond:%s", gutils.ToJsonString(cond))
 	}
 	return count, nil
 }

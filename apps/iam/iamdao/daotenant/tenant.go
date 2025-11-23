@@ -1,6 +1,7 @@
 package daotenant
 
 import (
+	"context"
 	"fmt"
 	"time"
 
@@ -8,7 +9,7 @@ import (
 	"github.com/morehao/goark/apps/iam/iammodel"
 	"github.com/morehao/goark/pkg/code"
 
-	"github.com/gin-gonic/gin"
+	"github.com/morehao/golib/gerror"
 	"github.com/morehao/golib/gutils"
 	"gorm.io/gorm"
 )
@@ -42,113 +43,113 @@ func (d *TenantDao) WithTx(db *gorm.DB) *TenantDao {
 	}
 }
 
-func (d *TenantDao) Insert(ctx *gin.Context, entity *iammodel.TenantEntity) error {
+func (d *TenantDao) Insert(ctx context.Context, entity *iammodel.TenantEntity) error {
 	db := d.DB(ctx).Table(d.TableName())
 	if err := db.Create(entity).Error; err != nil {
-		return code.GetError(code.DBInsertErr).Wrapf(err, "[TenantDao] Insert fail, entity:%s", gutils.ToJsonString(entity))
+		return code.GetError(gerror.DBInsertErr).Wrapf(err, "[TenantDao] Insert fail, entity:%s", gutils.ToJsonString(entity))
 	}
 	return nil
 }
 
-func (d *TenantDao) BatchInsert(ctx *gin.Context, entityList iammodel.TenantEntityList) error {
+func (d *TenantDao) BatchInsert(ctx context.Context, entityList iammodel.TenantEntityList) error {
 	if len(entityList) == 0 {
-		return code.GetError(code.DBInsertErr).Wrapf(nil, "[TenantDao] BatchInsert fail, entityList is empty")
+		return code.GetError(gerror.DBInsertErr).Wrapf(nil, "[TenantDao] BatchInsert fail, entityList is empty")
 	}
 
 	db := d.DB(ctx).Table(d.TableName())
 	if err := db.Create(entityList).Error; err != nil {
-		return code.GetError(code.DBInsertErr).Wrapf(err, "[TenantDao] BatchInsert fail, entityList:%s", gutils.ToJsonString(entityList))
+		return code.GetError(gerror.DBInsertErr).Wrapf(err, "[TenantDao] BatchInsert fail, entityList:%s", gutils.ToJsonString(entityList))
 	}
 	return nil
 }
 
-func (d *TenantDao) UpdateByID(ctx *gin.Context, id uint, entity *iammodel.TenantEntity) error {
+func (d *TenantDao) UpdateByID(ctx context.Context, id uint, entity *iammodel.TenantEntity) error {
 	db := d.DB(ctx).Table(d.TableName())
 	if err := db.Where("id = ?", id).Updates(entity).Error; err != nil {
-		return code.GetError(code.DBUpdateErr).Wrapf(err, "[TenantDao] UpdateByID fail, id:%d entity:%s", id, gutils.ToJsonString(entity))
+		return code.GetError(gerror.DBUpdateErr).Wrapf(err, "[TenantDao] UpdateByID fail, id:%d entity:%s", id, gutils.ToJsonString(entity))
 	}
 	return nil
 }
 
-func (d *TenantDao) UpdateMap(ctx *gin.Context, id uint, updateMap map[string]interface{}) error {
+func (d *TenantDao) UpdateMap(ctx context.Context, id uint, updateMap map[string]interface{}) error {
 	db := d.DB(ctx).Table(d.TableName())
 	if err := db.Where("id = ?", id).Updates(updateMap).Error; err != nil {
-		return code.GetError(code.DBUpdateErr).Wrapf(err, "[TenantDao] UpdateMap fail, id:%d, updateMap:%s", id, gutils.ToJsonString(updateMap))
+		return code.GetError(gerror.DBUpdateErr).Wrapf(err, "[TenantDao] UpdateMap fail, id:%d, updateMap:%s", id, gutils.ToJsonString(updateMap))
 	}
 	return nil
 }
 
-func (d *TenantDao) Delete(ctx *gin.Context, id, deletedBy uint) error {
+func (d *TenantDao) Delete(ctx context.Context, id, deletedBy uint) error {
 	db := d.DB(ctx).Table(d.TableName())
 	updatedField := map[string]interface{}{
 		"deleted_time": time.Now(),
 		"deleted_by":   deletedBy,
 	}
 	if err := db.Where("id = ?", id).Updates(updatedField).Error; err != nil {
-		return code.GetError(code.DBUpdateErr).Wrapf(err, "[TenantDao] Delete fail, id:%d, deletedBy:%d", id, deletedBy)
+		return code.GetError(gerror.DBDeleteErr).Wrapf(err, "[TenantDao] Delete fail, id:%d, deletedBy:%d", id, deletedBy)
 	}
 	return nil
 }
 
-func (d *TenantDao) GetById(ctx *gin.Context, id uint) (*iammodel.TenantEntity, error) {
+func (d *TenantDao) GetById(ctx context.Context, id uint) (*iammodel.TenantEntity, error) {
 	var entity iammodel.TenantEntity
 	db := d.DB(ctx).Table(d.TableName())
 	if err := db.Where("id = ?", id).Find(&entity).Error; err != nil {
-		return nil, code.GetError(code.DBFindErr).Wrapf(err, "[TenantDao] GetById fail, id:%d", id)
+		return nil, code.GetError(gerror.DBFindErr).Wrapf(err, "[TenantDao] GetById fail, id:%d", id)
 	}
 	return &entity, nil
 }
 
-func (d *TenantDao) GetByCond(ctx *gin.Context, cond *TenantCond) (*iammodel.TenantEntity, error) {
+func (d *TenantDao) GetByCond(ctx context.Context, cond *TenantCond) (*iammodel.TenantEntity, error) {
 	var entity iammodel.TenantEntity
 	db := d.DB(ctx).Table(d.TableName())
 
 	d.BuildCondition(db, cond)
 
 	if err := db.Find(&entity).Error; err != nil {
-		return nil, code.GetError(code.DBFindErr).Wrapf(err, "[TenantDao] GetById fail, cond:%s", gutils.ToJsonString(cond))
+		return nil, code.GetError(gerror.DBFindErr).Wrapf(err, "[TenantDao] GetById fail, cond:%s", gutils.ToJsonString(cond))
 	}
 	return &entity, nil
 }
 
-func (d *TenantDao) GetListByCond(ctx *gin.Context, cond *TenantCond) (iammodel.TenantEntityList, error) {
+func (d *TenantDao) GetListByCond(ctx context.Context, cond *TenantCond) (iammodel.TenantEntityList, error) {
 	var entityList iammodel.TenantEntityList
 	db := d.DB(ctx).Table(d.TableName())
 
 	d.BuildCondition(db, cond)
 
 	if err := db.Find(&entityList).Error; err != nil {
-		return nil, code.GetError(code.DBFindErr).Wrapf(err, "[TenantDao] GetListByCond fail, cond:%s", gutils.ToJsonString(cond))
+		return nil, code.GetError(gerror.DBFindErr).Wrapf(err, "[TenantDao] GetListByCond fail, cond:%s", gutils.ToJsonString(cond))
 	}
 	return entityList, nil
 }
 
-func (d *TenantDao) GetPageListByCond(ctx *gin.Context, cond *TenantCond) (iammodel.TenantEntityList, int64, error) {
+func (d *TenantDao) GetPageListByCond(ctx context.Context, cond *TenantCond) (iammodel.TenantEntityList, int64, error) {
 	db := d.DB(ctx).Table(d.TableName())
 
 	d.BuildCondition(db, cond)
 
 	var count int64
 	if err := db.Count(&count).Error; err != nil {
-		return nil, 0, code.GetError(code.DBFindErr).Wrapf(err, "[TenantDao] GetPageListByCond count fail, cond:%s", gutils.ToJsonString(cond))
+		return nil, 0, code.GetError(gerror.DBFindErr).Wrapf(err, "[TenantDao] GetPageListByCond count fail, cond:%s", gutils.ToJsonString(cond))
 	}
 	if cond.PageSize > 0 && cond.Page > 0 {
 		db.Offset((cond.Page - 1) * cond.PageSize).Limit(cond.PageSize)
 	}
 	var entityList iammodel.TenantEntityList
 	if err := db.Find(&entityList).Error; err != nil {
-		return nil, 0, code.GetError(code.DBFindErr).Wrapf(err, "[TenantDao] GetPageListByCond find fail, cond:%s", gutils.ToJsonString(cond))
+		return nil, 0, code.GetError(gerror.DBFindErr).Wrapf(err, "[TenantDao] GetPageListByCond find fail, cond:%s", gutils.ToJsonString(cond))
 	}
 	return entityList, count, nil
 }
 
-func (d *TenantDao) CountByCond(ctx *gin.Context, cond *TenantCond) (int64, error) {
+func (d *TenantDao) CountByCond(ctx context.Context, cond *TenantCond) (int64, error) {
 	db := d.DB(ctx).Table(d.TableName())
 
 	d.BuildCondition(db, cond)
 	var count int64
 	if err := db.Count(&count).Error; err != nil {
-		return 0, code.GetError(code.DBFindErr).Wrapf(err, "[TenantDao] CountByCond fail, cond:%s", gutils.ToJsonString(cond))
+		return 0, code.GetError(gerror.DBFindErr).Wrapf(err, "[TenantDao] CountByCond fail, cond:%s", gutils.ToJsonString(cond))
 	}
 	return count, nil
 }

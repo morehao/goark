@@ -7,11 +7,10 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/morehao/goark/apps/iam/config"
 	_ "github.com/morehao/goark/apps/iam/docs"
-	"github.com/morehao/goark/apps/iam/middleware"
 	"github.com/morehao/goark/apps/iam/router"
 	"github.com/morehao/golib/glog"
-	swaggerFiles "github.com/swaggo/files"
-	ginSwagger "github.com/swaggo/gin-swagger"
+	"github.com/morehao/golib/gmiddleware/ginmiddleware"
+	"github.com/morehao/golib/grouter/ginrouter"
 )
 
 func main() {
@@ -25,16 +24,17 @@ func main() {
 
 	engine := gin.New()
 	engine.Use(gin.Recovery())
-	routerGroup := engine.Group(fmt.Sprintf("/%s", config.Conf.Server.Name))
+	routerGroup := engine.Group("iam")
+	routerGroup.Use(ginmiddleware.AccessLog())
 	if config.Conf.Server.Env == "dev" {
-		routerGroup.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler, ginSwagger.InstanceName("demoapp")))
+		ginrouter.RegisterSwagger(routerGroup, config.Conf.Server.Name)
 	}
-	routerGroup.Use(middleware.AccessLog())
 	routerGroups := &router.RouterGroups{
 		AuthGroup:   routerGroup,
 		NoAuthGroup: routerGroup,
 	}
 	router.RegisterRouter(routerGroups)
+
 	if err := engine.Run(fmt.Sprintf(":%s", config.Conf.Server.Port)); err != nil {
 		glog.Errorf(context.Background(), "%s run fail, port:%s", config.Conf.Server.Name, config.Conf.Server.Port)
 		panic(err)

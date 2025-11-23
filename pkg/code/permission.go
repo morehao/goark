@@ -3,12 +3,12 @@ package code
 import "github.com/morehao/golib/gerror"
 
 const (
-	MenuCreateError      = 100100
-	MenuDeleteError      = 100101
-	MenuUpdateError      = 100102
-	MenuGetDetailError   = 100103
-	MenuGetPageListError = 100104
-	MenuNotExistError    = 100105
+	MenuCreateError      = 110500
+	MenuDeleteError      = 110501
+	MenuUpdateError      = 110502
+	MenuGetDetailError   = 110503
+	MenuGetPageListError = 110504
+	MenuNotExistError    = 110505
 )
 
 var menuErrorMsgMap = gerror.CodeMsgMap{
@@ -21,12 +21,12 @@ var menuErrorMsgMap = gerror.CodeMsgMap{
 }
 
 const (
-	RoleCreateError      = 100100
-	RoleDeleteError      = 100101
-	RoleUpdateError      = 100102
-	RoleGetDetailError   = 100103
-	RoleGetPageListError = 100104
-	RoleNotExistError    = 100105
+	RoleCreateError      = 110600
+	RoleDeleteError      = 110601
+	RoleUpdateError      = 110602
+	RoleGetDetailError   = 110603
+	RoleGetPageListError = 110604
+	RoleNotExistError    = 110605
 )
 
 var roleErrorMsgMap = gerror.CodeMsgMap{

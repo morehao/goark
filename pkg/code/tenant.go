@@ -3,12 +3,12 @@ package code
 import "github.com/morehao/golib/gerror"
 
 const (
-	TenantCreateError      = 100100
-	TenantDeleteError      = 100101
-	TenantUpdateError      = 100102
-	TenantGetDetailError   = 100103
-	TenantGetPageListError = 100104
-	TenantNotExistError    = 100105
+	TenantCreateError      = 110100
+	TenantDeleteError      = 110101
+	TenantUpdateError      = 110102
+	TenantGetDetailError   = 110103
+	TenantGetPageListError = 110104
+	TenantNotExistError    = 110105
 )
 
 var tenantErrorMsgMap = gerror.CodeMsgMap{

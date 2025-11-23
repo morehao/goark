@@ -1,6 +1,7 @@
 package daopermission
 
 import (
+	"context"
 	"fmt"
 	"time"
 
@@ -8,7 +9,7 @@ import (
 	"github.com/morehao/goark/apps/iam/iammodel"
 	"github.com/morehao/goark/pkg/code"
 
-	"github.com/gin-gonic/gin"
+	"github.com/morehao/golib/gerror"
 	"github.com/morehao/golib/gutils"
 	"gorm.io/gorm"
 )
@@ -42,113 +43,113 @@ func (d *RoleDao) WithTx(db *gorm.DB) *RoleDao {
 	}
 }
 
-func (d *RoleDao) Insert(ctx *gin.Context, entity *iammodel.RoleEntity) error {
+func (d *RoleDao) Insert(ctx context.Context, entity *iammodel.RoleEntity) error {
 	db := d.DB(ctx).Table(d.TableName())
 	if err := db.Create(entity).Error; err != nil {
-		return code.GetError(code.DBInsertErr).Wrapf(err, "[RoleDao] Insert fail, entity:%s", gutils.ToJsonString(entity))
+		return code.GetError(gerror.DBInsertErr).Wrapf(err, "[RoleDao] Insert fail, entity:%s", gutils.ToJsonString(entity))
 	}
 	return nil
 }
 
-func (d *RoleDao) BatchInsert(ctx *gin.Context, entityList iammodel.RoleEntityList) error {
+func (d *RoleDao) BatchInsert(ctx context.Context, entityList iammodel.RoleEntityList) error {
 	if len(entityList) == 0 {
-		return code.GetError(code.DBInsertErr).Wrapf(nil, "[RoleDao] BatchInsert fail, entityList is empty")
+		return code.GetError(gerror.DBInsertErr).Wrapf(nil, "[RoleDao] BatchInsert fail, entityList is empty")
 	}
 
 	db := d.DB(ctx).Table(d.TableName())
 	if err := db.Create(entityList).Error; err != nil {
-		return code.GetError(code.DBInsertErr).Wrapf(err, "[RoleDao] BatchInsert fail, entityList:%s", gutils.ToJsonString(entityList))
+		return code.GetError(gerror.DBInsertErr).Wrapf(err, "[RoleDao] BatchInsert fail, entityList:%s", gutils.ToJsonString(entityList))
 	}
 	return nil
 }
 
-func (d *RoleDao) UpdateByID(ctx *gin.Context, id uint, entity *iammodel.RoleEntity) error {
+func (d *RoleDao) UpdateByID(ctx context.Context, id uint, entity *iammodel.RoleEntity) error {
 	db := d.DB(ctx).Table(d.TableName())
 	if err := db.Where("id = ?", id).Updates(entity).Error; err != nil {
-		return code.GetError(code.DBUpdateErr).Wrapf(err, "[RoleDao] UpdateByID fail, id:%d entity:%s", id, gutils.ToJsonString(entity))
+		return code.GetError(gerror.DBUpdateErr).Wrapf(err, "[RoleDao] UpdateByID fail, id:%d entity:%s", id, gutils.ToJsonString(entity))
 	}
 	return nil
 }
 
-func (d *RoleDao) UpdateMap(ctx *gin.Context, id uint, updateMap map[string]interface{}) error {
+func (d *RoleDao) UpdateMap(ctx context.Context, id uint, updateMap map[string]interface{}) error {
 	db := d.DB(ctx).Table(d.TableName())
 	if err := db.Where("id = ?", id).Updates(updateMap).Error; err != nil {
-		return code.GetError(code.DBUpdateErr).Wrapf(err, "[RoleDao] UpdateMap fail, id:%d, updateMap:%s", id, gutils.ToJsonString(updateMap))
+		return code.GetError(gerror.DBUpdateErr).Wrapf(err, "[RoleDao] UpdateMap fail, id:%d, updateMap:%s", id, gutils.ToJsonString(updateMap))
 	}
 	return nil
 }
 
-func (d *RoleDao) Delete(ctx *gin.Context, id, deletedBy uint) error {
+func (d *RoleDao) Delete(ctx context.Context, id, deletedBy uint) error {
 	db := d.DB(ctx).Table(d.TableName())
 	updatedField := map[string]interface{}{
 		"deleted_time": time.Now(),
 		"deleted_by":   deletedBy,
 	}
 	if err := db.Where("id = ?", id).Updates(updatedField).Error; err != nil {
-		return code.GetError(code.DBUpdateErr).Wrapf(err, "[RoleDao] Delete fail, id:%d, deletedBy:%d", id, deletedBy)
+		return code.GetError(gerror.DBDeleteErr).Wrapf(err, "[RoleDao] Delete fail, id:%d, deletedBy:%d", id, deletedBy)
 	}
 	return nil
 }
 
-func (d *RoleDao) GetById(ctx *gin.Context, id uint) (*iammodel.RoleEntity, error) {
+func (d *RoleDao) GetById(ctx context.Context, id uint) (*iammodel.RoleEntity, error) {
 	var entity iammodel.RoleEntity
 	db := d.DB(ctx).Table(d.TableName())
 	if err := db.Where("id = ?", id).Find(&entity).Error; err != nil {
-		return nil, code.GetError(code.DBFindErr).Wrapf(err, "[RoleDao] GetById fail, id:%d", id)
+		return nil, code.GetError(gerror.DBFindErr).Wrapf(err, "[RoleDao] GetById fail, id:%d", id)
 	}
 	return &entity, nil
 }
 
-func (d *RoleDao) GetByCond(ctx *gin.Context, cond *RoleCond) (*iammodel.RoleEntity, error) {
+func (d *RoleDao) GetByCond(ctx context.Context, cond *RoleCond) (*iammodel.RoleEntity, error) {
 	var entity iammodel.RoleEntity
 	db := d.DB(ctx).Table(d.TableName())
 
 	d.BuildCondition(db, cond)
 
 	if err := db.Find(&entity).Error; err != nil {
-		return nil, code.GetError(code.DBFindErr).Wrapf(err, "[RoleDao] GetById fail, cond:%s", gutils.ToJsonString(cond))
+		return nil, code.GetError(gerror.DBFindErr).Wrapf(err, "[RoleDao] GetById fail, cond:%s", gutils.ToJsonString(cond))
 	}
 	return &entity, nil
 }
 
-func (d *RoleDao) GetListByCond(ctx *gin.Context, cond *RoleCond) (iammodel.RoleEntityList, error) {
+func (d *RoleDao) GetListByCond(ctx context.Context, cond *RoleCond) (iammodel.RoleEntityList, error) {
 	var entityList iammodel.RoleEntityList
 	db := d.DB(ctx).Table(d.TableName())
 
 	d.BuildCondition(db, cond)
 
 	if err := db.Find(&entityList).Error; err != nil {
-		return nil, code.GetError(code.DBFindErr).Wrapf(err, "[RoleDao] GetListByCond fail, cond:%s", gutils.ToJsonString(cond))
+		return nil, code.GetError(gerror.DBFindErr).Wrapf(err, "[RoleDao] GetListByCond fail, cond:%s", gutils.ToJsonString(cond))
 	}
 	return entityList, nil
 }
 
-func (d *RoleDao) GetPageListByCond(ctx *gin.Context, cond *RoleCond) (iammodel.RoleEntityList, int64, error) {
+func (d *RoleDao) GetPageListByCond(ctx context.Context, cond *RoleCond) (iammodel.RoleEntityList, int64, error) {
 	db := d.DB(ctx).Table(d.TableName())
 
 	d.BuildCondition(db, cond)
 
 	var count int64
 	if err := db.Count(&count).Error; err != nil {
-		return nil, 0, code.GetError(code.DBFindErr).Wrapf(err, "[RoleDao] GetPageListByCond count fail, cond:%s", gutils.ToJsonString(cond))
+		return nil, 0, code.GetError(gerror.DBFindErr).Wrapf(err, "[RoleDao] GetPageListByCond count fail, cond:%s", gutils.ToJsonString(cond))
 	}
 	if cond.PageSize > 0 && cond.Page > 0 {
 		db.Offset((cond.Page - 1) * cond.PageSize).Limit(cond.PageSize)
 	}
 	var entityList iammodel.RoleEntityList
 	if err := db.Find(&entityList).Error; err != nil {
-		return nil, 0, code.GetError(code.DBFindErr).Wrapf(err, "[RoleDao] GetPageListByCond find fail, cond:%s", gutils.ToJsonString(cond))
+		return nil, 0, code.GetError(gerror.DBFindErr).Wrapf(err, "[RoleDao] GetPageListByCond find fail, cond:%s", gutils.ToJsonString(cond))
 	}
 	return entityList, count, nil
 }
 
-func (d *RoleDao) CountByCond(ctx *gin.Context, cond *RoleCond) (int64, error) {
+func (d *RoleDao) CountByCond(ctx context.Context, cond *RoleCond) (int64, error) {
 	db := d.DB(ctx).Table(d.TableName())
 
 	d.BuildCondition(db, cond)
 	var count int64
 	if err := db.Count(&count).Error; err != nil {
-		return 0, code.GetError(code.DBFindErr).Wrapf(err, "[RoleDao] CountByCond fail, cond:%s", gutils.ToJsonString(cond))
+		return 0, code.GetError(gerror.DBFindErr).Wrapf(err, "[RoleDao] CountByCond fail, cond:%s", gutils.ToJsonString(cond))
 	}
 	return count, nil
 }
