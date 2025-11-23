@@ -15,233 +15,6 @@ const docTemplateiam = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
-        "/demoapp/user/create": {
-            "post": {
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "用户"
-                ],
-                "summary": "创建用户",
-                "parameters": [
-                    {
-                        "description": "创建用户",
-                        "name": "req",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/dtouser.UserCreateReq"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "{\"code\": 0,\"data\": \"ok\",\"msg\": \"success\"}",
-                        "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/gincontext.DtoRender"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "$ref": "#/definitions/dtouser.UserCreateResp"
-                                        }
-                                    }
-                                }
-                            ]
-                        }
-                    }
-                }
-            }
-        },
-        "/demoapp/user/delete": {
-            "post": {
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "用户"
-                ],
-                "summary": "删除用户",
-                "parameters": [
-                    {
-                        "description": "删除用户",
-                        "name": "req",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/dtouser.UserDeleteReq"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "{\"code\": 0,\"data\": \"ok\",\"msg\": \"删除成功\"}",
-                        "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/gincontext.DtoRender"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            ]
-                        }
-                    }
-                }
-            }
-        },
-        "/demoapp/user/detail": {
-            "get": {
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "用户"
-                ],
-                "summary": "用户详情",
-                "parameters": [
-                    {
-                        "type": "integer",
-                        "description": "ID 数据自增id",
-                        "name": "id",
-                        "in": "query",
-                        "required": true
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "{\"code\": 0,\"data\": \"ok\",\"msg\": \"success\"}",
-                        "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/gincontext.DtoRender"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "$ref": "#/definitions/dtouser.UserDetailResp"
-                                        }
-                                    }
-                                }
-                            ]
-                        }
-                    }
-                }
-            }
-        },
-        "/demoapp/user/pageList": {
-            "get": {
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "用户"
-                ],
-                "summary": "用户列表分页",
-                "parameters": [
-                    {
-                        "type": "integer",
-                        "description": "Page 页码",
-                        "name": "page",
-                        "in": "query"
-                    },
-                    {
-                        "maximum": 1000,
-                        "type": "integer",
-                        "description": "PageSize 每页数据条数",
-                        "name": "pageSize",
-                        "in": "query"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "{\"code\": 0,\"data\": \"ok\",\"msg\": \"success\"}",
-                        "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/gincontext.DtoRender"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "$ref": "#/definitions/dtouser.UserPageListResp"
-                                        }
-                                    }
-                                }
-                            ]
-                        }
-                    }
-                }
-            }
-        },
-        "/demoapp/user/update": {
-            "post": {
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "用户"
-                ],
-                "summary": "修改用户",
-                "parameters": [
-                    {
-                        "description": "修改用户",
-                        "name": "req",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/dtouser.UserUpdateReq"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "{\"code\": 0,\"data\": \"ok\",\"msg\": \"修改成功\"}",
-                        "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/gincontext.DtoRender"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            ]
-                        }
-                    }
-                }
-            }
-        },
         "/iam/v1/company/create": {
             "post": {
                 "consumes": [
@@ -261,7 +34,7 @@ const docTemplateiam = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/github_com_morehao_goark_apps_iam_internal_dto_dtoorg.CompanyCreateReq"
+                            "$ref": "#/definitions/dtoorg.CompanyCreateReq"
                         }
                     }
                 ],
@@ -277,7 +50,7 @@ const docTemplateiam = `{
                                     "type": "object",
                                     "properties": {
                                         "data": {
-                                            "$ref": "#/definitions/github_com_morehao_goark_apps_iam_internal_dto_dtoorg.CompanyCreateResp"
+                                            "$ref": "#/definitions/dtoorg.CompanyCreateResp"
                                         }
                                     }
                                 }
@@ -306,7 +79,7 @@ const docTemplateiam = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/github_com_morehao_goark_apps_iam_internal_dto_dtoorg.CompanyDeleteReq"
+                            "$ref": "#/definitions/dtoorg.CompanyDeleteReq"
                         }
                     }
                 ],
@@ -365,7 +138,7 @@ const docTemplateiam = `{
                                     "type": "object",
                                     "properties": {
                                         "data": {
-                                            "$ref": "#/definitions/github_com_morehao_goark_apps_iam_internal_dto_dtoorg.CompanyDetailResp"
+                                            "$ref": "#/definitions/dtoorg.CompanyDetailResp"
                                         }
                                     }
                                 }
@@ -414,7 +187,7 @@ const docTemplateiam = `{
                                     "type": "object",
                                     "properties": {
                                         "data": {
-                                            "$ref": "#/definitions/github_com_morehao_goark_apps_iam_internal_dto_dtoorg.CompanyPageListResp"
+                                            "$ref": "#/definitions/dtoorg.CompanyPageListResp"
                                         }
                                     }
                                 }
@@ -443,7 +216,7 @@ const docTemplateiam = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/github_com_morehao_goark_apps_iam_internal_dto_dtoorg.CompanyUpdateReq"
+                            "$ref": "#/definitions/dtoorg.CompanyUpdateReq"
                         }
                     }
                 ],
@@ -488,7 +261,7 @@ const docTemplateiam = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/github_com_morehao_goark_apps_iam_internal_dto_dtoorg.DepartmentCreateReq"
+                            "$ref": "#/definitions/dtoorg.DepartmentCreateReq"
                         }
                     }
                 ],
@@ -504,7 +277,7 @@ const docTemplateiam = `{
                                     "type": "object",
                                     "properties": {
                                         "data": {
-                                            "$ref": "#/definitions/github_com_morehao_goark_apps_iam_internal_dto_dtoorg.DepartmentCreateResp"
+                                            "$ref": "#/definitions/dtoorg.DepartmentCreateResp"
                                         }
                                     }
                                 }
@@ -533,7 +306,7 @@ const docTemplateiam = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/github_com_morehao_goark_apps_iam_internal_dto_dtoorg.DepartmentDeleteReq"
+                            "$ref": "#/definitions/dtoorg.DepartmentDeleteReq"
                         }
                     }
                 ],
@@ -592,7 +365,7 @@ const docTemplateiam = `{
                                     "type": "object",
                                     "properties": {
                                         "data": {
-                                            "$ref": "#/definitions/github_com_morehao_goark_apps_iam_internal_dto_dtoorg.DepartmentDetailResp"
+                                            "$ref": "#/definitions/dtoorg.DepartmentDetailResp"
                                         }
                                     }
                                 }
@@ -641,7 +414,7 @@ const docTemplateiam = `{
                                     "type": "object",
                                     "properties": {
                                         "data": {
-                                            "$ref": "#/definitions/github_com_morehao_goark_apps_iam_internal_dto_dtoorg.DepartmentPageListResp"
+                                            "$ref": "#/definitions/dtoorg.DepartmentPageListResp"
                                         }
                                     }
                                 }
@@ -670,7 +443,7 @@ const docTemplateiam = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/github_com_morehao_goark_apps_iam_internal_dto_dtoorg.DepartmentUpdateReq"
+                            "$ref": "#/definitions/dtoorg.DepartmentUpdateReq"
                         }
                     }
                 ],
@@ -715,7 +488,7 @@ const docTemplateiam = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/github_com_morehao_goark_apps_iam_internal_dto_dtopermission.MenuCreateReq"
+                            "$ref": "#/definitions/dtopermission.MenuCreateReq"
                         }
                     }
                 ],
@@ -731,7 +504,7 @@ const docTemplateiam = `{
                                     "type": "object",
                                     "properties": {
                                         "data": {
-                                            "$ref": "#/definitions/github_com_morehao_goark_apps_iam_internal_dto_dtopermission.MenuCreateResp"
+                                            "$ref": "#/definitions/dtopermission.MenuCreateResp"
                                         }
                                     }
                                 }
@@ -760,7 +533,7 @@ const docTemplateiam = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/github_com_morehao_goark_apps_iam_internal_dto_dtopermission.MenuDeleteReq"
+                            "$ref": "#/definitions/dtopermission.MenuDeleteReq"
                         }
                     }
                 ],
@@ -819,7 +592,7 @@ const docTemplateiam = `{
                                     "type": "object",
                                     "properties": {
                                         "data": {
-                                            "$ref": "#/definitions/github_com_morehao_goark_apps_iam_internal_dto_dtopermission.MenuDetailResp"
+                                            "$ref": "#/definitions/dtopermission.MenuDetailResp"
                                         }
                                     }
                                 }
@@ -868,7 +641,7 @@ const docTemplateiam = `{
                                     "type": "object",
                                     "properties": {
                                         "data": {
-                                            "$ref": "#/definitions/github_com_morehao_goark_apps_iam_internal_dto_dtopermission.MenuPageListResp"
+                                            "$ref": "#/definitions/dtopermission.MenuPageListResp"
                                         }
                                     }
                                 }
@@ -897,7 +670,7 @@ const docTemplateiam = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/github_com_morehao_goark_apps_iam_internal_dto_dtopermission.MenuUpdateReq"
+                            "$ref": "#/definitions/dtopermission.MenuUpdateReq"
                         }
                     }
                 ],
@@ -942,7 +715,7 @@ const docTemplateiam = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/github_com_morehao_goark_apps_iam_internal_dto_dtopermission.RoleCreateReq"
+                            "$ref": "#/definitions/dtopermission.RoleCreateReq"
                         }
                     }
                 ],
@@ -958,7 +731,7 @@ const docTemplateiam = `{
                                     "type": "object",
                                     "properties": {
                                         "data": {
-                                            "$ref": "#/definitions/github_com_morehao_goark_apps_iam_internal_dto_dtopermission.RoleCreateResp"
+                                            "$ref": "#/definitions/dtopermission.RoleCreateResp"
                                         }
                                     }
                                 }
@@ -987,7 +760,7 @@ const docTemplateiam = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/github_com_morehao_goark_apps_iam_internal_dto_dtopermission.RoleDeleteReq"
+                            "$ref": "#/definitions/dtopermission.RoleDeleteReq"
                         }
                     }
                 ],
@@ -1046,7 +819,7 @@ const docTemplateiam = `{
                                     "type": "object",
                                     "properties": {
                                         "data": {
-                                            "$ref": "#/definitions/github_com_morehao_goark_apps_iam_internal_dto_dtopermission.RoleDetailResp"
+                                            "$ref": "#/definitions/dtopermission.RoleDetailResp"
                                         }
                                     }
                                 }
@@ -1095,7 +868,7 @@ const docTemplateiam = `{
                                     "type": "object",
                                     "properties": {
                                         "data": {
-                                            "$ref": "#/definitions/github_com_morehao_goark_apps_iam_internal_dto_dtopermission.RolePageListResp"
+                                            "$ref": "#/definitions/dtopermission.RolePageListResp"
                                         }
                                     }
                                 }
@@ -1124,7 +897,7 @@ const docTemplateiam = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/github_com_morehao_goark_apps_iam_internal_dto_dtopermission.RoleUpdateReq"
+                            "$ref": "#/definitions/dtopermission.RoleUpdateReq"
                         }
                     }
                 ],
@@ -1169,7 +942,7 @@ const docTemplateiam = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/github_com_morehao_goark_apps_iam_internal_dto_dtotenant.TenantCreateReq"
+                            "$ref": "#/definitions/dtotenant.TenantCreateReq"
                         }
                     }
                 ],
@@ -1185,7 +958,7 @@ const docTemplateiam = `{
                                     "type": "object",
                                     "properties": {
                                         "data": {
-                                            "$ref": "#/definitions/github_com_morehao_goark_apps_iam_internal_dto_dtotenant.TenantCreateResp"
+                                            "$ref": "#/definitions/dtotenant.TenantCreateResp"
                                         }
                                     }
                                 }
@@ -1214,7 +987,7 @@ const docTemplateiam = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/github_com_morehao_goark_apps_iam_internal_dto_dtotenant.TenantDeleteReq"
+                            "$ref": "#/definitions/dtotenant.TenantDeleteReq"
                         }
                     }
                 ],
@@ -1273,7 +1046,7 @@ const docTemplateiam = `{
                                     "type": "object",
                                     "properties": {
                                         "data": {
-                                            "$ref": "#/definitions/github_com_morehao_goark_apps_iam_internal_dto_dtotenant.TenantDetailResp"
+                                            "$ref": "#/definitions/dtotenant.TenantDetailResp"
                                         }
                                     }
                                 }
@@ -1322,7 +1095,7 @@ const docTemplateiam = `{
                                     "type": "object",
                                     "properties": {
                                         "data": {
-                                            "$ref": "#/definitions/github_com_morehao_goark_apps_iam_internal_dto_dtotenant.TenantPageListResp"
+                                            "$ref": "#/definitions/dtotenant.TenantPageListResp"
                                         }
                                     }
                                 }
@@ -1351,7 +1124,7 @@ const docTemplateiam = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/github_com_morehao_goark_apps_iam_internal_dto_dtotenant.TenantUpdateReq"
+                            "$ref": "#/definitions/dtotenant.TenantUpdateReq"
                         }
                     }
                 ],
@@ -1606,19 +1379,1361 @@ const docTemplateiam = `{
         }
     },
     "definitions": {
+        "dtoorg.CompanyCreateReq": {
+            "type": "object",
+            "properties": {
+                "address": {
+                    "description": "Address 公司地址",
+                    "type": "string"
+                },
+                "companyCode": {
+                    "description": "CompanyCode 公司编码",
+                    "type": "string"
+                },
+                "companyName": {
+                    "description": "CompanyName 公司名称",
+                    "type": "string"
+                },
+                "contactEmail": {
+                    "description": "ContactEmail 联系邮箱",
+                    "type": "string"
+                },
+                "contactPhone": {
+                    "description": "ContactPhone 联系电话",
+                    "type": "string"
+                },
+                "legalPerson": {
+                    "description": "LegalPerson 法人代表",
+                    "type": "string"
+                },
+                "logo": {
+                    "description": "Logo 公司Logo",
+                    "type": "string"
+                },
+                "shortName": {
+                    "description": "ShortName 公司简称",
+                    "type": "string"
+                },
+                "status": {
+                    "description": "Status 状态: active-正常 trial-试用 expired-已过期 inactive-停用",
+                    "type": "string"
+                },
+                "tenantId": {
+                    "description": "TenantID 所属租户ID",
+                    "type": "integer"
+                },
+                "unifiedSocialCreditCode": {
+                    "description": "UnifiedSocialCreditCode 统一社会信用代码(18位)",
+                    "type": "string"
+                }
+            }
+        },
+        "dtoorg.CompanyCreateResp": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "description": "ID 数据自增id",
+                    "type": "integer"
+                }
+            }
+        },
+        "dtoorg.CompanyDeleteReq": {
+            "type": "object",
+            "required": [
+                "id"
+            ],
+            "properties": {
+                "id": {
+                    "description": "ID 数据自增id",
+                    "type": "integer"
+                }
+            }
+        },
+        "dtoorg.CompanyDetailResp": {
+            "type": "object",
+            "required": [
+                "id"
+            ],
+            "properties": {
+                "address": {
+                    "description": "Address 公司地址",
+                    "type": "string"
+                },
+                "companyCode": {
+                    "description": "CompanyCode 公司编码",
+                    "type": "string"
+                },
+                "companyName": {
+                    "description": "CompanyName 公司名称",
+                    "type": "string"
+                },
+                "contactEmail": {
+                    "description": "ContactEmail 联系邮箱",
+                    "type": "string"
+                },
+                "contactPhone": {
+                    "description": "ContactPhone 联系电话",
+                    "type": "string"
+                },
+                "createdAt": {
+                    "description": "CreatedAt 创建时间",
+                    "type": "integer"
+                },
+                "createdBy": {
+                    "description": "CreatedBy 创建人id",
+                    "type": "integer"
+                },
+                "id": {
+                    "description": "ID 数据自增id",
+                    "type": "integer"
+                },
+                "legalPerson": {
+                    "description": "LegalPerson 法人代表",
+                    "type": "string"
+                },
+                "logo": {
+                    "description": "Logo 公司Logo",
+                    "type": "string"
+                },
+                "shortName": {
+                    "description": "ShortName 公司简称",
+                    "type": "string"
+                },
+                "status": {
+                    "description": "Status 状态: active-正常 trial-试用 expired-已过期 inactive-停用",
+                    "type": "string"
+                },
+                "tenantId": {
+                    "description": "TenantID 所属租户ID",
+                    "type": "integer"
+                },
+                "unifiedSocialCreditCode": {
+                    "description": "UnifiedSocialCreditCode 统一社会信用代码(18位)",
+                    "type": "string"
+                },
+                "updatedAt": {
+                    "description": "UpdatedAt 更新时间",
+                    "type": "integer"
+                },
+                "updatedBy": {
+                    "description": "UpdatedBy 更新人id",
+                    "type": "integer"
+                }
+            }
+        },
+        "dtoorg.CompanyPageListItem": {
+            "type": "object",
+            "required": [
+                "id"
+            ],
+            "properties": {
+                "address": {
+                    "description": "Address 公司地址",
+                    "type": "string"
+                },
+                "companyCode": {
+                    "description": "CompanyCode 公司编码",
+                    "type": "string"
+                },
+                "companyName": {
+                    "description": "CompanyName 公司名称",
+                    "type": "string"
+                },
+                "contactEmail": {
+                    "description": "ContactEmail 联系邮箱",
+                    "type": "string"
+                },
+                "contactPhone": {
+                    "description": "ContactPhone 联系电话",
+                    "type": "string"
+                },
+                "createdAt": {
+                    "description": "CreatedAt 创建时间",
+                    "type": "integer"
+                },
+                "createdBy": {
+                    "description": "CreatedBy 创建人id",
+                    "type": "integer"
+                },
+                "id": {
+                    "description": "ID 数据自增id",
+                    "type": "integer"
+                },
+                "legalPerson": {
+                    "description": "LegalPerson 法人代表",
+                    "type": "string"
+                },
+                "logo": {
+                    "description": "Logo 公司Logo",
+                    "type": "string"
+                },
+                "shortName": {
+                    "description": "ShortName 公司简称",
+                    "type": "string"
+                },
+                "status": {
+                    "description": "Status 状态: active-正常 trial-试用 expired-已过期 inactive-停用",
+                    "type": "string"
+                },
+                "tenantId": {
+                    "description": "TenantID 所属租户ID",
+                    "type": "integer"
+                },
+                "unifiedSocialCreditCode": {
+                    "description": "UnifiedSocialCreditCode 统一社会信用代码(18位)",
+                    "type": "string"
+                },
+                "updatedAt": {
+                    "description": "UpdatedAt 更新时间",
+                    "type": "integer"
+                },
+                "updatedBy": {
+                    "description": "UpdatedBy 更新人id",
+                    "type": "integer"
+                }
+            }
+        },
+        "dtoorg.CompanyPageListResp": {
+            "type": "object",
+            "properties": {
+                "list": {
+                    "description": "List 数据列表",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/dtoorg.CompanyPageListItem"
+                    }
+                },
+                "total": {
+                    "description": "Total 数据总条数",
+                    "type": "integer"
+                }
+            }
+        },
+        "dtoorg.CompanyUpdateReq": {
+            "type": "object",
+            "required": [
+                "id"
+            ],
+            "properties": {
+                "address": {
+                    "description": "Address 公司地址",
+                    "type": "string"
+                },
+                "companyCode": {
+                    "description": "CompanyCode 公司编码",
+                    "type": "string"
+                },
+                "companyName": {
+                    "description": "CompanyName 公司名称",
+                    "type": "string"
+                },
+                "contactEmail": {
+                    "description": "ContactEmail 联系邮箱",
+                    "type": "string"
+                },
+                "contactPhone": {
+                    "description": "ContactPhone 联系电话",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "ID 数据自增id",
+                    "type": "integer"
+                },
+                "legalPerson": {
+                    "description": "LegalPerson 法人代表",
+                    "type": "string"
+                },
+                "logo": {
+                    "description": "Logo 公司Logo",
+                    "type": "string"
+                },
+                "shortName": {
+                    "description": "ShortName 公司简称",
+                    "type": "string"
+                },
+                "status": {
+                    "description": "Status 状态: active-正常 trial-试用 expired-已过期 inactive-停用",
+                    "type": "string"
+                },
+                "tenantId": {
+                    "description": "TenantID 所属租户ID",
+                    "type": "integer"
+                },
+                "unifiedSocialCreditCode": {
+                    "description": "UnifiedSocialCreditCode 统一社会信用代码(18位)",
+                    "type": "string"
+                }
+            }
+        },
+        "dtoorg.DepartmentCreateReq": {
+            "type": "object",
+            "properties": {
+                "companyId": {
+                    "description": "CompanyID 所属公司ID(租户ID)",
+                    "type": "integer"
+                },
+                "deptCode": {
+                    "description": "DeptCode 部门编码",
+                    "type": "string"
+                },
+                "deptLevel": {
+                    "description": "DeptLevel 部门层级",
+                    "type": "integer"
+                },
+                "deptName": {
+                    "description": "DeptName 部门名称",
+                    "type": "string"
+                },
+                "deptPath": {
+                    "description": "DeptPath 部门路径: /1/2/3/",
+                    "type": "string"
+                },
+                "leaderId": {
+                    "description": "LeaderID 部门负责人ID",
+                    "type": "integer"
+                },
+                "parentId": {
+                    "description": "ParentID 父部门ID,0表示根部门",
+                    "type": "integer"
+                },
+                "sortOrder": {
+                    "description": "SortOrder 排序",
+                    "type": "integer"
+                },
+                "status": {
+                    "description": "Status 状态: active-正常 inactive-停用",
+                    "type": "string"
+                }
+            }
+        },
+        "dtoorg.DepartmentCreateResp": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "description": "ID 数据自增id",
+                    "type": "integer"
+                }
+            }
+        },
+        "dtoorg.DepartmentDeleteReq": {
+            "type": "object",
+            "required": [
+                "id"
+            ],
+            "properties": {
+                "id": {
+                    "description": "ID 数据自增id",
+                    "type": "integer"
+                }
+            }
+        },
+        "dtoorg.DepartmentDetailResp": {
+            "type": "object",
+            "required": [
+                "id"
+            ],
+            "properties": {
+                "companyId": {
+                    "description": "CompanyID 所属公司ID(租户ID)",
+                    "type": "integer"
+                },
+                "createdAt": {
+                    "description": "CreatedAt 创建时间",
+                    "type": "integer"
+                },
+                "createdBy": {
+                    "description": "CreatedBy 创建人id",
+                    "type": "integer"
+                },
+                "deptCode": {
+                    "description": "DeptCode 部门编码",
+                    "type": "string"
+                },
+                "deptLevel": {
+                    "description": "DeptLevel 部门层级",
+                    "type": "integer"
+                },
+                "deptName": {
+                    "description": "DeptName 部门名称",
+                    "type": "string"
+                },
+                "deptPath": {
+                    "description": "DeptPath 部门路径: /1/2/3/",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "ID 数据自增id",
+                    "type": "integer"
+                },
+                "leaderId": {
+                    "description": "LeaderID 部门负责人ID",
+                    "type": "integer"
+                },
+                "parentId": {
+                    "description": "ParentID 父部门ID,0表示根部门",
+                    "type": "integer"
+                },
+                "sortOrder": {
+                    "description": "SortOrder 排序",
+                    "type": "integer"
+                },
+                "status": {
+                    "description": "Status 状态: active-正常 inactive-停用",
+                    "type": "string"
+                },
+                "updatedAt": {
+                    "description": "UpdatedAt 更新时间",
+                    "type": "integer"
+                },
+                "updatedBy": {
+                    "description": "UpdatedBy 更新人id",
+                    "type": "integer"
+                }
+            }
+        },
+        "dtoorg.DepartmentPageListItem": {
+            "type": "object",
+            "required": [
+                "id"
+            ],
+            "properties": {
+                "companyId": {
+                    "description": "CompanyID 所属公司ID(租户ID)",
+                    "type": "integer"
+                },
+                "createdAt": {
+                    "description": "CreatedAt 创建时间",
+                    "type": "integer"
+                },
+                "createdBy": {
+                    "description": "CreatedBy 创建人id",
+                    "type": "integer"
+                },
+                "deptCode": {
+                    "description": "DeptCode 部门编码",
+                    "type": "string"
+                },
+                "deptLevel": {
+                    "description": "DeptLevel 部门层级",
+                    "type": "integer"
+                },
+                "deptName": {
+                    "description": "DeptName 部门名称",
+                    "type": "string"
+                },
+                "deptPath": {
+                    "description": "DeptPath 部门路径: /1/2/3/",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "ID 数据自增id",
+                    "type": "integer"
+                },
+                "leaderId": {
+                    "description": "LeaderID 部门负责人ID",
+                    "type": "integer"
+                },
+                "parentId": {
+                    "description": "ParentID 父部门ID,0表示根部门",
+                    "type": "integer"
+                },
+                "sortOrder": {
+                    "description": "SortOrder 排序",
+                    "type": "integer"
+                },
+                "status": {
+                    "description": "Status 状态: active-正常 inactive-停用",
+                    "type": "string"
+                },
+                "updatedAt": {
+                    "description": "UpdatedAt 更新时间",
+                    "type": "integer"
+                },
+                "updatedBy": {
+                    "description": "UpdatedBy 更新人id",
+                    "type": "integer"
+                }
+            }
+        },
+        "dtoorg.DepartmentPageListResp": {
+            "type": "object",
+            "properties": {
+                "list": {
+                    "description": "List 数据列表",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/dtoorg.DepartmentPageListItem"
+                    }
+                },
+                "total": {
+                    "description": "Total 数据总条数",
+                    "type": "integer"
+                }
+            }
+        },
+        "dtoorg.DepartmentUpdateReq": {
+            "type": "object",
+            "required": [
+                "id"
+            ],
+            "properties": {
+                "companyId": {
+                    "description": "CompanyID 所属公司ID(租户ID)",
+                    "type": "integer"
+                },
+                "deptCode": {
+                    "description": "DeptCode 部门编码",
+                    "type": "string"
+                },
+                "deptLevel": {
+                    "description": "DeptLevel 部门层级",
+                    "type": "integer"
+                },
+                "deptName": {
+                    "description": "DeptName 部门名称",
+                    "type": "string"
+                },
+                "deptPath": {
+                    "description": "DeptPath 部门路径: /1/2/3/",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "ID 数据自增id",
+                    "type": "integer"
+                },
+                "leaderId": {
+                    "description": "LeaderID 部门负责人ID",
+                    "type": "integer"
+                },
+                "parentId": {
+                    "description": "ParentID 父部门ID,0表示根部门",
+                    "type": "integer"
+                },
+                "sortOrder": {
+                    "description": "SortOrder 排序",
+                    "type": "integer"
+                },
+                "status": {
+                    "description": "Status 状态: active-正常 inactive-停用",
+                    "type": "string"
+                }
+            }
+        },
+        "dtopermission.MenuCreateReq": {
+            "type": "object",
+            "properties": {
+                "cacheType": {
+                    "description": "CacheType 缓存类型: enabled-启用 disabled-禁用",
+                    "type": "string"
+                },
+                "companyId": {
+                    "description": "CompanyID 所属公司ID(租户ID)",
+                    "type": "integer"
+                },
+                "componentPath": {
+                    "description": "ComponentPath 组件路径",
+                    "type": "string"
+                },
+                "icon": {
+                    "description": "Icon 菜单图标",
+                    "type": "string"
+                },
+                "linkType": {
+                    "description": "LinkType 链接类型: internal-内部链接 external-外部链接",
+                    "type": "string"
+                },
+                "menuCode": {
+                    "description": "MenuCode 菜单编码",
+                    "type": "string"
+                },
+                "menuName": {
+                    "description": "MenuName 菜单名称",
+                    "type": "string"
+                },
+                "menuType": {
+                    "description": "MenuType 菜单类型: directory-目录 menu-菜单 button-按钮",
+                    "type": "string"
+                },
+                "parentId": {
+                    "description": "ParentID 父菜单ID",
+                    "type": "integer"
+                },
+                "permission": {
+                    "description": "Permission 权限标识: sys:user:add",
+                    "type": "string"
+                },
+                "routePath": {
+                    "description": "RoutePath 路由地址",
+                    "type": "string"
+                },
+                "sortOrder": {
+                    "description": "SortOrder 排序",
+                    "type": "integer"
+                },
+                "status": {
+                    "description": "Status 状态: active-正常 inactive-停用",
+                    "type": "string"
+                },
+                "visibility": {
+                    "description": "Visibility 可见性: visible-可见 hidden-隐藏",
+                    "type": "string"
+                }
+            }
+        },
+        "dtopermission.MenuCreateResp": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "description": "ID 数据自增id",
+                    "type": "integer"
+                }
+            }
+        },
+        "dtopermission.MenuDeleteReq": {
+            "type": "object",
+            "required": [
+                "id"
+            ],
+            "properties": {
+                "id": {
+                    "description": "ID 数据自增id",
+                    "type": "integer"
+                }
+            }
+        },
+        "dtopermission.MenuDetailResp": {
+            "type": "object",
+            "required": [
+                "id"
+            ],
+            "properties": {
+                "cacheType": {
+                    "description": "CacheType 缓存类型: enabled-启用 disabled-禁用",
+                    "type": "string"
+                },
+                "companyId": {
+                    "description": "CompanyID 所属公司ID(租户ID)",
+                    "type": "integer"
+                },
+                "componentPath": {
+                    "description": "ComponentPath 组件路径",
+                    "type": "string"
+                },
+                "createdAt": {
+                    "description": "CreatedAt 创建时间",
+                    "type": "integer"
+                },
+                "createdBy": {
+                    "description": "CreatedBy 创建人id",
+                    "type": "integer"
+                },
+                "icon": {
+                    "description": "Icon 菜单图标",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "ID 数据自增id",
+                    "type": "integer"
+                },
+                "linkType": {
+                    "description": "LinkType 链接类型: internal-内部链接 external-外部链接",
+                    "type": "string"
+                },
+                "menuCode": {
+                    "description": "MenuCode 菜单编码",
+                    "type": "string"
+                },
+                "menuName": {
+                    "description": "MenuName 菜单名称",
+                    "type": "string"
+                },
+                "menuType": {
+                    "description": "MenuType 菜单类型: directory-目录 menu-菜单 button-按钮",
+                    "type": "string"
+                },
+                "parentId": {
+                    "description": "ParentID 父菜单ID",
+                    "type": "integer"
+                },
+                "permission": {
+                    "description": "Permission 权限标识: sys:user:add",
+                    "type": "string"
+                },
+                "routePath": {
+                    "description": "RoutePath 路由地址",
+                    "type": "string"
+                },
+                "sortOrder": {
+                    "description": "SortOrder 排序",
+                    "type": "integer"
+                },
+                "status": {
+                    "description": "Status 状态: active-正常 inactive-停用",
+                    "type": "string"
+                },
+                "updatedAt": {
+                    "description": "UpdatedAt 更新时间",
+                    "type": "integer"
+                },
+                "updatedBy": {
+                    "description": "UpdatedBy 更新人id",
+                    "type": "integer"
+                },
+                "visibility": {
+                    "description": "Visibility 可见性: visible-可见 hidden-隐藏",
+                    "type": "string"
+                }
+            }
+        },
+        "dtopermission.MenuPageListItem": {
+            "type": "object",
+            "required": [
+                "id"
+            ],
+            "properties": {
+                "cacheType": {
+                    "description": "CacheType 缓存类型: enabled-启用 disabled-禁用",
+                    "type": "string"
+                },
+                "companyId": {
+                    "description": "CompanyID 所属公司ID(租户ID)",
+                    "type": "integer"
+                },
+                "componentPath": {
+                    "description": "ComponentPath 组件路径",
+                    "type": "string"
+                },
+                "createdAt": {
+                    "description": "CreatedAt 创建时间",
+                    "type": "integer"
+                },
+                "createdBy": {
+                    "description": "CreatedBy 创建人id",
+                    "type": "integer"
+                },
+                "icon": {
+                    "description": "Icon 菜单图标",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "ID 数据自增id",
+                    "type": "integer"
+                },
+                "linkType": {
+                    "description": "LinkType 链接类型: internal-内部链接 external-外部链接",
+                    "type": "string"
+                },
+                "menuCode": {
+                    "description": "MenuCode 菜单编码",
+                    "type": "string"
+                },
+                "menuName": {
+                    "description": "MenuName 菜单名称",
+                    "type": "string"
+                },
+                "menuType": {
+                    "description": "MenuType 菜单类型: directory-目录 menu-菜单 button-按钮",
+                    "type": "string"
+                },
+                "parentId": {
+                    "description": "ParentID 父菜单ID",
+                    "type": "integer"
+                },
+                "permission": {
+                    "description": "Permission 权限标识: sys:user:add",
+                    "type": "string"
+                },
+                "routePath": {
+                    "description": "RoutePath 路由地址",
+                    "type": "string"
+                },
+                "sortOrder": {
+                    "description": "SortOrder 排序",
+                    "type": "integer"
+                },
+                "status": {
+                    "description": "Status 状态: active-正常 inactive-停用",
+                    "type": "string"
+                },
+                "updatedAt": {
+                    "description": "UpdatedAt 更新时间",
+                    "type": "integer"
+                },
+                "updatedBy": {
+                    "description": "UpdatedBy 更新人id",
+                    "type": "integer"
+                },
+                "visibility": {
+                    "description": "Visibility 可见性: visible-可见 hidden-隐藏",
+                    "type": "string"
+                }
+            }
+        },
+        "dtopermission.MenuPageListResp": {
+            "type": "object",
+            "properties": {
+                "list": {
+                    "description": "List 数据列表",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/dtopermission.MenuPageListItem"
+                    }
+                },
+                "total": {
+                    "description": "Total 数据总条数",
+                    "type": "integer"
+                }
+            }
+        },
+        "dtopermission.MenuUpdateReq": {
+            "type": "object",
+            "required": [
+                "id"
+            ],
+            "properties": {
+                "cacheType": {
+                    "description": "CacheType 缓存类型: enabled-启用 disabled-禁用",
+                    "type": "string"
+                },
+                "companyId": {
+                    "description": "CompanyID 所属公司ID(租户ID)",
+                    "type": "integer"
+                },
+                "componentPath": {
+                    "description": "ComponentPath 组件路径",
+                    "type": "string"
+                },
+                "icon": {
+                    "description": "Icon 菜单图标",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "ID 数据自增id",
+                    "type": "integer"
+                },
+                "linkType": {
+                    "description": "LinkType 链接类型: internal-内部链接 external-外部链接",
+                    "type": "string"
+                },
+                "menuCode": {
+                    "description": "MenuCode 菜单编码",
+                    "type": "string"
+                },
+                "menuName": {
+                    "description": "MenuName 菜单名称",
+                    "type": "string"
+                },
+                "menuType": {
+                    "description": "MenuType 菜单类型: directory-目录 menu-菜单 button-按钮",
+                    "type": "string"
+                },
+                "parentId": {
+                    "description": "ParentID 父菜单ID",
+                    "type": "integer"
+                },
+                "permission": {
+                    "description": "Permission 权限标识: sys:user:add",
+                    "type": "string"
+                },
+                "routePath": {
+                    "description": "RoutePath 路由地址",
+                    "type": "string"
+                },
+                "sortOrder": {
+                    "description": "SortOrder 排序",
+                    "type": "integer"
+                },
+                "status": {
+                    "description": "Status 状态: active-正常 inactive-停用",
+                    "type": "string"
+                },
+                "visibility": {
+                    "description": "Visibility 可见性: visible-可见 hidden-隐藏",
+                    "type": "string"
+                }
+            }
+        },
+        "dtopermission.RoleCreateReq": {
+            "type": "object",
+            "properties": {
+                "companyId": {
+                    "description": "CompanyID 所属公司ID(租户ID)",
+                    "type": "integer"
+                },
+                "dataScope": {
+                    "description": "DataScope 数据权限范围: all-全部 dept_and_sub-本部门及以下 dept-本部门 self-仅本人 custom-自定义",
+                    "type": "string"
+                },
+                "description": {
+                    "description": "Description 角色描述",
+                    "type": "string"
+                },
+                "roleCode": {
+                    "description": "RoleCode 角色编码",
+                    "type": "string"
+                },
+                "roleName": {
+                    "description": "RoleName 角色名称",
+                    "type": "string"
+                },
+                "roleType": {
+                    "description": "RoleType 角色类型: custom-自定义 system-系统内置",
+                    "type": "string"
+                },
+                "sortOrder": {
+                    "description": "SortOrder 排序",
+                    "type": "integer"
+                },
+                "status": {
+                    "description": "Status 状态: active-正常 inactive-停用",
+                    "type": "string"
+                }
+            }
+        },
+        "dtopermission.RoleCreateResp": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "description": "ID 数据自增id",
+                    "type": "integer"
+                }
+            }
+        },
+        "dtopermission.RoleDeleteReq": {
+            "type": "object",
+            "required": [
+                "id"
+            ],
+            "properties": {
+                "id": {
+                    "description": "ID 数据自增id",
+                    "type": "integer"
+                }
+            }
+        },
+        "dtopermission.RoleDetailResp": {
+            "type": "object",
+            "required": [
+                "id"
+            ],
+            "properties": {
+                "companyId": {
+                    "description": "CompanyID 所属公司ID(租户ID)",
+                    "type": "integer"
+                },
+                "createdAt": {
+                    "description": "CreatedAt 创建时间",
+                    "type": "integer"
+                },
+                "createdBy": {
+                    "description": "CreatedBy 创建人id",
+                    "type": "integer"
+                },
+                "dataScope": {
+                    "description": "DataScope 数据权限范围: all-全部 dept_and_sub-本部门及以下 dept-本部门 self-仅本人 custom-自定义",
+                    "type": "string"
+                },
+                "description": {
+                    "description": "Description 角色描述",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "ID 数据自增id",
+                    "type": "integer"
+                },
+                "roleCode": {
+                    "description": "RoleCode 角色编码",
+                    "type": "string"
+                },
+                "roleName": {
+                    "description": "RoleName 角色名称",
+                    "type": "string"
+                },
+                "roleType": {
+                    "description": "RoleType 角色类型: custom-自定义 system-系统内置",
+                    "type": "string"
+                },
+                "sortOrder": {
+                    "description": "SortOrder 排序",
+                    "type": "integer"
+                },
+                "status": {
+                    "description": "Status 状态: active-正常 inactive-停用",
+                    "type": "string"
+                },
+                "updatedAt": {
+                    "description": "UpdatedAt 更新时间",
+                    "type": "integer"
+                },
+                "updatedBy": {
+                    "description": "UpdatedBy 更新人id",
+                    "type": "integer"
+                }
+            }
+        },
+        "dtopermission.RolePageListItem": {
+            "type": "object",
+            "required": [
+                "id"
+            ],
+            "properties": {
+                "companyId": {
+                    "description": "CompanyID 所属公司ID(租户ID)",
+                    "type": "integer"
+                },
+                "createdAt": {
+                    "description": "CreatedAt 创建时间",
+                    "type": "integer"
+                },
+                "createdBy": {
+                    "description": "CreatedBy 创建人id",
+                    "type": "integer"
+                },
+                "dataScope": {
+                    "description": "DataScope 数据权限范围: all-全部 dept_and_sub-本部门及以下 dept-本部门 self-仅本人 custom-自定义",
+                    "type": "string"
+                },
+                "description": {
+                    "description": "Description 角色描述",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "ID 数据自增id",
+                    "type": "integer"
+                },
+                "roleCode": {
+                    "description": "RoleCode 角色编码",
+                    "type": "string"
+                },
+                "roleName": {
+                    "description": "RoleName 角色名称",
+                    "type": "string"
+                },
+                "roleType": {
+                    "description": "RoleType 角色类型: custom-自定义 system-系统内置",
+                    "type": "string"
+                },
+                "sortOrder": {
+                    "description": "SortOrder 排序",
+                    "type": "integer"
+                },
+                "status": {
+                    "description": "Status 状态: active-正常 inactive-停用",
+                    "type": "string"
+                },
+                "updatedAt": {
+                    "description": "UpdatedAt 更新时间",
+                    "type": "integer"
+                },
+                "updatedBy": {
+                    "description": "UpdatedBy 更新人id",
+                    "type": "integer"
+                }
+            }
+        },
+        "dtopermission.RolePageListResp": {
+            "type": "object",
+            "properties": {
+                "list": {
+                    "description": "List 数据列表",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/dtopermission.RolePageListItem"
+                    }
+                },
+                "total": {
+                    "description": "Total 数据总条数",
+                    "type": "integer"
+                }
+            }
+        },
+        "dtopermission.RoleUpdateReq": {
+            "type": "object",
+            "required": [
+                "id"
+            ],
+            "properties": {
+                "companyId": {
+                    "description": "CompanyID 所属公司ID(租户ID)",
+                    "type": "integer"
+                },
+                "dataScope": {
+                    "description": "DataScope 数据权限范围: all-全部 dept_and_sub-本部门及以下 dept-本部门 self-仅本人 custom-自定义",
+                    "type": "string"
+                },
+                "description": {
+                    "description": "Description 角色描述",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "ID 数据自增id",
+                    "type": "integer"
+                },
+                "roleCode": {
+                    "description": "RoleCode 角色编码",
+                    "type": "string"
+                },
+                "roleName": {
+                    "description": "RoleName 角色名称",
+                    "type": "string"
+                },
+                "roleType": {
+                    "description": "RoleType 角色类型: custom-自定义 system-系统内置",
+                    "type": "string"
+                },
+                "sortOrder": {
+                    "description": "SortOrder 排序",
+                    "type": "integer"
+                },
+                "status": {
+                    "description": "Status 状态: active-正常 inactive-停用",
+                    "type": "string"
+                }
+            }
+        },
+        "dtotenant.TenantCreateReq": {
+            "type": "object",
+            "properties": {
+                "description": {
+                    "description": "Description 租户描述",
+                    "type": "string"
+                },
+                "sortOrder": {
+                    "description": "SortOrder 排序",
+                    "type": "integer"
+                },
+                "status": {
+                    "description": "Status 状态: active-正常 inactive-停用",
+                    "type": "string"
+                },
+                "tenantCode": {
+                    "description": "TenantCode 租户编码",
+                    "type": "string"
+                },
+                "tenantName": {
+                    "description": "TenantName 租户名称",
+                    "type": "string"
+                }
+            }
+        },
+        "dtotenant.TenantCreateResp": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "description": "ID 数据自增id",
+                    "type": "integer"
+                }
+            }
+        },
+        "dtotenant.TenantDeleteReq": {
+            "type": "object",
+            "required": [
+                "id"
+            ],
+            "properties": {
+                "id": {
+                    "description": "ID 数据自增id",
+                    "type": "integer"
+                }
+            }
+        },
+        "dtotenant.TenantDetailResp": {
+            "type": "object",
+            "required": [
+                "id"
+            ],
+            "properties": {
+                "createdAt": {
+                    "description": "CreatedAt 创建时间",
+                    "type": "integer"
+                },
+                "createdBy": {
+                    "description": "CreatedBy 创建人id",
+                    "type": "integer"
+                },
+                "description": {
+                    "description": "Description 租户描述",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "ID 数据自增id",
+                    "type": "integer"
+                },
+                "sortOrder": {
+                    "description": "SortOrder 排序",
+                    "type": "integer"
+                },
+                "status": {
+                    "description": "Status 状态: active-正常 inactive-停用",
+                    "type": "string"
+                },
+                "tenantCode": {
+                    "description": "TenantCode 租户编码",
+                    "type": "string"
+                },
+                "tenantName": {
+                    "description": "TenantName 租户名称",
+                    "type": "string"
+                },
+                "updatedAt": {
+                    "description": "UpdatedAt 更新时间",
+                    "type": "integer"
+                },
+                "updatedBy": {
+                    "description": "UpdatedBy 更新人id",
+                    "type": "integer"
+                }
+            }
+        },
+        "dtotenant.TenantPageListItem": {
+            "type": "object",
+            "required": [
+                "id"
+            ],
+            "properties": {
+                "createdAt": {
+                    "description": "CreatedAt 创建时间",
+                    "type": "integer"
+                },
+                "createdBy": {
+                    "description": "CreatedBy 创建人id",
+                    "type": "integer"
+                },
+                "description": {
+                    "description": "Description 租户描述",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "ID 数据自增id",
+                    "type": "integer"
+                },
+                "sortOrder": {
+                    "description": "SortOrder 排序",
+                    "type": "integer"
+                },
+                "status": {
+                    "description": "Status 状态: active-正常 inactive-停用",
+                    "type": "string"
+                },
+                "tenantCode": {
+                    "description": "TenantCode 租户编码",
+                    "type": "string"
+                },
+                "tenantName": {
+                    "description": "TenantName 租户名称",
+                    "type": "string"
+                },
+                "updatedAt": {
+                    "description": "UpdatedAt 更新时间",
+                    "type": "integer"
+                },
+                "updatedBy": {
+                    "description": "UpdatedBy 更新人id",
+                    "type": "integer"
+                }
+            }
+        },
+        "dtotenant.TenantPageListResp": {
+            "type": "object",
+            "properties": {
+                "list": {
+                    "description": "List 数据列表",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/dtotenant.TenantPageListItem"
+                    }
+                },
+                "total": {
+                    "description": "Total 数据总条数",
+                    "type": "integer"
+                }
+            }
+        },
+        "dtotenant.TenantUpdateReq": {
+            "type": "object",
+            "required": [
+                "id"
+            ],
+            "properties": {
+                "description": {
+                    "description": "Description 租户描述",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "ID 数据自增id",
+                    "type": "integer"
+                },
+                "sortOrder": {
+                    "description": "SortOrder 排序",
+                    "type": "integer"
+                },
+                "status": {
+                    "description": "Status 状态: active-正常 inactive-停用",
+                    "type": "string"
+                },
+                "tenantCode": {
+                    "description": "TenantCode 租户编码",
+                    "type": "string"
+                },
+                "tenantName": {
+                    "description": "TenantName 租户名称",
+                    "type": "string"
+                }
+            }
+        },
         "dtouser.UserCreateReq": {
             "type": "object",
             "properties": {
                 "companyId": {
-                    "description": "CompanyID 公司id",
+                    "description": "CompanyID 所属公司ID(租户ID), 0表示平台管理员账号",
                     "type": "integer"
                 },
-                "departmentId": {
-                    "description": "DepartmentID 部门id",
+                "deptId": {
+                    "description": "DeptID 主部门ID(冗余字段,方便查询,实际关联关系在iam_user_department表)",
                     "type": "integer"
                 },
-                "name": {
-                    "description": "Name 姓名",
+                "employeeNo": {
+                    "description": "EmployeeNo 工号",
+                    "type": "string"
+                },
+                "entryDate": {
+                    "description": "EntryDate 入职日期",
+                    "type": "integer"
+                },
+                "jobLevel": {
+                    "description": "JobLevel 职级",
+                    "type": "string"
+                },
+                "lastLoginAt": {
+                    "description": "LastLoginAt 最后登录时间",
+                    "type": "integer"
+                },
+                "lastLoginIp": {
+                    "description": "LastLoginIp 最后登录IP(支持IPv6)",
+                    "type": "string"
+                },
+                "loginCount": {
+                    "description": "LoginCount 登录次数",
+                    "type": "integer"
+                },
+                "personId": {
+                    "description": "PersonID 自然人ID",
+                    "type": "integer"
+                },
+                "position": {
+                    "description": "Position 职位",
+                    "type": "string"
+                },
+                "status": {
+                    "description": "Status 状态: active-正常 locked-锁定 disabled-禁用",
+                    "type": "string"
+                },
+                "userType": {
+                    "description": "UserType 用户类型: normal-普通用户 company_admin-公司管理员 platform_admin-平台管理员(可管理所有公司)",
+                    "type": "string"
+                },
+                "username": {
+                    "description": "Username 用户名(公司用户:公司内唯一,平台管理员:全局唯一,需应用层保证)",
                     "type": "string"
                 }
             }
@@ -1651,7 +2766,7 @@ const docTemplateiam = `{
             ],
             "properties": {
                 "companyId": {
-                    "description": "CompanyID 公司id",
+                    "description": "CompanyID 所属公司ID(租户ID), 0表示平台管理员账号",
                     "type": "integer"
                 },
                 "createdAt": {
@@ -1662,16 +2777,48 @@ const docTemplateiam = `{
                     "description": "CreatedBy 创建人id",
                     "type": "integer"
                 },
-                "departmentId": {
-                    "description": "DepartmentID 部门id",
+                "deptId": {
+                    "description": "DeptID 主部门ID(冗余字段,方便查询,实际关联关系在iam_user_department表)",
+                    "type": "integer"
+                },
+                "employeeNo": {
+                    "description": "EmployeeNo 工号",
+                    "type": "string"
+                },
+                "entryDate": {
+                    "description": "EntryDate 入职日期",
                     "type": "integer"
                 },
                 "id": {
                     "description": "ID 数据自增id",
                     "type": "integer"
                 },
-                "name": {
-                    "description": "Name 姓名",
+                "jobLevel": {
+                    "description": "JobLevel 职级",
+                    "type": "string"
+                },
+                "lastLoginAt": {
+                    "description": "LastLoginAt 最后登录时间",
+                    "type": "integer"
+                },
+                "lastLoginIp": {
+                    "description": "LastLoginIp 最后登录IP(支持IPv6)",
+                    "type": "string"
+                },
+                "loginCount": {
+                    "description": "LoginCount 登录次数",
+                    "type": "integer"
+                },
+                "personId": {
+                    "description": "PersonID 自然人ID",
+                    "type": "integer"
+                },
+                "position": {
+                    "description": "Position 职位",
+                    "type": "string"
+                },
+                "status": {
+                    "description": "Status 状态: active-正常 locked-锁定 disabled-禁用",
                     "type": "string"
                 },
                 "updatedAt": {
@@ -1681,6 +2828,14 @@ const docTemplateiam = `{
                 "updatedBy": {
                     "description": "UpdatedBy 更新人id",
                     "type": "integer"
+                },
+                "userType": {
+                    "description": "UserType 用户类型: normal-普通用户 company_admin-公司管理员 platform_admin-平台管理员(可管理所有公司)",
+                    "type": "string"
+                },
+                "username": {
+                    "description": "Username 用户名(公司用户:公司内唯一,平台管理员:全局唯一,需应用层保证)",
+                    "type": "string"
                 }
             }
         },
@@ -1691,7 +2846,7 @@ const docTemplateiam = `{
             ],
             "properties": {
                 "companyId": {
-                    "description": "CompanyID 公司id",
+                    "description": "CompanyID 所属公司ID(租户ID), 0表示平台管理员账号",
                     "type": "integer"
                 },
                 "createdAt": {
@@ -1702,16 +2857,48 @@ const docTemplateiam = `{
                     "description": "CreatedBy 创建人id",
                     "type": "integer"
                 },
-                "departmentId": {
-                    "description": "DepartmentID 部门id",
+                "deptId": {
+                    "description": "DeptID 主部门ID(冗余字段,方便查询,实际关联关系在iam_user_department表)",
+                    "type": "integer"
+                },
+                "employeeNo": {
+                    "description": "EmployeeNo 工号",
+                    "type": "string"
+                },
+                "entryDate": {
+                    "description": "EntryDate 入职日期",
                     "type": "integer"
                 },
                 "id": {
                     "description": "ID 数据自增id",
                     "type": "integer"
                 },
-                "name": {
-                    "description": "Name 姓名",
+                "jobLevel": {
+                    "description": "JobLevel 职级",
+                    "type": "string"
+                },
+                "lastLoginAt": {
+                    "description": "LastLoginAt 最后登录时间",
+                    "type": "integer"
+                },
+                "lastLoginIp": {
+                    "description": "LastLoginIp 最后登录IP(支持IPv6)",
+                    "type": "string"
+                },
+                "loginCount": {
+                    "description": "LoginCount 登录次数",
+                    "type": "integer"
+                },
+                "personId": {
+                    "description": "PersonID 自然人ID",
+                    "type": "integer"
+                },
+                "position": {
+                    "description": "Position 职位",
+                    "type": "string"
+                },
+                "status": {
+                    "description": "Status 状态: active-正常 locked-锁定 disabled-禁用",
                     "type": "string"
                 },
                 "updatedAt": {
@@ -1721,6 +2908,14 @@ const docTemplateiam = `{
                 "updatedBy": {
                     "description": "UpdatedBy 更新人id",
                     "type": "integer"
+                },
+                "userType": {
+                    "description": "UserType 用户类型: normal-普通用户 company_admin-公司管理员 platform_admin-平台管理员(可管理所有公司)",
+                    "type": "string"
+                },
+                "username": {
+                    "description": "Username 用户名(公司用户:公司内唯一,平台管理员:全局唯一,需应用层保证)",
+                    "type": "string"
                 }
             }
         },
@@ -1747,19 +2942,59 @@ const docTemplateiam = `{
             ],
             "properties": {
                 "companyId": {
-                    "description": "CompanyID 公司id",
+                    "description": "CompanyID 所属公司ID(租户ID), 0表示平台管理员账号",
                     "type": "integer"
                 },
-                "departmentId": {
-                    "description": "DepartmentID 部门id",
+                "deptId": {
+                    "description": "DeptID 主部门ID(冗余字段,方便查询,实际关联关系在iam_user_department表)",
+                    "type": "integer"
+                },
+                "employeeNo": {
+                    "description": "EmployeeNo 工号",
+                    "type": "string"
+                },
+                "entryDate": {
+                    "description": "EntryDate 入职日期",
                     "type": "integer"
                 },
                 "id": {
                     "description": "ID 数据自增id",
                     "type": "integer"
                 },
-                "name": {
-                    "description": "Name 姓名",
+                "jobLevel": {
+                    "description": "JobLevel 职级",
+                    "type": "string"
+                },
+                "lastLoginAt": {
+                    "description": "LastLoginAt 最后登录时间",
+                    "type": "integer"
+                },
+                "lastLoginIp": {
+                    "description": "LastLoginIp 最后登录IP(支持IPv6)",
+                    "type": "string"
+                },
+                "loginCount": {
+                    "description": "LoginCount 登录次数",
+                    "type": "integer"
+                },
+                "personId": {
+                    "description": "PersonID 自然人ID",
+                    "type": "integer"
+                },
+                "position": {
+                    "description": "Position 职位",
+                    "type": "string"
+                },
+                "status": {
+                    "description": "Status 状态: active-正常 locked-锁定 disabled-禁用",
+                    "type": "string"
+                },
+                "userType": {
+                    "description": "UserType 用户类型: normal-普通用户 company_admin-公司管理员 platform_admin-平台管理员(可管理所有公司)",
+                    "type": "string"
+                },
+                "username": {
+                    "description": "Username 用户名(公司用户:公司内唯一,平台管理员:全局唯一,需应用层保证)",
                     "type": "string"
                 }
             }
@@ -1772,1308 +3007,6 @@ const docTemplateiam = `{
                 },
                 "data": {},
                 "msg": {
-                    "type": "string"
-                }
-            }
-        },
-        "github_com_morehao_goark_apps_iam_internal_dto_dtoorg.CompanyCreateReq": {
-            "type": "object",
-            "properties": {
-                "address": {
-                    "description": "Address 公司地址",
-                    "type": "string"
-                },
-                "companyCode": {
-                    "description": "CompanyCode 公司编码",
-                    "type": "string"
-                },
-                "companyName": {
-                    "description": "CompanyName 公司名称",
-                    "type": "string"
-                },
-                "contactEmail": {
-                    "description": "ContactEmail 联系邮箱",
-                    "type": "string"
-                },
-                "contactPhone": {
-                    "description": "ContactPhone 联系电话",
-                    "type": "string"
-                },
-                "legalPerson": {
-                    "description": "LegalPerson 法人代表",
-                    "type": "string"
-                },
-                "logo": {
-                    "description": "Logo 公司Logo",
-                    "type": "string"
-                },
-                "shortName": {
-                    "description": "ShortName 公司简称",
-                    "type": "string"
-                },
-                "status": {
-                    "description": "Status 状态: active-正常 trial-试用 expired-已过期 inactive-停用",
-                    "type": "string"
-                },
-                "tenantId": {
-                    "description": "TenantID 所属租户ID",
-                    "type": "integer"
-                },
-                "unifiedSocialCreditCode": {
-                    "description": "UnifiedSocialCreditCode 统一社会信用代码(18位)",
-                    "type": "string"
-                }
-            }
-        },
-        "github_com_morehao_goark_apps_iam_internal_dto_dtoorg.CompanyCreateResp": {
-            "type": "object",
-            "properties": {
-                "id": {
-                    "description": "ID 数据自增id",
-                    "type": "integer"
-                }
-            }
-        },
-        "github_com_morehao_goark_apps_iam_internal_dto_dtoorg.CompanyDeleteReq": {
-            "type": "object",
-            "required": [
-                "id"
-            ],
-            "properties": {
-                "id": {
-                    "description": "ID 数据自增id",
-                    "type": "integer"
-                }
-            }
-        },
-        "github_com_morehao_goark_apps_iam_internal_dto_dtoorg.CompanyDetailResp": {
-            "type": "object",
-            "required": [
-                "id"
-            ],
-            "properties": {
-                "address": {
-                    "description": "Address 公司地址",
-                    "type": "string"
-                },
-                "companyCode": {
-                    "description": "CompanyCode 公司编码",
-                    "type": "string"
-                },
-                "companyName": {
-                    "description": "CompanyName 公司名称",
-                    "type": "string"
-                },
-                "contactEmail": {
-                    "description": "ContactEmail 联系邮箱",
-                    "type": "string"
-                },
-                "contactPhone": {
-                    "description": "ContactPhone 联系电话",
-                    "type": "string"
-                },
-                "createdAt": {
-                    "description": "CreatedAt 创建时间",
-                    "type": "integer"
-                },
-                "createdBy": {
-                    "description": "CreatedBy 创建人id",
-                    "type": "integer"
-                },
-                "id": {
-                    "description": "ID 数据自增id",
-                    "type": "integer"
-                },
-                "legalPerson": {
-                    "description": "LegalPerson 法人代表",
-                    "type": "string"
-                },
-                "logo": {
-                    "description": "Logo 公司Logo",
-                    "type": "string"
-                },
-                "shortName": {
-                    "description": "ShortName 公司简称",
-                    "type": "string"
-                },
-                "status": {
-                    "description": "Status 状态: active-正常 trial-试用 expired-已过期 inactive-停用",
-                    "type": "string"
-                },
-                "tenantId": {
-                    "description": "TenantID 所属租户ID",
-                    "type": "integer"
-                },
-                "unifiedSocialCreditCode": {
-                    "description": "UnifiedSocialCreditCode 统一社会信用代码(18位)",
-                    "type": "string"
-                },
-                "updatedAt": {
-                    "description": "UpdatedAt 更新时间",
-                    "type": "integer"
-                },
-                "updatedBy": {
-                    "description": "UpdatedBy 更新人id",
-                    "type": "integer"
-                }
-            }
-        },
-        "github_com_morehao_goark_apps_iam_internal_dto_dtoorg.CompanyPageListItem": {
-            "type": "object",
-            "required": [
-                "id"
-            ],
-            "properties": {
-                "address": {
-                    "description": "Address 公司地址",
-                    "type": "string"
-                },
-                "companyCode": {
-                    "description": "CompanyCode 公司编码",
-                    "type": "string"
-                },
-                "companyName": {
-                    "description": "CompanyName 公司名称",
-                    "type": "string"
-                },
-                "contactEmail": {
-                    "description": "ContactEmail 联系邮箱",
-                    "type": "string"
-                },
-                "contactPhone": {
-                    "description": "ContactPhone 联系电话",
-                    "type": "string"
-                },
-                "createdAt": {
-                    "description": "CreatedAt 创建时间",
-                    "type": "integer"
-                },
-                "createdBy": {
-                    "description": "CreatedBy 创建人id",
-                    "type": "integer"
-                },
-                "id": {
-                    "description": "ID 数据自增id",
-                    "type": "integer"
-                },
-                "legalPerson": {
-                    "description": "LegalPerson 法人代表",
-                    "type": "string"
-                },
-                "logo": {
-                    "description": "Logo 公司Logo",
-                    "type": "string"
-                },
-                "shortName": {
-                    "description": "ShortName 公司简称",
-                    "type": "string"
-                },
-                "status": {
-                    "description": "Status 状态: active-正常 trial-试用 expired-已过期 inactive-停用",
-                    "type": "string"
-                },
-                "tenantId": {
-                    "description": "TenantID 所属租户ID",
-                    "type": "integer"
-                },
-                "unifiedSocialCreditCode": {
-                    "description": "UnifiedSocialCreditCode 统一社会信用代码(18位)",
-                    "type": "string"
-                },
-                "updatedAt": {
-                    "description": "UpdatedAt 更新时间",
-                    "type": "integer"
-                },
-                "updatedBy": {
-                    "description": "UpdatedBy 更新人id",
-                    "type": "integer"
-                }
-            }
-        },
-        "github_com_morehao_goark_apps_iam_internal_dto_dtoorg.CompanyPageListResp": {
-            "type": "object",
-            "properties": {
-                "list": {
-                    "description": "List 数据列表",
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/github_com_morehao_goark_apps_iam_internal_dto_dtoorg.CompanyPageListItem"
-                    }
-                },
-                "total": {
-                    "description": "Total 数据总条数",
-                    "type": "integer"
-                }
-            }
-        },
-        "github_com_morehao_goark_apps_iam_internal_dto_dtoorg.CompanyUpdateReq": {
-            "type": "object",
-            "required": [
-                "id"
-            ],
-            "properties": {
-                "address": {
-                    "description": "Address 公司地址",
-                    "type": "string"
-                },
-                "companyCode": {
-                    "description": "CompanyCode 公司编码",
-                    "type": "string"
-                },
-                "companyName": {
-                    "description": "CompanyName 公司名称",
-                    "type": "string"
-                },
-                "contactEmail": {
-                    "description": "ContactEmail 联系邮箱",
-                    "type": "string"
-                },
-                "contactPhone": {
-                    "description": "ContactPhone 联系电话",
-                    "type": "string"
-                },
-                "id": {
-                    "description": "ID 数据自增id",
-                    "type": "integer"
-                },
-                "legalPerson": {
-                    "description": "LegalPerson 法人代表",
-                    "type": "string"
-                },
-                "logo": {
-                    "description": "Logo 公司Logo",
-                    "type": "string"
-                },
-                "shortName": {
-                    "description": "ShortName 公司简称",
-                    "type": "string"
-                },
-                "status": {
-                    "description": "Status 状态: active-正常 trial-试用 expired-已过期 inactive-停用",
-                    "type": "string"
-                },
-                "tenantId": {
-                    "description": "TenantID 所属租户ID",
-                    "type": "integer"
-                },
-                "unifiedSocialCreditCode": {
-                    "description": "UnifiedSocialCreditCode 统一社会信用代码(18位)",
-                    "type": "string"
-                }
-            }
-        },
-        "github_com_morehao_goark_apps_iam_internal_dto_dtoorg.DepartmentCreateReq": {
-            "type": "object",
-            "properties": {
-                "companyId": {
-                    "description": "CompanyID 所属公司ID(租户ID)",
-                    "type": "integer"
-                },
-                "deptCode": {
-                    "description": "DeptCode 部门编码",
-                    "type": "string"
-                },
-                "deptLevel": {
-                    "description": "DeptLevel 部门层级",
-                    "type": "integer"
-                },
-                "deptName": {
-                    "description": "DeptName 部门名称",
-                    "type": "string"
-                },
-                "deptPath": {
-                    "description": "DeptPath 部门路径: /1/2/3/",
-                    "type": "string"
-                },
-                "leaderId": {
-                    "description": "LeaderID 部门负责人ID",
-                    "type": "integer"
-                },
-                "parentId": {
-                    "description": "ParentID 父部门ID,0表示根部门",
-                    "type": "integer"
-                },
-                "sortOrder": {
-                    "description": "SortOrder 排序",
-                    "type": "integer"
-                },
-                "status": {
-                    "description": "Status 状态: active-正常 inactive-停用",
-                    "type": "string"
-                }
-            }
-        },
-        "github_com_morehao_goark_apps_iam_internal_dto_dtoorg.DepartmentCreateResp": {
-            "type": "object",
-            "properties": {
-                "id": {
-                    "description": "ID 数据自增id",
-                    "type": "integer"
-                }
-            }
-        },
-        "github_com_morehao_goark_apps_iam_internal_dto_dtoorg.DepartmentDeleteReq": {
-            "type": "object",
-            "required": [
-                "id"
-            ],
-            "properties": {
-                "id": {
-                    "description": "ID 数据自增id",
-                    "type": "integer"
-                }
-            }
-        },
-        "github_com_morehao_goark_apps_iam_internal_dto_dtoorg.DepartmentDetailResp": {
-            "type": "object",
-            "required": [
-                "id"
-            ],
-            "properties": {
-                "companyId": {
-                    "description": "CompanyID 所属公司ID(租户ID)",
-                    "type": "integer"
-                },
-                "createdAt": {
-                    "description": "CreatedAt 创建时间",
-                    "type": "integer"
-                },
-                "createdBy": {
-                    "description": "CreatedBy 创建人id",
-                    "type": "integer"
-                },
-                "deptCode": {
-                    "description": "DeptCode 部门编码",
-                    "type": "string"
-                },
-                "deptLevel": {
-                    "description": "DeptLevel 部门层级",
-                    "type": "integer"
-                },
-                "deptName": {
-                    "description": "DeptName 部门名称",
-                    "type": "string"
-                },
-                "deptPath": {
-                    "description": "DeptPath 部门路径: /1/2/3/",
-                    "type": "string"
-                },
-                "id": {
-                    "description": "ID 数据自增id",
-                    "type": "integer"
-                },
-                "leaderId": {
-                    "description": "LeaderID 部门负责人ID",
-                    "type": "integer"
-                },
-                "parentId": {
-                    "description": "ParentID 父部门ID,0表示根部门",
-                    "type": "integer"
-                },
-                "sortOrder": {
-                    "description": "SortOrder 排序",
-                    "type": "integer"
-                },
-                "status": {
-                    "description": "Status 状态: active-正常 inactive-停用",
-                    "type": "string"
-                },
-                "updatedAt": {
-                    "description": "UpdatedAt 更新时间",
-                    "type": "integer"
-                },
-                "updatedBy": {
-                    "description": "UpdatedBy 更新人id",
-                    "type": "integer"
-                }
-            }
-        },
-        "github_com_morehao_goark_apps_iam_internal_dto_dtoorg.DepartmentPageListItem": {
-            "type": "object",
-            "required": [
-                "id"
-            ],
-            "properties": {
-                "companyId": {
-                    "description": "CompanyID 所属公司ID(租户ID)",
-                    "type": "integer"
-                },
-                "createdAt": {
-                    "description": "CreatedAt 创建时间",
-                    "type": "integer"
-                },
-                "createdBy": {
-                    "description": "CreatedBy 创建人id",
-                    "type": "integer"
-                },
-                "deptCode": {
-                    "description": "DeptCode 部门编码",
-                    "type": "string"
-                },
-                "deptLevel": {
-                    "description": "DeptLevel 部门层级",
-                    "type": "integer"
-                },
-                "deptName": {
-                    "description": "DeptName 部门名称",
-                    "type": "string"
-                },
-                "deptPath": {
-                    "description": "DeptPath 部门路径: /1/2/3/",
-                    "type": "string"
-                },
-                "id": {
-                    "description": "ID 数据自增id",
-                    "type": "integer"
-                },
-                "leaderId": {
-                    "description": "LeaderID 部门负责人ID",
-                    "type": "integer"
-                },
-                "parentId": {
-                    "description": "ParentID 父部门ID,0表示根部门",
-                    "type": "integer"
-                },
-                "sortOrder": {
-                    "description": "SortOrder 排序",
-                    "type": "integer"
-                },
-                "status": {
-                    "description": "Status 状态: active-正常 inactive-停用",
-                    "type": "string"
-                },
-                "updatedAt": {
-                    "description": "UpdatedAt 更新时间",
-                    "type": "integer"
-                },
-                "updatedBy": {
-                    "description": "UpdatedBy 更新人id",
-                    "type": "integer"
-                }
-            }
-        },
-        "github_com_morehao_goark_apps_iam_internal_dto_dtoorg.DepartmentPageListResp": {
-            "type": "object",
-            "properties": {
-                "list": {
-                    "description": "List 数据列表",
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/github_com_morehao_goark_apps_iam_internal_dto_dtoorg.DepartmentPageListItem"
-                    }
-                },
-                "total": {
-                    "description": "Total 数据总条数",
-                    "type": "integer"
-                }
-            }
-        },
-        "github_com_morehao_goark_apps_iam_internal_dto_dtoorg.DepartmentUpdateReq": {
-            "type": "object",
-            "required": [
-                "id"
-            ],
-            "properties": {
-                "companyId": {
-                    "description": "CompanyID 所属公司ID(租户ID)",
-                    "type": "integer"
-                },
-                "deptCode": {
-                    "description": "DeptCode 部门编码",
-                    "type": "string"
-                },
-                "deptLevel": {
-                    "description": "DeptLevel 部门层级",
-                    "type": "integer"
-                },
-                "deptName": {
-                    "description": "DeptName 部门名称",
-                    "type": "string"
-                },
-                "deptPath": {
-                    "description": "DeptPath 部门路径: /1/2/3/",
-                    "type": "string"
-                },
-                "id": {
-                    "description": "ID 数据自增id",
-                    "type": "integer"
-                },
-                "leaderId": {
-                    "description": "LeaderID 部门负责人ID",
-                    "type": "integer"
-                },
-                "parentId": {
-                    "description": "ParentID 父部门ID,0表示根部门",
-                    "type": "integer"
-                },
-                "sortOrder": {
-                    "description": "SortOrder 排序",
-                    "type": "integer"
-                },
-                "status": {
-                    "description": "Status 状态: active-正常 inactive-停用",
-                    "type": "string"
-                }
-            }
-        },
-        "github_com_morehao_goark_apps_iam_internal_dto_dtopermission.MenuCreateReq": {
-            "type": "object",
-            "properties": {
-                "cacheType": {
-                    "description": "CacheType 缓存类型: enabled-启用 disabled-禁用",
-                    "type": "string"
-                },
-                "companyId": {
-                    "description": "CompanyID 所属公司ID(租户ID)",
-                    "type": "integer"
-                },
-                "componentPath": {
-                    "description": "ComponentPath 组件路径",
-                    "type": "string"
-                },
-                "icon": {
-                    "description": "Icon 菜单图标",
-                    "type": "string"
-                },
-                "linkType": {
-                    "description": "LinkType 链接类型: internal-内部链接 external-外部链接",
-                    "type": "string"
-                },
-                "menuCode": {
-                    "description": "MenuCode 菜单编码",
-                    "type": "string"
-                },
-                "menuName": {
-                    "description": "MenuName 菜单名称",
-                    "type": "string"
-                },
-                "menuType": {
-                    "description": "MenuType 菜单类型: directory-目录 menu-菜单 button-按钮",
-                    "type": "string"
-                },
-                "parentId": {
-                    "description": "ParentID 父菜单ID",
-                    "type": "integer"
-                },
-                "permission": {
-                    "description": "Permission 权限标识: sys:user:add",
-                    "type": "string"
-                },
-                "routePath": {
-                    "description": "RoutePath 路由地址",
-                    "type": "string"
-                },
-                "sortOrder": {
-                    "description": "SortOrder 排序",
-                    "type": "integer"
-                },
-                "status": {
-                    "description": "Status 状态: active-正常 inactive-停用",
-                    "type": "string"
-                },
-                "visibility": {
-                    "description": "Visibility 可见性: visible-可见 hidden-隐藏",
-                    "type": "string"
-                }
-            }
-        },
-        "github_com_morehao_goark_apps_iam_internal_dto_dtopermission.MenuCreateResp": {
-            "type": "object",
-            "properties": {
-                "id": {
-                    "description": "ID 数据自增id",
-                    "type": "integer"
-                }
-            }
-        },
-        "github_com_morehao_goark_apps_iam_internal_dto_dtopermission.MenuDeleteReq": {
-            "type": "object",
-            "required": [
-                "id"
-            ],
-            "properties": {
-                "id": {
-                    "description": "ID 数据自增id",
-                    "type": "integer"
-                }
-            }
-        },
-        "github_com_morehao_goark_apps_iam_internal_dto_dtopermission.MenuDetailResp": {
-            "type": "object",
-            "required": [
-                "id"
-            ],
-            "properties": {
-                "cacheType": {
-                    "description": "CacheType 缓存类型: enabled-启用 disabled-禁用",
-                    "type": "string"
-                },
-                "companyId": {
-                    "description": "CompanyID 所属公司ID(租户ID)",
-                    "type": "integer"
-                },
-                "componentPath": {
-                    "description": "ComponentPath 组件路径",
-                    "type": "string"
-                },
-                "createdAt": {
-                    "description": "CreatedAt 创建时间",
-                    "type": "integer"
-                },
-                "createdBy": {
-                    "description": "CreatedBy 创建人id",
-                    "type": "integer"
-                },
-                "icon": {
-                    "description": "Icon 菜单图标",
-                    "type": "string"
-                },
-                "id": {
-                    "description": "ID 数据自增id",
-                    "type": "integer"
-                },
-                "linkType": {
-                    "description": "LinkType 链接类型: internal-内部链接 external-外部链接",
-                    "type": "string"
-                },
-                "menuCode": {
-                    "description": "MenuCode 菜单编码",
-                    "type": "string"
-                },
-                "menuName": {
-                    "description": "MenuName 菜单名称",
-                    "type": "string"
-                },
-                "menuType": {
-                    "description": "MenuType 菜单类型: directory-目录 menu-菜单 button-按钮",
-                    "type": "string"
-                },
-                "parentId": {
-                    "description": "ParentID 父菜单ID",
-                    "type": "integer"
-                },
-                "permission": {
-                    "description": "Permission 权限标识: sys:user:add",
-                    "type": "string"
-                },
-                "routePath": {
-                    "description": "RoutePath 路由地址",
-                    "type": "string"
-                },
-                "sortOrder": {
-                    "description": "SortOrder 排序",
-                    "type": "integer"
-                },
-                "status": {
-                    "description": "Status 状态: active-正常 inactive-停用",
-                    "type": "string"
-                },
-                "updatedAt": {
-                    "description": "UpdatedAt 更新时间",
-                    "type": "integer"
-                },
-                "updatedBy": {
-                    "description": "UpdatedBy 更新人id",
-                    "type": "integer"
-                },
-                "visibility": {
-                    "description": "Visibility 可见性: visible-可见 hidden-隐藏",
-                    "type": "string"
-                }
-            }
-        },
-        "github_com_morehao_goark_apps_iam_internal_dto_dtopermission.MenuPageListItem": {
-            "type": "object",
-            "required": [
-                "id"
-            ],
-            "properties": {
-                "cacheType": {
-                    "description": "CacheType 缓存类型: enabled-启用 disabled-禁用",
-                    "type": "string"
-                },
-                "companyId": {
-                    "description": "CompanyID 所属公司ID(租户ID)",
-                    "type": "integer"
-                },
-                "componentPath": {
-                    "description": "ComponentPath 组件路径",
-                    "type": "string"
-                },
-                "createdAt": {
-                    "description": "CreatedAt 创建时间",
-                    "type": "integer"
-                },
-                "createdBy": {
-                    "description": "CreatedBy 创建人id",
-                    "type": "integer"
-                },
-                "icon": {
-                    "description": "Icon 菜单图标",
-                    "type": "string"
-                },
-                "id": {
-                    "description": "ID 数据自增id",
-                    "type": "integer"
-                },
-                "linkType": {
-                    "description": "LinkType 链接类型: internal-内部链接 external-外部链接",
-                    "type": "string"
-                },
-                "menuCode": {
-                    "description": "MenuCode 菜单编码",
-                    "type": "string"
-                },
-                "menuName": {
-                    "description": "MenuName 菜单名称",
-                    "type": "string"
-                },
-                "menuType": {
-                    "description": "MenuType 菜单类型: directory-目录 menu-菜单 button-按钮",
-                    "type": "string"
-                },
-                "parentId": {
-                    "description": "ParentID 父菜单ID",
-                    "type": "integer"
-                },
-                "permission": {
-                    "description": "Permission 权限标识: sys:user:add",
-                    "type": "string"
-                },
-                "routePath": {
-                    "description": "RoutePath 路由地址",
-                    "type": "string"
-                },
-                "sortOrder": {
-                    "description": "SortOrder 排序",
-                    "type": "integer"
-                },
-                "status": {
-                    "description": "Status 状态: active-正常 inactive-停用",
-                    "type": "string"
-                },
-                "updatedAt": {
-                    "description": "UpdatedAt 更新时间",
-                    "type": "integer"
-                },
-                "updatedBy": {
-                    "description": "UpdatedBy 更新人id",
-                    "type": "integer"
-                },
-                "visibility": {
-                    "description": "Visibility 可见性: visible-可见 hidden-隐藏",
-                    "type": "string"
-                }
-            }
-        },
-        "github_com_morehao_goark_apps_iam_internal_dto_dtopermission.MenuPageListResp": {
-            "type": "object",
-            "properties": {
-                "list": {
-                    "description": "List 数据列表",
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/github_com_morehao_goark_apps_iam_internal_dto_dtopermission.MenuPageListItem"
-                    }
-                },
-                "total": {
-                    "description": "Total 数据总条数",
-                    "type": "integer"
-                }
-            }
-        },
-        "github_com_morehao_goark_apps_iam_internal_dto_dtopermission.MenuUpdateReq": {
-            "type": "object",
-            "required": [
-                "id"
-            ],
-            "properties": {
-                "cacheType": {
-                    "description": "CacheType 缓存类型: enabled-启用 disabled-禁用",
-                    "type": "string"
-                },
-                "companyId": {
-                    "description": "CompanyID 所属公司ID(租户ID)",
-                    "type": "integer"
-                },
-                "componentPath": {
-                    "description": "ComponentPath 组件路径",
-                    "type": "string"
-                },
-                "icon": {
-                    "description": "Icon 菜单图标",
-                    "type": "string"
-                },
-                "id": {
-                    "description": "ID 数据自增id",
-                    "type": "integer"
-                },
-                "linkType": {
-                    "description": "LinkType 链接类型: internal-内部链接 external-外部链接",
-                    "type": "string"
-                },
-                "menuCode": {
-                    "description": "MenuCode 菜单编码",
-                    "type": "string"
-                },
-                "menuName": {
-                    "description": "MenuName 菜单名称",
-                    "type": "string"
-                },
-                "menuType": {
-                    "description": "MenuType 菜单类型: directory-目录 menu-菜单 button-按钮",
-                    "type": "string"
-                },
-                "parentId": {
-                    "description": "ParentID 父菜单ID",
-                    "type": "integer"
-                },
-                "permission": {
-                    "description": "Permission 权限标识: sys:user:add",
-                    "type": "string"
-                },
-                "routePath": {
-                    "description": "RoutePath 路由地址",
-                    "type": "string"
-                },
-                "sortOrder": {
-                    "description": "SortOrder 排序",
-                    "type": "integer"
-                },
-                "status": {
-                    "description": "Status 状态: active-正常 inactive-停用",
-                    "type": "string"
-                },
-                "visibility": {
-                    "description": "Visibility 可见性: visible-可见 hidden-隐藏",
-                    "type": "string"
-                }
-            }
-        },
-        "github_com_morehao_goark_apps_iam_internal_dto_dtopermission.RoleCreateReq": {
-            "type": "object",
-            "properties": {
-                "companyId": {
-                    "description": "CompanyID 所属公司ID(租户ID)",
-                    "type": "integer"
-                },
-                "dataScope": {
-                    "description": "DataScope 数据权限范围: all-全部 dept_and_sub-本部门及以下 dept-本部门 self-仅本人 custom-自定义",
-                    "type": "string"
-                },
-                "description": {
-                    "description": "Description 角色描述",
-                    "type": "string"
-                },
-                "roleCode": {
-                    "description": "RoleCode 角色编码",
-                    "type": "string"
-                },
-                "roleName": {
-                    "description": "RoleName 角色名称",
-                    "type": "string"
-                },
-                "roleType": {
-                    "description": "RoleType 角色类型: custom-自定义 system-系统内置",
-                    "type": "string"
-                },
-                "sortOrder": {
-                    "description": "SortOrder 排序",
-                    "type": "integer"
-                },
-                "status": {
-                    "description": "Status 状态: active-正常 inactive-停用",
-                    "type": "string"
-                }
-            }
-        },
-        "github_com_morehao_goark_apps_iam_internal_dto_dtopermission.RoleCreateResp": {
-            "type": "object",
-            "properties": {
-                "id": {
-                    "description": "ID 数据自增id",
-                    "type": "integer"
-                }
-            }
-        },
-        "github_com_morehao_goark_apps_iam_internal_dto_dtopermission.RoleDeleteReq": {
-            "type": "object",
-            "required": [
-                "id"
-            ],
-            "properties": {
-                "id": {
-                    "description": "ID 数据自增id",
-                    "type": "integer"
-                }
-            }
-        },
-        "github_com_morehao_goark_apps_iam_internal_dto_dtopermission.RoleDetailResp": {
-            "type": "object",
-            "required": [
-                "id"
-            ],
-            "properties": {
-                "companyId": {
-                    "description": "CompanyID 所属公司ID(租户ID)",
-                    "type": "integer"
-                },
-                "createdAt": {
-                    "description": "CreatedAt 创建时间",
-                    "type": "integer"
-                },
-                "createdBy": {
-                    "description": "CreatedBy 创建人id",
-                    "type": "integer"
-                },
-                "dataScope": {
-                    "description": "DataScope 数据权限范围: all-全部 dept_and_sub-本部门及以下 dept-本部门 self-仅本人 custom-自定义",
-                    "type": "string"
-                },
-                "description": {
-                    "description": "Description 角色描述",
-                    "type": "string"
-                },
-                "id": {
-                    "description": "ID 数据自增id",
-                    "type": "integer"
-                },
-                "roleCode": {
-                    "description": "RoleCode 角色编码",
-                    "type": "string"
-                },
-                "roleName": {
-                    "description": "RoleName 角色名称",
-                    "type": "string"
-                },
-                "roleType": {
-                    "description": "RoleType 角色类型: custom-自定义 system-系统内置",
-                    "type": "string"
-                },
-                "sortOrder": {
-                    "description": "SortOrder 排序",
-                    "type": "integer"
-                },
-                "status": {
-                    "description": "Status 状态: active-正常 inactive-停用",
-                    "type": "string"
-                },
-                "updatedAt": {
-                    "description": "UpdatedAt 更新时间",
-                    "type": "integer"
-                },
-                "updatedBy": {
-                    "description": "UpdatedBy 更新人id",
-                    "type": "integer"
-                }
-            }
-        },
-        "github_com_morehao_goark_apps_iam_internal_dto_dtopermission.RolePageListItem": {
-            "type": "object",
-            "required": [
-                "id"
-            ],
-            "properties": {
-                "companyId": {
-                    "description": "CompanyID 所属公司ID(租户ID)",
-                    "type": "integer"
-                },
-                "createdAt": {
-                    "description": "CreatedAt 创建时间",
-                    "type": "integer"
-                },
-                "createdBy": {
-                    "description": "CreatedBy 创建人id",
-                    "type": "integer"
-                },
-                "dataScope": {
-                    "description": "DataScope 数据权限范围: all-全部 dept_and_sub-本部门及以下 dept-本部门 self-仅本人 custom-自定义",
-                    "type": "string"
-                },
-                "description": {
-                    "description": "Description 角色描述",
-                    "type": "string"
-                },
-                "id": {
-                    "description": "ID 数据自增id",
-                    "type": "integer"
-                },
-                "roleCode": {
-                    "description": "RoleCode 角色编码",
-                    "type": "string"
-                },
-                "roleName": {
-                    "description": "RoleName 角色名称",
-                    "type": "string"
-                },
-                "roleType": {
-                    "description": "RoleType 角色类型: custom-自定义 system-系统内置",
-                    "type": "string"
-                },
-                "sortOrder": {
-                    "description": "SortOrder 排序",
-                    "type": "integer"
-                },
-                "status": {
-                    "description": "Status 状态: active-正常 inactive-停用",
-                    "type": "string"
-                },
-                "updatedAt": {
-                    "description": "UpdatedAt 更新时间",
-                    "type": "integer"
-                },
-                "updatedBy": {
-                    "description": "UpdatedBy 更新人id",
-                    "type": "integer"
-                }
-            }
-        },
-        "github_com_morehao_goark_apps_iam_internal_dto_dtopermission.RolePageListResp": {
-            "type": "object",
-            "properties": {
-                "list": {
-                    "description": "List 数据列表",
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/github_com_morehao_goark_apps_iam_internal_dto_dtopermission.RolePageListItem"
-                    }
-                },
-                "total": {
-                    "description": "Total 数据总条数",
-                    "type": "integer"
-                }
-            }
-        },
-        "github_com_morehao_goark_apps_iam_internal_dto_dtopermission.RoleUpdateReq": {
-            "type": "object",
-            "required": [
-                "id"
-            ],
-            "properties": {
-                "companyId": {
-                    "description": "CompanyID 所属公司ID(租户ID)",
-                    "type": "integer"
-                },
-                "dataScope": {
-                    "description": "DataScope 数据权限范围: all-全部 dept_and_sub-本部门及以下 dept-本部门 self-仅本人 custom-自定义",
-                    "type": "string"
-                },
-                "description": {
-                    "description": "Description 角色描述",
-                    "type": "string"
-                },
-                "id": {
-                    "description": "ID 数据自增id",
-                    "type": "integer"
-                },
-                "roleCode": {
-                    "description": "RoleCode 角色编码",
-                    "type": "string"
-                },
-                "roleName": {
-                    "description": "RoleName 角色名称",
-                    "type": "string"
-                },
-                "roleType": {
-                    "description": "RoleType 角色类型: custom-自定义 system-系统内置",
-                    "type": "string"
-                },
-                "sortOrder": {
-                    "description": "SortOrder 排序",
-                    "type": "integer"
-                },
-                "status": {
-                    "description": "Status 状态: active-正常 inactive-停用",
-                    "type": "string"
-                }
-            }
-        },
-        "github_com_morehao_goark_apps_iam_internal_dto_dtotenant.TenantCreateReq": {
-            "type": "object",
-            "properties": {
-                "description": {
-                    "description": "Description 租户描述",
-                    "type": "string"
-                },
-                "sortOrder": {
-                    "description": "SortOrder 排序",
-                    "type": "integer"
-                },
-                "status": {
-                    "description": "Status 状态: active-正常 inactive-停用",
-                    "type": "string"
-                },
-                "tenantCode": {
-                    "description": "TenantCode 租户编码",
-                    "type": "string"
-                },
-                "tenantName": {
-                    "description": "TenantName 租户名称",
-                    "type": "string"
-                }
-            }
-        },
-        "github_com_morehao_goark_apps_iam_internal_dto_dtotenant.TenantCreateResp": {
-            "type": "object",
-            "properties": {
-                "id": {
-                    "description": "ID 数据自增id",
-                    "type": "integer"
-                }
-            }
-        },
-        "github_com_morehao_goark_apps_iam_internal_dto_dtotenant.TenantDeleteReq": {
-            "type": "object",
-            "required": [
-                "id"
-            ],
-            "properties": {
-                "id": {
-                    "description": "ID 数据自增id",
-                    "type": "integer"
-                }
-            }
-        },
-        "github_com_morehao_goark_apps_iam_internal_dto_dtotenant.TenantDetailResp": {
-            "type": "object",
-            "required": [
-                "id"
-            ],
-            "properties": {
-                "createdAt": {
-                    "description": "CreatedAt 创建时间",
-                    "type": "integer"
-                },
-                "createdBy": {
-                    "description": "CreatedBy 创建人id",
-                    "type": "integer"
-                },
-                "description": {
-                    "description": "Description 租户描述",
-                    "type": "string"
-                },
-                "id": {
-                    "description": "ID 数据自增id",
-                    "type": "integer"
-                },
-                "sortOrder": {
-                    "description": "SortOrder 排序",
-                    "type": "integer"
-                },
-                "status": {
-                    "description": "Status 状态: active-正常 inactive-停用",
-                    "type": "string"
-                },
-                "tenantCode": {
-                    "description": "TenantCode 租户编码",
-                    "type": "string"
-                },
-                "tenantName": {
-                    "description": "TenantName 租户名称",
-                    "type": "string"
-                },
-                "updatedAt": {
-                    "description": "UpdatedAt 更新时间",
-                    "type": "integer"
-                },
-                "updatedBy": {
-                    "description": "UpdatedBy 更新人id",
-                    "type": "integer"
-                }
-            }
-        },
-        "github_com_morehao_goark_apps_iam_internal_dto_dtotenant.TenantPageListItem": {
-            "type": "object",
-            "required": [
-                "id"
-            ],
-            "properties": {
-                "createdAt": {
-                    "description": "CreatedAt 创建时间",
-                    "type": "integer"
-                },
-                "createdBy": {
-                    "description": "CreatedBy 创建人id",
-                    "type": "integer"
-                },
-                "description": {
-                    "description": "Description 租户描述",
-                    "type": "string"
-                },
-                "id": {
-                    "description": "ID 数据自增id",
-                    "type": "integer"
-                },
-                "sortOrder": {
-                    "description": "SortOrder 排序",
-                    "type": "integer"
-                },
-                "status": {
-                    "description": "Status 状态: active-正常 inactive-停用",
-                    "type": "string"
-                },
-                "tenantCode": {
-                    "description": "TenantCode 租户编码",
-                    "type": "string"
-                },
-                "tenantName": {
-                    "description": "TenantName 租户名称",
-                    "type": "string"
-                },
-                "updatedAt": {
-                    "description": "UpdatedAt 更新时间",
-                    "type": "integer"
-                },
-                "updatedBy": {
-                    "description": "UpdatedBy 更新人id",
-                    "type": "integer"
-                }
-            }
-        },
-        "github_com_morehao_goark_apps_iam_internal_dto_dtotenant.TenantPageListResp": {
-            "type": "object",
-            "properties": {
-                "list": {
-                    "description": "List 数据列表",
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/github_com_morehao_goark_apps_iam_internal_dto_dtotenant.TenantPageListItem"
-                    }
-                },
-                "total": {
-                    "description": "Total 数据总条数",
-                    "type": "integer"
-                }
-            }
-        },
-        "github_com_morehao_goark_apps_iam_internal_dto_dtotenant.TenantUpdateReq": {
-            "type": "object",
-            "required": [
-                "id"
-            ],
-            "properties": {
-                "description": {
-                    "description": "Description 租户描述",
-                    "type": "string"
-                },
-                "id": {
-                    "description": "ID 数据自增id",
-                    "type": "integer"
-                },
-                "sortOrder": {
-                    "description": "SortOrder 排序",
-                    "type": "integer"
-                },
-                "status": {
-                    "description": "Status 状态: active-正常 inactive-停用",
-                    "type": "string"
-                },
-                "tenantCode": {
-                    "description": "TenantCode 租户编码",
-                    "type": "string"
-                },
-                "tenantName": {
-                    "description": "TenantName 租户名称",
                     "type": "string"
                 }
             }

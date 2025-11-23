@@ -88,12 +88,11 @@ swag:
 	$(call validate_app)
 	@echo "📚 正在生成 Swagger 文档..."
 	@which swag > /dev/null || (echo "⚠️  swag 未安装，正在安装..." && go install github.com/swaggo/swag/cmd/swag@latest)
-	@rm -rf apps/$(APP)/docs/*
 	@swag init \
 		--parseDependency \
 		--parseInternal \
-		-g apps/$(APP)/cmd/main.go \
-		--dir . \
+		-g app.go \
+		--dir apps/${APP} \
 		--output apps/$(APP)/docs \
 		--outputTypes go \
 		--instanceName $(APP)

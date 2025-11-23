@@ -1,6 +1,10 @@
 package router
 
-import "github.com/gin-gonic/gin"
+import (
+	"github.com/gin-gonic/gin"
+	"github.com/morehao/goark/apps/iam/config"
+	"github.com/morehao/golib/grouter/ginrouter"
+)
 
 type RouterGroups struct {
 	AuthGroup   *gin.RouterGroup
@@ -8,6 +12,9 @@ type RouterGroups struct {
 }
 
 func RegisterRouter(groups *RouterGroups) {
+	if config.Conf.Server.Env == "dev" {
+		ginrouter.RegisterSwagger(groups.AuthGroup, config.Conf.Server.Name)
+	}
 	v1Auth := groups.AuthGroup.Group("/v1")
 	// v1NoAuth := groups.NoAuthGroup.Group("/v1")
 	tenantRouter(v1Auth)
