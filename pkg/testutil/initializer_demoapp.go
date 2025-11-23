@@ -79,21 +79,24 @@ func (d *demoappInitializer) Initialize() error {
 func (d *demoappInitializer) initResources() error {
 	// 初始化 MySQL
 	if len(config.Conf.MysqlConfigs) > 0 {
-		if err := storages.InitMultiMysql(config.Conf.MysqlConfigs); err != nil {
+		gormLogConfig := config.Conf.Log["gorm"]
+		if err := storages.InitMultiMysql(config.Conf.MysqlConfigs, &gormLogConfig); err != nil {
 			return fmt.Errorf("init mysql: %w", err)
 		}
 	}
 
 	// 初始化 Redis
 	if len(config.Conf.RedisConfigs) > 0 {
-		if err := storages.InitMultiRedis(config.Conf.RedisConfigs); err != nil {
+		redisLogConfig := config.Conf.Log["redis"]
+		if err := storages.InitMultiRedis(config.Conf.RedisConfigs, &redisLogConfig); err != nil {
 			return fmt.Errorf("init redis: %w", err)
 		}
 	}
 
 	// 初始化 Elasticsearch
 	if len(config.Conf.ESConfigs) > 0 {
-		if err := storages.InitMultiEs(config.Conf.ESConfigs); err != nil {
+		esLogConfig := config.Conf.Log["es"]
+		if err := storages.InitMultiEs(config.Conf.ESConfigs, &esLogConfig); err != nil {
 			return fmt.Errorf("init elasticsearch: %w", err)
 		}
 	}

@@ -3,8 +3,8 @@ package storages
 import (
 	"fmt"
 
-	"github.com/morehao/goark/apps/demoapp/config"
 	"github.com/morehao/golib/dbstore/dbmysql"
+	"github.com/morehao/golib/glog"
 	"gorm.io/gorm"
 )
 
@@ -18,15 +18,14 @@ const (
 	DBNameIam  = "ark_iam"
 )
 
-func InitMultiMysql(configs []dbmysql.MysqlConfig) error {
+func InitMultiMysql(configs []dbmysql.MysqlConfig, logConfig *glog.LogConfig) error {
 	if len(configs) == 0 {
 		return fmt.Errorf("mysql config is empty")
 	}
 
 	var opts []dbmysql.Option
-	logCfg, ok := config.Conf.Log["gorm"]
-	if ok {
-		opts = append(opts, dbmysql.WithLogConfig(&logCfg))
+	if logConfig != nil {
+		opts = append(opts, dbmysql.WithLogConfig(logConfig))
 	}
 	for _, cfg := range configs {
 		client, err := dbmysql.InitMysql(&cfg, opts...)
