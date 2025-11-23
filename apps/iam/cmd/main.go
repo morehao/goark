@@ -26,9 +26,9 @@ func main() {
 	iam.Routers(engine)
 
 	if err := engine.Run(fmt.Sprintf(":%s", config.Conf.Server.Port)); err != nil {
-		glog.Errorf(context.Background(), "%s run fail, port:%s", config.Conf.Server.Name, config.Conf.Server.Port)
+		glog.Errorf(context.Background(), "%s run fail, port:%s", iam.AppName, config.Conf.Server.Port)
 		panic(err)
 	} else {
-		glog.Infof(context.Background(), "%s run success, port:%s", config.Conf.Server.Name, config.Conf.Server.Port)
+		glog.Infof(context.Background(), "%s run success, port:%s", iam.AppName, config.Conf.Server.Port)
 	}
 }

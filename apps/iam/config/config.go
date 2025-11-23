@@ -19,7 +19,7 @@ type Config struct {
 	Server       Server                    `yaml:"server"`
 	Log          map[string]glog.LogConfig `yaml:"log"`
 	MysqlConfigs []dbmysql.MysqlConfig     `yaml:"mysql_configs"`
-	RedisConfigs []dbredis.RedisConfig     `yaml:"redis_configs"`
+	RedisConfig  dbredis.RedisConfig       `yaml:"redis_config"`
 	ESConfigs    []dbes.ESConfig           `yaml:"es_configs"`
 	Client       Client                    `yaml:"client"`
 }

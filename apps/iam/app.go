@@ -6,11 +6,13 @@ import (
 	"github.com/morehao/goark/apps/iam/router"
 )
 
+const AppName = "iam"
+
 func Routers(engine *gin.Engine) {
-	routerGroup := engine.Group("iam")
+	routerGroup := engine.Group(AppName)
 	routerGroups := &router.RouterGroups{
 		AuthGroup:   routerGroup,
 		NoAuthGroup: routerGroup,
 	}
-	router.RegisterRouter(routerGroups)
+	router.RegisterRouter(routerGroups, AppName)
 }

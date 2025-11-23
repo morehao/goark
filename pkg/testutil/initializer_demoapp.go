@@ -79,24 +79,33 @@ func (d *demoappInitializer) Initialize() error {
 func (d *demoappInitializer) initResources() error {
 	// 初始化 MySQL
 	if len(config.Conf.MysqlConfigs) > 0 {
-		gormLogConfig := config.Conf.Log["gorm"]
-		if err := storages.InitMultiMysql(config.Conf.MysqlConfigs, &gormLogConfig); err != nil {
+		var gormLogConfig *glog.LogConfig
+		if cfg, ok := config.Conf.Log["gorm"]; ok {
+			gormLogConfig = &cfg
+		}
+		if err := storages.InitMultiMysql(config.Conf.MysqlConfigs, gormLogConfig); err != nil {
 			return fmt.Errorf("init mysql: %w", err)
 		}
 	}
 
 	// 初始化 Redis
-	if len(config.Conf.RedisConfigs) > 0 {
-		redisLogConfig := config.Conf.Log["redis"]
-		if err := storages.InitMultiRedis(config.Conf.RedisConfigs, &redisLogConfig); err != nil {
+	if config.Conf.RedisConfig.Addr != "" {
+		var redisLogConfig *glog.LogConfig
+		if cfg, ok := config.Conf.Log["redis"]; ok {
+			redisLogConfig = &cfg
+		}
+		if err := storages.InitRedis(config.Conf.RedisConfig, redisLogConfig); err != nil {
 			return fmt.Errorf("init redis: %w", err)
 		}
 	}
 
 	// 初始化 Elasticsearch
 	if len(config.Conf.ESConfigs) > 0 {
-		esLogConfig := config.Conf.Log["es"]
-		if err := storages.InitMultiEs(config.Conf.ESConfigs, &esLogConfig); err != nil {
+		var esLogConfig *glog.LogConfig
+		if cfg, ok := config.Conf.Log["es"]; ok {
+			esLogConfig = &cfg
+		}
+		if err := storages.InitMultiEs(config.Conf.ESConfigs, esLogConfig); err != nil {
 			return fmt.Errorf("init elasticsearch: %w", err)
 		}
 	}

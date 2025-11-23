@@ -28,12 +28,18 @@ func preInit() error {
 }
 
 func resourceInit() error {
-	gormLogConfig := config.Conf.Log["gorm"]
-	if err := storages.InitMultiMysql(config.Conf.MysqlConfigs, &gormLogConfig); err != nil {
+	var gormLogConfig *glog.LogConfig
+	if cfg, ok := config.Conf.Log["gorm"]; ok {
+		gormLogConfig = &cfg
+	}
+	if err := storages.InitMultiMysql(config.Conf.MysqlConfigs, gormLogConfig); err != nil {
 		return fmt.Errorf("init mysql failed: " + err.Error())
 	}
-	redisLogConfig := config.Conf.Log["redis"]
-	if err := storages.InitMultiRedis(config.Conf.RedisConfigs, &redisLogConfig); err != nil {
+	var redisLogConfig *glog.LogConfig
+	if cfg, ok := config.Conf.Log["redis"]; ok {
+		redisLogConfig = &cfg
+	}
+	if err := storages.InitRedis(config.Conf.RedisConfig, redisLogConfig); err != nil {
 		return fmt.Errorf("init redis failed: " + err.Error())
 	}
 	return nil

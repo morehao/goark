@@ -11,9 +11,9 @@ type RouterGroups struct {
 	NoAuthGroup *gin.RouterGroup
 }
 
-func RegisterRouter(groups *RouterGroups) {
+func RegisterRouter(groups *RouterGroups, appName string) {
 	if config.Conf.Server.Env == "dev" {
-		ginrouter.RegisterSwagger(groups.AuthGroup, config.Conf.Server.Name)
+		ginrouter.RegisterSwagger(groups.AuthGroup, appName)
 	}
 	v1Auth := groups.AuthGroup.Group("/v1")
 	// v1NoAuth := groups.NoAuthGroup.Group("/v1")
