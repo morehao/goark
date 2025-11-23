@@ -5,11 +5,11 @@ import (
 	"github.com/morehao/goark/apps/iam/iamdao/daoorg"
 	"github.com/morehao/goark/apps/iam/iammodel"
 	"github.com/morehao/goark/apps/iam/internal/dto/dtoorg"
-	"github.com/morehao/goark/apps/iam/object/objcommon"
 	"github.com/morehao/goark/apps/iam/object/objorg"
 	"github.com/morehao/goark/pkg/code"
 	"github.com/morehao/golib/gcontext/gincontext"
 	"github.com/morehao/golib/glog"
+	"github.com/morehao/golib/gobject"
 	"github.com/morehao/golib/gutil"
 )
 
@@ -109,7 +109,7 @@ func (svc *departmentSvc) Detail(ctx *gin.Context, req *dtoorg.DepartmentDetailR
 			SortOrder: detailEntity.SortOrder,
 			Status:    detailEntity.Status,
 		},
-		OperatorBaseInfo: objcommon.OperatorBaseInfo{
+		OperatorBaseInfo: gobject.OperatorBaseInfo{
 			CreatedAt: detailEntity.CreatedAt.Unix(),
 			UpdatedAt: detailEntity.UpdatedAt.Unix(),
 		},
@@ -143,7 +143,7 @@ func (svc *departmentSvc) PageList(ctx *gin.Context, req *dtoorg.DepartmentPageL
 				SortOrder: v.SortOrder,
 				Status:    v.Status,
 			},
-			OperatorBaseInfo: objcommon.OperatorBaseInfo{
+			OperatorBaseInfo: gobject.OperatorBaseInfo{
 				UpdatedAt: v.UpdatedAt.Unix(),
 			},
 		})

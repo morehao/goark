@@ -1,4 +1,4 @@
-package objcommon
+package gobject
 
 type OperatorBaseInfo struct {
 	// CreatedBy 创建人id

@@ -1,8 +1,8 @@
 package dtotenant
 
 import (
-	"github.com/morehao/goark/apps/iam/object/objcommon"
 	"github.com/morehao/goark/apps/iam/object/objtenant"
+	"github.com/morehao/golib/gobject"
 )
 
 type TenantCreateResp struct {
@@ -15,7 +15,7 @@ type TenantDetailResp struct {
 	ID uint `json:"id" validate:"required"`
 
 	objtenant.TenantBaseInfo
-	objcommon.OperatorBaseInfo
+	gobject.OperatorBaseInfo
 }
 
 type TenantPageListItem struct {
@@ -23,7 +23,7 @@ type TenantPageListItem struct {
 	ID uint `json:"id" validate:"required"`
 
 	objtenant.TenantBaseInfo
-	objcommon.OperatorBaseInfo
+	gobject.OperatorBaseInfo
 }
 
 type TenantPageListResp struct {

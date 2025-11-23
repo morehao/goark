@@ -1,4 +1,4 @@
-package objcommon
+package gobject
 
 type PageQuery struct {
 	// Page 页码

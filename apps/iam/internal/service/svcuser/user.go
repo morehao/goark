@@ -7,11 +7,11 @@ import (
 	"github.com/morehao/goark/apps/iam/iamdao/daouser"
 	"github.com/morehao/goark/apps/iam/iammodel"
 	"github.com/morehao/goark/apps/iam/internal/dto/dtouser"
-	"github.com/morehao/goark/apps/iam/object/objcommon"
 	"github.com/morehao/goark/apps/iam/object/objuser"
 	"github.com/morehao/goark/pkg/code"
 	"github.com/morehao/golib/gcontext/gincontext"
 	"github.com/morehao/golib/glog"
+	"github.com/morehao/golib/gobject"
 	"github.com/morehao/golib/gutil"
 )
 
@@ -123,7 +123,7 @@ func (svc *userSvc) Detail(ctx *gin.Context, req *dtouser.UserDetailReq) (*dtous
 			UserType:    detailEntity.UserType,
 			Username:    detailEntity.Username,
 		},
-		OperatorBaseInfo: objcommon.OperatorBaseInfo{
+		OperatorBaseInfo: gobject.OperatorBaseInfo{
 			CreatedAt: detailEntity.CreatedAt.Unix(),
 			UpdatedAt: detailEntity.UpdatedAt.Unix(),
 		},
@@ -161,7 +161,7 @@ func (svc *userSvc) PageList(ctx *gin.Context, req *dtouser.UserPageListReq) (*d
 				UserType:    v.UserType,
 				Username:    v.Username,
 			},
-			OperatorBaseInfo: objcommon.OperatorBaseInfo{
+			OperatorBaseInfo: gobject.OperatorBaseInfo{
 				UpdatedAt: v.UpdatedAt.Unix(),
 			},
 		})

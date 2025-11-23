@@ -5,11 +5,11 @@ import (
 	"github.com/morehao/goark/apps/iam/iamdao/daopermission"
 	"github.com/morehao/goark/apps/iam/iammodel"
 	"github.com/morehao/goark/apps/iam/internal/dto/dtopermission"
-	"github.com/morehao/goark/apps/iam/object/objcommon"
 	"github.com/morehao/goark/apps/iam/object/objpermission"
 	"github.com/morehao/goark/pkg/code"
 	"github.com/morehao/golib/gcontext/gincontext"
 	"github.com/morehao/golib/glog"
+	"github.com/morehao/golib/gobject"
 	"github.com/morehao/golib/gutil"
 )
 
@@ -124,7 +124,7 @@ func (svc *menuSvc) Detail(ctx *gin.Context, req *dtopermission.MenuDetailReq) (
 			Status:        detailEntity.Status,
 			Visibility:    detailEntity.Visibility,
 		},
-		OperatorBaseInfo: objcommon.OperatorBaseInfo{
+		OperatorBaseInfo: gobject.OperatorBaseInfo{
 			CreatedAt: detailEntity.CreatedAt.Unix(),
 			UpdatedAt: detailEntity.UpdatedAt.Unix(),
 		},
@@ -163,7 +163,7 @@ func (svc *menuSvc) PageList(ctx *gin.Context, req *dtopermission.MenuPageListRe
 				Status:        v.Status,
 				Visibility:    v.Visibility,
 			},
-			OperatorBaseInfo: objcommon.OperatorBaseInfo{
+			OperatorBaseInfo: gobject.OperatorBaseInfo{
 				UpdatedAt: v.UpdatedAt.Unix(),
 			},
 		})

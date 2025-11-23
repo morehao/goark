@@ -1,8 +1,8 @@
 package dtopermission
 
 import (
-	"github.com/morehao/goark/apps/iam/object/objcommon"
 	"github.com/morehao/goark/apps/iam/object/objpermission"
+	"github.com/morehao/golib/gobject"
 )
 
 type MenuCreateResp struct {
@@ -15,7 +15,7 @@ type MenuDetailResp struct {
 	ID uint `json:"id" validate:"required"`
 
 	objpermission.MenuBaseInfo
-	objcommon.OperatorBaseInfo
+	gobject.OperatorBaseInfo
 }
 
 type MenuPageListItem struct {
@@ -23,7 +23,7 @@ type MenuPageListItem struct {
 	ID uint `json:"id" validate:"required"`
 
 	objpermission.MenuBaseInfo
-	objcommon.OperatorBaseInfo
+	gobject.OperatorBaseInfo
 }
 
 type MenuPageListResp struct {
@@ -44,7 +44,7 @@ type RoleDetailResp struct {
 	ID uint `json:"id" validate:"required"`
 
 	objpermission.RoleBaseInfo
-	objcommon.OperatorBaseInfo
+	gobject.OperatorBaseInfo
 }
 
 type RolePageListItem struct {
@@ -52,7 +52,7 @@ type RolePageListItem struct {
 	ID uint `json:"id" validate:"required"`
 
 	objpermission.RoleBaseInfo
-	objcommon.OperatorBaseInfo
+	gobject.OperatorBaseInfo
 }
 
 type RolePageListResp struct {

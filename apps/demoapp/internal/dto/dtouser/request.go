@@ -1,8 +1,8 @@
 package dtouser
 
 import (
-	"github.com/morehao/goark/apps/demoapp/object/objcommon"
 	"github.com/morehao/goark/apps/demoapp/object/objuser"
+	"github.com/morehao/golib/gobject"
 )
 
 type UserCreateReq struct {
@@ -22,7 +22,7 @@ type UserDetailReq struct {
 }
 
 type UserPageListReq struct {
-	objcommon.PageQuery
+	gobject.PageQuery
 }
 
 type UserDeleteReq struct {

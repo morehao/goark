@@ -1,8 +1,8 @@
 package dtouser
 
 import (
-	"github.com/morehao/goark/apps/iam/object/objcommon"
 	"github.com/morehao/goark/apps/iam/object/objuser"
+	"github.com/morehao/golib/gobject"
 )
 
 type UserCreateResp struct {
@@ -15,7 +15,7 @@ type UserDetailResp struct {
 	ID uint `json:"id" validate:"required"`
 
 	objuser.UserBaseInfo
-	objcommon.OperatorBaseInfo
+	gobject.OperatorBaseInfo
 }
 
 type UserPageListItem struct {
@@ -23,7 +23,7 @@ type UserPageListItem struct {
 	ID uint `json:"id" validate:"required"`
 
 	objuser.UserBaseInfo
-	objcommon.OperatorBaseInfo
+	gobject.OperatorBaseInfo
 }
 
 type UserPageListResp struct {

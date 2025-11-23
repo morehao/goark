@@ -1,8 +1,8 @@
 package dtoorg
 
 import (
-	"github.com/morehao/goark/apps/iam/object/objcommon"
 	"github.com/morehao/goark/apps/iam/object/objorg"
+	"github.com/morehao/golib/gobject"
 )
 
 type CompanyCreateResp struct {
@@ -15,7 +15,7 @@ type CompanyDetailResp struct {
 	ID uint `json:"id" validate:"required"`
 
 	objorg.CompanyBaseInfo
-	objcommon.OperatorBaseInfo
+	gobject.OperatorBaseInfo
 }
 
 type CompanyPageListItem struct {
@@ -23,7 +23,7 @@ type CompanyPageListItem struct {
 	ID uint `json:"id" validate:"required"`
 
 	objorg.CompanyBaseInfo
-	objcommon.OperatorBaseInfo
+	gobject.OperatorBaseInfo
 }
 
 type CompanyPageListResp struct {
@@ -44,7 +44,7 @@ type DepartmentDetailResp struct {
 	ID uint `json:"id" validate:"required"`
 
 	objorg.DepartmentBaseInfo
-	objcommon.OperatorBaseInfo
+	gobject.OperatorBaseInfo
 }
 
 type DepartmentPageListItem struct {
@@ -52,7 +52,7 @@ type DepartmentPageListItem struct {
 	ID uint `json:"id" validate:"required"`
 
 	objorg.DepartmentBaseInfo
-	objcommon.OperatorBaseInfo
+	gobject.OperatorBaseInfo
 }
 
 type DepartmentPageListResp struct {

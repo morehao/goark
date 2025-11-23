@@ -1,8 +1,8 @@
 package dtotenant
 
 import (
-	"github.com/morehao/goark/apps/iam/object/objcommon"
 	"github.com/morehao/goark/apps/iam/object/objtenant"
+	"github.com/morehao/golib/gobject"
 )
 
 type TenantCreateReq struct {
@@ -22,7 +22,7 @@ type TenantDetailReq struct {
 }
 
 type TenantPageListReq struct {
-	objcommon.PageQuery
+	gobject.PageQuery
 }
 
 type TenantDeleteReq struct {

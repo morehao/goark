@@ -1,8 +1,8 @@
 package dtopermission
 
 import (
-	"github.com/morehao/goark/apps/iam/object/objcommon"
 	"github.com/morehao/goark/apps/iam/object/objpermission"
+	"github.com/morehao/golib/gobject"
 )
 
 type MenuCreateReq struct {
@@ -22,7 +22,7 @@ type MenuDetailReq struct {
 }
 
 type MenuPageListReq struct {
-	objcommon.PageQuery
+	gobject.PageQuery
 }
 
 type MenuDeleteReq struct {
@@ -47,7 +47,7 @@ type RoleDetailReq struct {
 }
 
 type RolePageListReq struct {
-	objcommon.PageQuery
+	gobject.PageQuery
 }
 
 type RoleDeleteReq struct {

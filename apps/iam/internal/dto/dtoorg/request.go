@@ -1,8 +1,8 @@
 package dtoorg
 
 import (
-	"github.com/morehao/goark/apps/iam/object/objcommon"
 	"github.com/morehao/goark/apps/iam/object/objorg"
+	"github.com/morehao/golib/gobject"
 )
 
 type CompanyCreateReq struct {
@@ -22,7 +22,7 @@ type CompanyDetailReq struct {
 }
 
 type CompanyPageListReq struct {
-	objcommon.PageQuery
+	gobject.PageQuery
 }
 
 type CompanyDeleteReq struct {
@@ -47,7 +47,7 @@ type DepartmentDetailReq struct {
 }
 
 type DepartmentPageListReq struct {
-	objcommon.PageQuery
+	gobject.PageQuery
 }
 
 type DepartmentDeleteReq struct {

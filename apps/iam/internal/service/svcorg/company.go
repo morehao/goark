@@ -5,11 +5,11 @@ import (
 	"github.com/morehao/goark/apps/iam/iamdao/daoorg"
 	"github.com/morehao/goark/apps/iam/iammodel"
 	"github.com/morehao/goark/apps/iam/internal/dto/dtoorg"
-	"github.com/morehao/goark/apps/iam/object/objcommon"
 	"github.com/morehao/goark/apps/iam/object/objorg"
 	"github.com/morehao/goark/pkg/code"
 	"github.com/morehao/golib/gcontext/gincontext"
 	"github.com/morehao/golib/glog"
+	"github.com/morehao/golib/gobject"
 	"github.com/morehao/golib/gutil"
 )
 
@@ -115,7 +115,7 @@ func (svc *companySvc) Detail(ctx *gin.Context, req *dtoorg.CompanyDetailReq) (*
 			TenantID:                detailEntity.TenantID,
 			UnifiedSocialCreditCode: detailEntity.UnifiedSocialCreditCode,
 		},
-		OperatorBaseInfo: objcommon.OperatorBaseInfo{
+		OperatorBaseInfo: gobject.OperatorBaseInfo{
 			CreatedAt: detailEntity.CreatedAt.Unix(),
 			UpdatedAt: detailEntity.UpdatedAt.Unix(),
 		},
@@ -151,7 +151,7 @@ func (svc *companySvc) PageList(ctx *gin.Context, req *dtoorg.CompanyPageListReq
 				TenantID:                v.TenantID,
 				UnifiedSocialCreditCode: v.UnifiedSocialCreditCode,
 			},
-			OperatorBaseInfo: objcommon.OperatorBaseInfo{
+			OperatorBaseInfo: gobject.OperatorBaseInfo{
 				UpdatedAt: v.UpdatedAt.Unix(),
 			},
 		})

@@ -40,7 +40,7 @@
 │   │   ├── middleware
 │   │   ├── model
 │   │   ├── object
-│   │   │   ├── objcommon
+│   │   │   ├── gobject
 │   │   │   └── objuser
 │   │   ├── router
 │   │   └── scripts

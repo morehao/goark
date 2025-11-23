@@ -8,13 +8,13 @@ import (
 	"github.com/morehao/goark/apps/demoapp/dao/daouser"
 	"github.com/morehao/goark/apps/demoapp/internal/dto/dtouser"
 	"github.com/morehao/goark/apps/demoapp/model"
-	"github.com/morehao/goark/apps/demoapp/object/objcommon"
 	"github.com/morehao/goark/apps/demoapp/object/objuser"
 	"github.com/morehao/goark/pkg/code"
 	"github.com/morehao/goark/pkg/dbclient"
 	"github.com/morehao/golib/database/dbes"
 	"github.com/morehao/golib/gcontext/gincontext"
 	"github.com/morehao/golib/glog"
+	"github.com/morehao/golib/gobject"
 	"github.com/morehao/golib/gutil"
 )
 
@@ -101,7 +101,7 @@ func (svc *userSvc) Detail(ctx *gin.Context, req *dtouser.UserDetailReq) (*dtous
 			DepartmentID: detailEntity.DepartmentID,
 			Name:         detailEntity.Name,
 		},
-		OperatorBaseInfo: objcommon.OperatorBaseInfo{
+		OperatorBaseInfo: gobject.OperatorBaseInfo{
 			CreatedBy: detailEntity.CreatedBy,
 			CreatedAt: detailEntity.CreatedAt.Unix(),
 			UpdatedBy: detailEntity.UpdatedBy,
@@ -152,7 +152,7 @@ func (svc *userSvc) PageList(ctx *gin.Context, req *dtouser.UserPageListReq) (*d
 				DepartmentID: v.DepartmentID,
 				Name:         v.Name,
 			},
-			OperatorBaseInfo: objcommon.OperatorBaseInfo{
+			OperatorBaseInfo: gobject.OperatorBaseInfo{
 				CreatedBy: v.CreatedBy,
 				CreatedAt: v.CreatedAt.Unix(),
 				UpdatedBy: v.UpdatedBy,
