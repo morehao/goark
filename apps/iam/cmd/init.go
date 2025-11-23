@@ -4,7 +4,7 @@ import (
 	"fmt"
 
 	"github.com/morehao/goark/apps/iam/config"
-	"github.com/morehao/goark/pkg/storages"
+	"github.com/morehao/goark/pkg/dbclient"
 	"github.com/morehao/golib/glog"
 )
 
@@ -32,14 +32,14 @@ func resourceInit() error {
 	if cfg, ok := config.Conf.Log["gorm"]; ok {
 		gormLogConfig = &cfg
 	}
-	if err := storages.InitMultiMysql(config.Conf.MysqlConfigs, gormLogConfig); err != nil {
+	if err := dbclient.InitMultiMysql(config.Conf.MysqlConfigs, gormLogConfig); err != nil {
 		return fmt.Errorf("init mysql failed: " + err.Error())
 	}
 	var redisLogConfig *glog.LogConfig
 	if cfg, ok := config.Conf.Log["redis"]; ok {
 		redisLogConfig = &cfg
 	}
-	if err := storages.InitRedis(config.Conf.RedisConfig, redisLogConfig); err != nil {
+	if err := dbclient.InitRedis(config.Conf.RedisConfig, redisLogConfig); err != nil {
 		return fmt.Errorf("init redis failed: " + err.Error())
 	}
 	return nil

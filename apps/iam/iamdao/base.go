@@ -3,7 +3,7 @@ package iamdao
 import (
 	"context"
 
-	"github.com/morehao/goark/pkg/storages"
+	"github.com/morehao/goark/pkg/dbclient"
 	"gorm.io/gorm"
 )
 
@@ -17,6 +17,6 @@ func (base *Base) DB(ctx context.Context) (db *gorm.DB) {
 		return base.Tx.WithContext(ctx)
 	}
 
-	db = storages.DBIam.WithContext(ctx)
+	db = dbclient.DBIam.WithContext(ctx)
 	return
 }

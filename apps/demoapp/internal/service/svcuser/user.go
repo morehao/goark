@@ -11,8 +11,8 @@ import (
 	"github.com/morehao/goark/apps/demoapp/object/objcommon"
 	"github.com/morehao/goark/apps/demoapp/object/objuser"
 	"github.com/morehao/goark/pkg/code"
-	"github.com/morehao/goark/pkg/storages"
-	"github.com/morehao/golib/dbstore/dbes"
+	"github.com/morehao/goark/pkg/dbclient"
+	"github.com/morehao/golib/database/dbes"
 	"github.com/morehao/golib/gcontext/gincontext"
 	"github.com/morehao/golib/glog"
 	"github.com/morehao/golib/gutils"
@@ -115,7 +115,7 @@ func (svc *userSvc) Detail(ctx *gin.Context, req *dtouser.UserDetailReq) (*dtous
 func (svc *userSvc) PageList(ctx *gin.Context, req *dtouser.UserPageListReq) (*dtouser.UserPageListResp, error) {
 	// Redis 调用示例：获取用户列表缓存
 	cacheKey := "user:list:cache"
-	_, redisErr := storages.DemoRedis.Get(ctx, cacheKey).Result()
+	_, redisErr := dbclient.DemoRedis.Get(ctx, cacheKey).Result()
 	if redisErr != nil {
 		glog.Debugf(ctx, "[svcuser.UserPageList] redis get fail, key:%s, err:%v", cacheKey, redisErr)
 	}
@@ -124,10 +124,10 @@ func (svc *userSvc) PageList(ctx *gin.Context, req *dtouser.UserPageListReq) (*d
 	query := dbes.NewBuilder().SetQuery(dbes.BuildMap("match_all", dbes.Map{})).Build()
 	var buf bytes.Buffer
 	if err := json.NewEncoder(&buf).Encode(query); err == nil {
-		_, esErr := storages.DemoES.Search(
-			storages.DemoES.Search.WithContext(ctx),
-			storages.DemoES.Search.WithIndex("users"),
-			storages.DemoES.Search.WithBody(&buf),
+		_, esErr := dbclient.DemoES.Search(
+			dbclient.DemoES.Search.WithContext(ctx),
+			dbclient.DemoES.Search.WithIndex("users"),
+			dbclient.DemoES.Search.WithBody(&buf),
 		)
 		if esErr != nil {
 			glog.Debugf(ctx, "[svcuser.UserPageList] es search fail, err:%v", esErr)

@@ -1,10 +1,10 @@
-package storages
+package dbclient
 
 import (
 	"fmt"
 
 	"github.com/elastic/go-elasticsearch/v8"
-	"github.com/morehao/golib/dbstore/dbes"
+	"github.com/morehao/golib/database/dbes"
 	"github.com/morehao/golib/glog"
 )
 

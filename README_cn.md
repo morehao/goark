@@ -50,7 +50,7 @@
 │   └── build
 ├── pkg
 │   ├── code
-│   ├── storages
+│   ├── dbclient
 │   ├── testutil
 │   └── utils
 └── scripts

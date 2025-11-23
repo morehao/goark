@@ -125,7 +125,7 @@ import (
     "os"
     
     "github.com/myproject/apps/myapp/config"
-    "github.com/myproject/pkg/storages"
+    "github.com/myproject/pkg/dbclient"
     "github.com/morehao/golib/glog"
 )
 
@@ -181,7 +181,7 @@ func (m *myappInitializer) Initialize() error {
     
     // 4. 初始化资源
     if len(config.Conf.MysqlConfigs) > 0 {
-        if err := storages.InitMultiMysql(config.Conf.MysqlConfigs); err != nil {
+        if err := dbclient.InitMultiMysql(config.Conf.MysqlConfigs); err != nil {
             return fmt.Errorf("init mysql: %w", err)
         }
     }

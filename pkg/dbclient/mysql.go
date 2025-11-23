@@ -1,9 +1,9 @@
-package storages
+package dbclient
 
 import (
 	"fmt"
 
-	"github.com/morehao/golib/dbstore/dbmysql"
+	"github.com/morehao/golib/database/dbmysql"
 	"github.com/morehao/golib/glog"
 	"gorm.io/gorm"
 )

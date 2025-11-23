@@ -1,7 +1,7 @@
-package storages
+package dbclient
 
 import (
-	"github.com/morehao/golib/dbstore/dbredis"
+	"github.com/morehao/golib/database/dbredis"
 	"github.com/morehao/golib/glog"
 	"github.com/redis/go-redis/v9"
 )

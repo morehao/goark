@@ -6,9 +6,9 @@ import (
 	"path/filepath"
 
 	"github.com/morehao/golib/conf"
-	"github.com/morehao/golib/dbstore/dbes"
-	"github.com/morehao/golib/dbstore/dbmysql"
-	"github.com/morehao/golib/dbstore/dbredis"
+	"github.com/morehao/golib/database/dbes"
+	"github.com/morehao/golib/database/dbmysql"
+	"github.com/morehao/golib/database/dbredis"
 	"github.com/morehao/golib/glog"
 	"github.com/morehao/golib/protocol/ghttp"
 )

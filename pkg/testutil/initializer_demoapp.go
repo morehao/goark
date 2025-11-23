@@ -5,7 +5,7 @@ import (
 	"os"
 
 	"github.com/morehao/goark/apps/demoapp/config"
-	"github.com/morehao/goark/pkg/storages"
+	"github.com/morehao/goark/pkg/dbclient"
 	"github.com/morehao/golib/glog"
 )
 
@@ -83,7 +83,7 @@ func (d *demoappInitializer) initResources() error {
 		if cfg, ok := config.Conf.Log["gorm"]; ok {
 			gormLogConfig = &cfg
 		}
-		if err := storages.InitMultiMysql(config.Conf.MysqlConfigs, gormLogConfig); err != nil {
+		if err := dbclient.InitMultiMysql(config.Conf.MysqlConfigs, gormLogConfig); err != nil {
 			return fmt.Errorf("init mysql: %w", err)
 		}
 	}
@@ -94,7 +94,7 @@ func (d *demoappInitializer) initResources() error {
 		if cfg, ok := config.Conf.Log["redis"]; ok {
 			redisLogConfig = &cfg
 		}
-		if err := storages.InitRedis(config.Conf.RedisConfig, redisLogConfig); err != nil {
+		if err := dbclient.InitRedis(config.Conf.RedisConfig, redisLogConfig); err != nil {
 			return fmt.Errorf("init redis: %w", err)
 		}
 	}
@@ -105,7 +105,7 @@ func (d *demoappInitializer) initResources() error {
 		if cfg, ok := config.Conf.Log["es"]; ok {
 			esLogConfig = &cfg
 		}
-		if err := storages.InitMultiEs(config.Conf.ESConfigs, esLogConfig); err != nil {
+		if err := dbclient.InitMultiEs(config.Conf.ESConfigs, esLogConfig); err != nil {
 			return fmt.Errorf("init elasticsearch: %w", err)
 		}
 	}

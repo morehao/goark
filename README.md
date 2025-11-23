@@ -57,7 +57,7 @@ Follows [project-layout](https://github.com/golang-standards/project-layout). Cu
 │   └── build
 ├── pkg
 │   ├── code
-│   ├── storages
+│   ├── dbclient
 │   ├── testutil
 │   └── utils
 └── scripts

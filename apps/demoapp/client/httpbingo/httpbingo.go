@@ -14,12 +14,12 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/morehao/goark/apps/demoapp/config"
 	"github.com/morehao/goark/apps/demoapp/dao/daouser"
-	"github.com/morehao/goark/pkg/storages"
+	"github.com/morehao/goark/pkg/dbclient"
 	"github.com/morehao/golib/protocol/ghttp"
 )
 
 func Get(ctx *gin.Context, req *GetRequest) (*GetResponse, error) {
-	_, _ = storages.DemoRedis.Get(ctx, "").Result()
+	_, _ = dbclient.DemoRedis.Get(ctx, "").Result()
 	_, _ = daouser.NewUserDao().GetListByCond(ctx, &daouser.UserCond{})
 
 	cfg := config.Conf
