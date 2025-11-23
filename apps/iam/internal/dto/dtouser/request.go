@@ -10,14 +10,13 @@ type UserCreateReq struct {
 }
 
 type UserUpdateReq struct {
-	// ID 数据自增id
+	// ID 数据自增 ID
 	ID uint `json:"id" validate:"required" label:"数据自增id"`
-
 	objuser.UserBaseInfo
 }
 
 type UserDetailReq struct {
-	// ID 数据自增id
+	// ID 数据自增 ID
 	ID uint `json:"id" form:"id" validate:"required" label:"数据自增id"`
 }
 
@@ -26,6 +25,6 @@ type UserPageListReq struct {
 }
 
 type UserDeleteReq struct {
-	// ID 数据自增id
+	// ID 数据自增 ID
 	ID uint `json:"id" form:"id" validate:"required" label:"数据自增id"`
 }

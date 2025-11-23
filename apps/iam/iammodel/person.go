@@ -6,7 +6,7 @@ import (
 	"gorm.io/gorm"
 )
 
-// PersonEntity 自然人表结构体
+// PersonEntity 自然人用户表结构体
 type PersonEntity struct {
 	gorm.Model
 	AvatarUrl    string    `gorm:"column:avatar_url;type:varchar(255);;default '';comment: 头像URL"`

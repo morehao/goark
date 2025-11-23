@@ -8,7 +8,6 @@ import (
 	"github.com/morehao/goark/apps/iam/iamdao"
 	"github.com/morehao/goark/apps/iam/iammodel"
 	"github.com/morehao/goark/pkg/code"
-
 	"github.com/morehao/golib/gerror"
 	"github.com/morehao/golib/gutil"
 	"gorm.io/gorm"
@@ -64,7 +63,7 @@ func (d *UserDepartmentDao) BatchInsert(ctx context.Context, entityList iammodel
 }
 
 func (d *UserDepartmentDao) UpdateByID(ctx context.Context, id uint, entity *iammodel.UserDepartmentEntity) error {
-	db := d.DB(ctx).Table(d.TableName())
+	db := d.DB(ctx).Model(&iammodel.UserDepartmentEntity{}).Table(d.TableName())
 	if err := db.Where("id = ?", id).Updates(entity).Error; err != nil {
 		return code.GetError(gerror.DBUpdateErr).Wrapf(err, "[UserDepartmentDao] UpdateByID fail, id:%d entity:%s", id, gutil.ToJsonString(entity))
 	}
@@ -72,7 +71,7 @@ func (d *UserDepartmentDao) UpdateByID(ctx context.Context, id uint, entity *iam
 }
 
 func (d *UserDepartmentDao) UpdateMap(ctx context.Context, id uint, updateMap map[string]interface{}) error {
-	db := d.DB(ctx).Table(d.TableName())
+	db := d.DB(ctx).Model(&iammodel.UserDepartmentEntity{}).Table(d.TableName())
 	if err := db.Where("id = ?", id).Updates(updateMap).Error; err != nil {
 		return code.GetError(gerror.DBUpdateErr).Wrapf(err, "[UserDepartmentDao] UpdateMap fail, id:%d, updateMap:%s", id, gutil.ToJsonString(updateMap))
 	}
@@ -80,7 +79,7 @@ func (d *UserDepartmentDao) UpdateMap(ctx context.Context, id uint, updateMap ma
 }
 
 func (d *UserDepartmentDao) Delete(ctx context.Context, id, deletedBy uint) error {
-	db := d.DB(ctx).Table(d.TableName())
+	db := d.DB(ctx).Model(&iammodel.UserDepartmentEntity{}).Table(d.TableName())
 	updatedField := map[string]interface{}{
 		"deleted_time": time.Now(),
 		"deleted_by":   deletedBy,
@@ -125,7 +124,7 @@ func (d *UserDepartmentDao) GetListByCond(ctx context.Context, cond *UserDepartm
 }
 
 func (d *UserDepartmentDao) GetPageListByCond(ctx context.Context, cond *UserDepartmentCond) (iammodel.UserDepartmentEntityList, int64, error) {
-	db := d.DB(ctx).Table(d.TableName())
+	db := d.DB(ctx).Model(&iammodel.UserDepartmentEntity{}).Table(d.TableName())
 
 	d.BuildCondition(db, cond)
 
@@ -144,7 +143,7 @@ func (d *UserDepartmentDao) GetPageListByCond(ctx context.Context, cond *UserDep
 }
 
 func (d *UserDepartmentDao) CountByCond(ctx context.Context, cond *UserDepartmentCond) (int64, error) {
-	db := d.DB(ctx).Table(d.TableName())
+	db := d.DB(ctx).Model(&iammodel.UserDepartmentEntity{}).Table(d.TableName())
 
 	d.BuildCondition(db, cond)
 	var count int64

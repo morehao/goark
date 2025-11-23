@@ -14,5 +14,5 @@ func userRouter(routerGroup *gin.RouterGroup) {
 	routerGroup.POST("/user/delete", userCtr.Delete)
 	routerGroup.POST("/user/update", userCtr.Update)
 	routerGroup.GET("/user/detail", userCtr.Detail)
-	routerGroup.GET("/user/pageList", userCtr.PageList)
+	routerGroup.POST("/user/pageList", userCtr.PageList)
 }

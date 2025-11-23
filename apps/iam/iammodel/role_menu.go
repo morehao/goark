@@ -4,7 +4,7 @@ import (
 	"gorm.io/gorm"
 )
 
-// RoleMenuEntity 角色菜单关系表结构体
+// RoleMenuEntity 角色菜单关联表结构体
 type RoleMenuEntity struct {
 	gorm.Model
 	CompanyID uint `gorm:"column:company_id;type:bigint;not null;default '';comment: 公司ID(租户ID,冗余)"`

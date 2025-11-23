@@ -8,7 +8,6 @@ import (
 	"github.com/morehao/goark/apps/iam/iamdao"
 	"github.com/morehao/goark/apps/iam/iammodel"
 	"github.com/morehao/goark/pkg/code"
-
 	"github.com/morehao/golib/gerror"
 	"github.com/morehao/golib/gutil"
 	"gorm.io/gorm"
@@ -64,7 +63,7 @@ func (d *RoleMenuDao) BatchInsert(ctx context.Context, entityList iammodel.RoleM
 }
 
 func (d *RoleMenuDao) UpdateByID(ctx context.Context, id uint, entity *iammodel.RoleMenuEntity) error {
-	db := d.DB(ctx).Table(d.TableName())
+	db := d.DB(ctx).Model(&iammodel.RoleMenuEntity{}).Table(d.TableName())
 	if err := db.Where("id = ?", id).Updates(entity).Error; err != nil {
 		return code.GetError(gerror.DBUpdateErr).Wrapf(err, "[RoleMenuDao] UpdateByID fail, id:%d entity:%s", id, gutil.ToJsonString(entity))
 	}
@@ -72,7 +71,7 @@ func (d *RoleMenuDao) UpdateByID(ctx context.Context, id uint, entity *iammodel.
 }
 
 func (d *RoleMenuDao) UpdateMap(ctx context.Context, id uint, updateMap map[string]interface{}) error {
-	db := d.DB(ctx).Table(d.TableName())
+	db := d.DB(ctx).Model(&iammodel.RoleMenuEntity{}).Table(d.TableName())
 	if err := db.Where("id = ?", id).Updates(updateMap).Error; err != nil {
 		return code.GetError(gerror.DBUpdateErr).Wrapf(err, "[RoleMenuDao] UpdateMap fail, id:%d, updateMap:%s", id, gutil.ToJsonString(updateMap))
 	}
@@ -80,7 +79,7 @@ func (d *RoleMenuDao) UpdateMap(ctx context.Context, id uint, updateMap map[stri
 }
 
 func (d *RoleMenuDao) Delete(ctx context.Context, id, deletedBy uint) error {
-	db := d.DB(ctx).Table(d.TableName())
+	db := d.DB(ctx).Model(&iammodel.RoleMenuEntity{}).Table(d.TableName())
 	updatedField := map[string]interface{}{
 		"deleted_time": time.Now(),
 		"deleted_by":   deletedBy,
@@ -125,7 +124,7 @@ func (d *RoleMenuDao) GetListByCond(ctx context.Context, cond *RoleMenuCond) (ia
 }
 
 func (d *RoleMenuDao) GetPageListByCond(ctx context.Context, cond *RoleMenuCond) (iammodel.RoleMenuEntityList, int64, error) {
-	db := d.DB(ctx).Table(d.TableName())
+	db := d.DB(ctx).Model(&iammodel.RoleMenuEntity{}).Table(d.TableName())
 
 	d.BuildCondition(db, cond)
 
@@ -144,7 +143,7 @@ func (d *RoleMenuDao) GetPageListByCond(ctx context.Context, cond *RoleMenuCond)
 }
 
 func (d *RoleMenuDao) CountByCond(ctx context.Context, cond *RoleMenuCond) (int64, error) {
-	db := d.DB(ctx).Table(d.TableName())
+	db := d.DB(ctx).Model(&iammodel.RoleMenuEntity{}).Table(d.TableName())
 
 	d.BuildCondition(db, cond)
 	var count int64

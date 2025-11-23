@@ -9,9 +9,10 @@ import (
 // tenantRouter 初始化租户管理路由信息
 func tenantRouter(routerGroup *gin.RouterGroup) {
 	tenantCtr := ctrtenant.NewTenantCtr()
+
 	routerGroup.POST("/tenant/create", tenantCtr.Create)
 	routerGroup.POST("/tenant/delete", tenantCtr.Delete)
 	routerGroup.POST("/tenant/update", tenantCtr.Update)
 	routerGroup.GET("/tenant/detail", tenantCtr.Detail)
-	routerGroup.GET("/tenant/pageList", tenantCtr.PageList)
+	routerGroup.POST("/tenant/pageList", tenantCtr.PageList)
 }

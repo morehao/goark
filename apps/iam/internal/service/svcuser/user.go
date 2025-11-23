@@ -1,8 +1,6 @@
 package svcuser
 
 import (
-	"time"
-
 	"github.com/gin-gonic/gin"
 	"github.com/morehao/goark/apps/iam/iamdao/daouser"
 	"github.com/morehao/goark/apps/iam/iammodel"
