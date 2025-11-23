@@ -1,11 +1,11 @@
-package storages
+package dbclient
 
 import (
 	"fmt"
 
 	"github.com/elastic/go-elasticsearch/v8"
-	"github.com/morehao/goark/apps/demoapp/config"
-	"github.com/morehao/golib/dbstore/dbes"
+	"github.com/morehao/golib/database/dbes"
+	"github.com/morehao/golib/glog"
 )
 
 var (
@@ -16,14 +16,13 @@ const (
 	ESServiceDemo = "demoapp"
 )
 
-func InitMultiEs(configs []dbes.ESConfig) error {
+func InitMultiEs(configs []dbes.ESConfig, logConfig *glog.LogConfig) error {
 	if len(configs) == 0 {
 		return fmt.Errorf("es config is empty")
 	}
 	var opts []dbes.Option
-	logCfg, ok := config.Conf.Log["es"]
-	if ok {
-		opts = append(opts, dbes.WithLogConfig(&logCfg))
+	if logConfig != nil {
+		opts = append(opts, dbes.WithLogConfig(logConfig))
 	}
 	for _, cfg := range configs {
 		client, _, err := dbes.InitES(&cfg, opts...)

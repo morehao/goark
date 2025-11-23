@@ -1,0 +1,18 @@
+package router
+
+import (
+	"github.com/morehao/goark/apps/iam/internal/controller/ctruser"
+
+	"github.com/gin-gonic/gin"
+)
+
+// userRouter 初始化用户管理路由信息
+func userRouter(routerGroup *gin.RouterGroup) {
+	userCtr := ctruser.NewUserCtr()
+
+	routerGroup.POST("/user/create", userCtr.Create)
+	routerGroup.POST("/user/delete", userCtr.Delete)
+	routerGroup.POST("/user/update", userCtr.Update)
+	routerGroup.GET("/user/detail", userCtr.Detail)
+	routerGroup.GET("/user/pageList", userCtr.PageList)
+}

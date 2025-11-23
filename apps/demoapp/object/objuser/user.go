@@ -1,7 +1,12 @@
 package objuser
 
 type UserBaseInfo struct {
-	CompanyID    uint   `json:"companyId" form:"companyId"`       // 公司id
-	DepartmentID uint   `json:"departmentId" form:"departmentId"` // 部门id
-	Name         string `json:"name" form:"name"`                 // 姓名
+	// CompanyID 公司id
+	CompanyID uint `json:"companyId" form:"companyId"`
+
+	// DepartmentID 部门id
+	DepartmentID uint `json:"departmentId" form:"departmentId"`
+
+	// Name 姓名
+	Name string `json:"name" form:"name"`
 }

@@ -27,6 +27,13 @@ func GetError(code int) *gerror.Error {
 }
 
 func init() {
-	registerError(dbErrorMsgMap)
+	registerError(gerror.DBErrorMsgMap)
+	registerError(gerror.SystemErrorMsgMap)
+	registerError(gerror.AuthErrorMsgMap)
+	registerError(tenantErrorMsgMap)
+	registerError(companyErrorMsgMap)
+	registerError(departmentErrorMsgMap)
 	registerError(userErrorMsgMap)
+	registerError(menuErrorMsgMap)
+	registerError(roleErrorMsgMap)
 }

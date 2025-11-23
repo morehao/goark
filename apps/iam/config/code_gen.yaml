@@ -1,0 +1,26 @@
+mysql_dsn: root:123456@tcp(127.0.0.1:3306)/ark_iam?charset=utf8mb4&parseTime=True&loc=Local
+layer_parent_dir_map:
+  controller: internal
+  service: internal
+  dto: internal
+layer_name_map:
+  model: iammodel
+  dao: iamdao
+module:
+  package_name: permission
+  description: 角色菜单关系
+  table_name: iam_role_menu
+  table_prefix: iam_ 
+model:
+  package_name: permission
+  description: 角色菜单关系
+  table_name: iam_role_menu
+  table_prefix: iam_ 
+api:
+  package_name: tenants
+  target_filename: tenants.go
+  function_name: DisableTenant
+  http_method: POST
+  description: 禁用租户
+  api_doc_tag: 租户管理
+

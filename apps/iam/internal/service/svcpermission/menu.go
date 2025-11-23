@@ -1,0 +1,175 @@
+package svcpermission
+
+import (
+	"github.com/gin-gonic/gin"
+	"github.com/morehao/goark/apps/iam/iamdao/daopermission"
+	"github.com/morehao/goark/apps/iam/iammodel"
+	"github.com/morehao/goark/apps/iam/internal/dto/dtopermission"
+	"github.com/morehao/goark/apps/iam/object/objpermission"
+	"github.com/morehao/goark/pkg/code"
+	"github.com/morehao/golib/gcontext/gincontext"
+	"github.com/morehao/golib/glog"
+	"github.com/morehao/golib/gobject"
+	"github.com/morehao/golib/gutil"
+)
+
+type MenuSvc interface {
+	Create(ctx *gin.Context, req *dtopermission.MenuCreateReq) (*dtopermission.MenuCreateResp, error)
+	Delete(ctx *gin.Context, req *dtopermission.MenuDeleteReq) error
+	Update(ctx *gin.Context, req *dtopermission.MenuUpdateReq) error
+	Detail(ctx *gin.Context, req *dtopermission.MenuDetailReq) (*dtopermission.MenuDetailResp, error)
+	PageList(ctx *gin.Context, req *dtopermission.MenuPageListReq) (*dtopermission.MenuPageListResp, error)
+}
+
+type menuSvc struct {
+}
+
+var _ MenuSvc = (*menuSvc)(nil)
+
+func NewMenuSvc() MenuSvc {
+	return &menuSvc{}
+}
+
+// Create 创建菜单管理
+func (svc *menuSvc) Create(ctx *gin.Context, req *dtopermission.MenuCreateReq) (*dtopermission.MenuCreateResp, error) {
+	insertEntity := &iammodel.MenuEntity{
+		CacheType:     req.CacheType,
+		CompanyID:     req.CompanyID,
+		ComponentPath: req.ComponentPath,
+		Icon:          req.Icon,
+		LinkType:      req.LinkType,
+		MenuCode:      req.MenuCode,
+		MenuName:      req.MenuName,
+		MenuType:      req.MenuType,
+		ParentID:      req.ParentID,
+		Permission:    req.Permission,
+		RoutePath:     req.RoutePath,
+		SortOrder:     req.SortOrder,
+		Status:        req.Status,
+		Visibility:    req.Visibility,
+	}
+
+	if err := daopermission.NewMenuDao().Insert(ctx, insertEntity); err != nil {
+		glog.Errorf(ctx, "[svcpermission.MenuCreate] daoMenu Create fail, err:%v, req:%s", err, gutil.ToJsonString(req))
+		return nil, code.GetError(code.MenuCreateError)
+	}
+	return &dtopermission.MenuCreateResp{
+		ID: insertEntity.ID,
+	}, nil
+}
+
+// Delete 删除菜单管理
+func (svc *menuSvc) Delete(ctx *gin.Context, req *dtopermission.MenuDeleteReq) error {
+	userID := gincontext.GetUserID(ctx)
+
+	if err := daopermission.NewMenuDao().Delete(ctx, req.ID, userID); err != nil {
+		glog.Errorf(ctx, "[svcpermission.Delete] daoMenu Delete fail, err:%v, req:%s", err, gutil.ToJsonString(req))
+		return code.GetError(code.MenuDeleteError)
+	}
+	return nil
+}
+
+// Update 更新菜单管理
+func (svc *menuSvc) Update(ctx *gin.Context, req *dtopermission.MenuUpdateReq) error {
+
+	updateEntity := &iammodel.MenuEntity{
+		CacheType:     req.CacheType,
+		CompanyID:     req.CompanyID,
+		ComponentPath: req.ComponentPath,
+		Icon:          req.Icon,
+		LinkType:      req.LinkType,
+		MenuCode:      req.MenuCode,
+		MenuName:      req.MenuName,
+		MenuType:      req.MenuType,
+		ParentID:      req.ParentID,
+		Permission:    req.Permission,
+		RoutePath:     req.RoutePath,
+		SortOrder:     req.SortOrder,
+		Status:        req.Status,
+		Visibility:    req.Visibility,
+	}
+	if err := daopermission.NewMenuDao().UpdateByID(ctx, req.ID, updateEntity); err != nil {
+		glog.Errorf(ctx, "[svcpermission.MenuUpdate] daoMenu UpdateByID fail, err:%v, req:%s", err, gutil.ToJsonString(req))
+		return code.GetError(code.MenuUpdateError)
+	}
+	return nil
+}
+
+// Detail 根据id获取菜单管理
+func (svc *menuSvc) Detail(ctx *gin.Context, req *dtopermission.MenuDetailReq) (*dtopermission.MenuDetailResp, error) {
+	detailEntity, err := daopermission.NewMenuDao().GetById(ctx, req.ID)
+	if err != nil {
+		glog.Errorf(ctx, "[svcpermission.MenuDetail] daoMenu GetById fail, err:%v, req:%s", err, gutil.ToJsonString(req))
+		return nil, code.GetError(code.MenuGetDetailError)
+	}
+	// 判断是否存在
+	if detailEntity == nil || detailEntity.ID == 0 {
+		return nil, code.GetError(code.MenuNotExistError)
+	}
+	resp := &dtopermission.MenuDetailResp{
+		ID: detailEntity.ID,
+		MenuBaseInfo: objpermission.MenuBaseInfo{
+			CacheType:     detailEntity.CacheType,
+			CompanyID:     detailEntity.CompanyID,
+			ComponentPath: detailEntity.ComponentPath,
+			Icon:          detailEntity.Icon,
+			LinkType:      detailEntity.LinkType,
+			MenuCode:      detailEntity.MenuCode,
+			MenuName:      detailEntity.MenuName,
+			MenuType:      detailEntity.MenuType,
+			ParentID:      detailEntity.ParentID,
+			Permission:    detailEntity.Permission,
+			RoutePath:     detailEntity.RoutePath,
+			SortOrder:     detailEntity.SortOrder,
+			Status:        detailEntity.Status,
+			Visibility:    detailEntity.Visibility,
+		},
+		OperatorBaseInfo: gobject.OperatorBaseInfo{
+			CreatedAt: detailEntity.CreatedAt.Unix(),
+			UpdatedAt: detailEntity.UpdatedAt.Unix(),
+		},
+	}
+	return resp, nil
+}
+
+// PageList 分页获取菜单管理列表
+func (svc *menuSvc) PageList(ctx *gin.Context, req *dtopermission.MenuPageListReq) (*dtopermission.MenuPageListResp, error) {
+	cond := &daopermission.MenuCond{
+		Page:     req.Page,
+		PageSize: req.PageSize,
+	}
+	dataList, total, err := daopermission.NewMenuDao().GetPageListByCond(ctx, cond)
+	if err != nil {
+		glog.Errorf(ctx, "[svcpermission.MenuPageList] daoMenu GetPageListByCond fail, err:%v, req:%s", err, gutil.ToJsonString(req))
+		return nil, code.GetError(code.MenuGetPageListError)
+	}
+	list := make([]dtopermission.MenuPageListItem, 0, len(dataList))
+	for _, v := range dataList {
+		list = append(list, dtopermission.MenuPageListItem{
+			ID: v.ID,
+			MenuBaseInfo: objpermission.MenuBaseInfo{
+				CacheType:     v.CacheType,
+				CompanyID:     v.CompanyID,
+				ComponentPath: v.ComponentPath,
+				Icon:          v.Icon,
+				LinkType:      v.LinkType,
+				MenuCode:      v.MenuCode,
+				MenuName:      v.MenuName,
+				MenuType:      v.MenuType,
+				ParentID:      v.ParentID,
+				Permission:    v.Permission,
+				RoutePath:     v.RoutePath,
+				SortOrder:     v.SortOrder,
+				Status:        v.Status,
+				Visibility:    v.Visibility,
+			},
+			OperatorBaseInfo: gobject.OperatorBaseInfo{
+				UpdatedAt: v.UpdatedAt.Unix(),
+			},
+		})
+	}
+	return &dtopermission.MenuPageListResp{
+		List:  list,
+		Total: total,
+	}, nil
+}

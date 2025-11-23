@@ -40,7 +40,7 @@
 │   │   ├── middleware
 │   │   ├── model
 │   │   ├── object
-│   │   │   ├── objcommon
+│   │   │   ├── gobject
 │   │   │   └── objuser
 │   │   ├── router
 │   │   └── scripts
@@ -50,7 +50,7 @@
 │   └── build
 ├── pkg
 │   ├── code
-│   ├── storages
+│   ├── dbclient
 │   ├── testutil
 │   └── utils
 └── scripts
