@@ -7,8 +7,8 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/morehao/goark/apps/iam"
 	"github.com/morehao/goark/apps/iam/config"
+	"github.com/morehao/golib/biz/gmiddleware/ginmiddleware"
 	"github.com/morehao/golib/glog"
-	"github.com/morehao/golib/gmiddleware/ginmiddleware"
 )
 
 func main() {

@@ -2,7 +2,7 @@ package dtotenant
 
 import (
 	"github.com/morehao/goark/apps/iam/object/objtenant"
-	"github.com/morehao/golib/gobject"
+	"github.com/morehao/golib/biz/gobject"
 )
 
 type TenantCreateReq struct {

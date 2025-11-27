@@ -1,9 +1,8 @@
 package router
 
 import (
-	"github.com/morehao/goark/apps/iam/internal/controller/ctrtenant"
-
 	"github.com/gin-gonic/gin"
+	"github.com/morehao/goark/apps/iam/internal/controller/ctrtenant"
 )
 
 // tenantRouter 初始化租户管理路由信息
