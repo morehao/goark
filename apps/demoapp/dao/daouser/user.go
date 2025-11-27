@@ -8,7 +8,7 @@ import (
 	"github.com/morehao/goark/apps/demoapp/dao"
 	"github.com/morehao/goark/apps/demoapp/model"
 	"github.com/morehao/goark/pkg/code"
-	"github.com/morehao/golib/gerror"
+	"github.com/morehao/golib/biz/gconstant"
 	"github.com/morehao/golib/gutil"
 	"gorm.io/gorm"
 )
@@ -45,19 +45,19 @@ func (d *UserDao) WithTx(db *gorm.DB) *UserDao {
 func (d *UserDao) Insert(ctx context.Context, entity *model.UserEntity) error {
 	db := d.DB(ctx).Table(d.TableName())
 	if err := db.Create(entity).Error; err != nil {
-		return code.GetError(gerror.DBInsertErr).Wrapf(err, "[UserDao] Insert fail, entity:%s", gutil.ToJsonString(entity))
+		return code.GetError(gconstant.DBInsertErr).Wrapf(err, "[UserDao] Insert fail, entity:%s", gutil.ToJsonString(entity))
 	}
 	return nil
 }
 
 func (d *UserDao) BatchInsert(ctx context.Context, entityList model.UserEntityList) error {
 	if len(entityList) == 0 {
-		return code.GetError(gerror.DBInsertErr).Wrapf(nil, "[UserDao] BatchInsert fail, entityList is empty")
+		return code.GetError(gconstant.DBInsertErr).Wrapf(nil, "[UserDao] BatchInsert fail, entityList is empty")
 	}
 
 	db := d.DB(ctx).Table(d.TableName())
 	if err := db.Create(entityList).Error; err != nil {
-		return code.GetError(gerror.DBInsertErr).Wrapf(err, "[UserDao] BatchInsert fail, entityList:%s", gutil.ToJsonString(entityList))
+		return code.GetError(gconstant.DBInsertErr).Wrapf(err, "[UserDao] BatchInsert fail, entityList:%s", gutil.ToJsonString(entityList))
 	}
 	return nil
 }
@@ -65,7 +65,7 @@ func (d *UserDao) BatchInsert(ctx context.Context, entityList model.UserEntityLi
 func (d *UserDao) UpdateByID(ctx context.Context, id uint, entity *model.UserEntity) error {
 	db := d.DB(ctx).Table(d.TableName())
 	if err := db.Where("id = ?", id).Updates(entity).Error; err != nil {
-		return code.GetError(gerror.DBUpdateErr).Wrapf(err, "[UserDao] UpdateByID fail, id:%d entity:%s", id, gutil.ToJsonString(entity))
+		return code.GetError(gconstant.DBUpdateErr).Wrapf(err, "[UserDao] UpdateByID fail, id:%d entity:%s", id, gutil.ToJsonString(entity))
 	}
 	return nil
 }
@@ -73,7 +73,7 @@ func (d *UserDao) UpdateByID(ctx context.Context, id uint, entity *model.UserEnt
 func (d *UserDao) UpdateMap(ctx context.Context, id uint, updateMap map[string]interface{}) error {
 	db := d.DB(ctx).Table(d.TableName())
 	if err := db.Where("id = ?", id).Updates(updateMap).Error; err != nil {
-		return code.GetError(gerror.DBUpdateErr).Wrapf(err, "[UserDao] UpdateMap fail, id:%d, updateMap:%s", id, gutil.ToJsonString(updateMap))
+		return code.GetError(gconstant.DBUpdateErr).Wrapf(err, "[UserDao] UpdateMap fail, id:%d, updateMap:%s", id, gutil.ToJsonString(updateMap))
 	}
 	return nil
 }
@@ -85,7 +85,7 @@ func (d *UserDao) Delete(ctx context.Context, id, deletedBy uint) error {
 		"deleted_by":   deletedBy,
 	}
 	if err := db.Where("id = ?", id).Updates(updatedField).Error; err != nil {
-		return code.GetError(gerror.DBDeleteErr).Wrapf(err, "[UserDao] Delete fail, id:%d, deletedBy:%d", id, deletedBy)
+		return code.GetError(gconstant.DBDeleteErr).Wrapf(err, "[UserDao] Delete fail, id:%d, deletedBy:%d", id, deletedBy)
 	}
 	return nil
 }
@@ -94,7 +94,7 @@ func (d *UserDao) GetById(ctx context.Context, id uint) (*model.UserEntity, erro
 	var entity model.UserEntity
 	db := d.DB(ctx).Table(d.TableName())
 	if err := db.Where("id = ?", id).Find(&entity).Error; err != nil {
-		return nil, code.GetError(gerror.DBFindErr).Wrapf(err, "[UserDao] GetById fail, id:%d", id)
+		return nil, code.GetError(gconstant.DBFindErr).Wrapf(err, "[UserDao] GetById fail, id:%d", id)
 	}
 	return &entity, nil
 }
@@ -106,7 +106,7 @@ func (d *UserDao) GetByCond(ctx context.Context, cond *UserCond) (*model.UserEnt
 	d.BuildCondition(db, cond)
 
 	if err := db.Find(&entity).Error; err != nil {
-		return nil, code.GetError(gerror.DBFindErr).Wrapf(err, "[UserDao] GetById fail, cond:%s", gutil.ToJsonString(cond))
+		return nil, code.GetError(gconstant.DBFindErr).Wrapf(err, "[UserDao] GetById fail, cond:%s", gutil.ToJsonString(cond))
 	}
 	return &entity, nil
 }
@@ -118,7 +118,7 @@ func (d *UserDao) GetListByCond(ctx context.Context, cond *UserCond) (model.User
 	d.BuildCondition(db, cond)
 
 	if err := db.Find(&entityList).Error; err != nil {
-		return nil, code.GetError(gerror.DBFindErr).Wrapf(err, "[UserDao] GetListByCond fail, cond:%s", gutil.ToJsonString(cond))
+		return nil, code.GetError(gconstant.DBFindErr).Wrapf(err, "[UserDao] GetListByCond fail, cond:%s", gutil.ToJsonString(cond))
 	}
 	return entityList, nil
 }
@@ -130,14 +130,14 @@ func (d *UserDao) GetPageListByCond(ctx context.Context, cond *UserCond) (model.
 
 	var count int64
 	if err := db.Count(&count).Error; err != nil {
-		return nil, 0, code.GetError(gerror.DBFindErr).Wrapf(err, "[UserDao] GetPageListByCond count fail, cond:%s", gutil.ToJsonString(cond))
+		return nil, 0, code.GetError(gconstant.DBFindErr).Wrapf(err, "[UserDao] GetPageListByCond count fail, cond:%s", gutil.ToJsonString(cond))
 	}
 	if cond.PageSize > 0 && cond.Page > 0 {
 		db.Offset((cond.Page - 1) * cond.PageSize).Limit(cond.PageSize)
 	}
 	var entityList model.UserEntityList
 	if err := db.Find(&entityList).Error; err != nil {
-		return nil, 0, code.GetError(gerror.DBFindErr).Wrapf(err, "[UserDao] GetPageListByCond find fail, cond:%s", gutil.ToJsonString(cond))
+		return nil, 0, code.GetError(gconstant.DBFindErr).Wrapf(err, "[UserDao] GetPageListByCond find fail, cond:%s", gutil.ToJsonString(cond))
 	}
 	return entityList, count, nil
 }
@@ -148,7 +148,7 @@ func (d *UserDao) CountByCond(ctx context.Context, cond *UserCond) (int64, error
 	d.BuildCondition(db, cond)
 	var count int64
 	if err := db.Count(&count).Error; err != nil {
-		return 0, code.GetError(gerror.DBFindErr).Wrapf(err, "[UserDao] CountByCond fail, cond:%s", gutil.ToJsonString(cond))
+		return 0, code.GetError(gconstant.DBFindErr).Wrapf(err, "[UserDao] CountByCond fail, cond:%s", gutil.ToJsonString(cond))
 	}
 	return count, nil
 }

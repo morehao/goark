@@ -1,9 +1,8 @@
 package router
 
 import (
-	"github.com/morehao/goark/apps/iam/internal/controller/ctruser"
-
 	"github.com/gin-gonic/gin"
+	"github.com/morehao/goark/apps/iam/internal/controller/ctruser"
 )
 
 // userRouter 初始化用户管理路由信息

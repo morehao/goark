@@ -2,7 +2,7 @@ package dtoorg
 
 import (
 	"github.com/morehao/goark/apps/iam/object/objorg"
-	"github.com/morehao/golib/gobject"
+	"github.com/morehao/golib/biz/gobject"
 )
 
 type CompanyCreateReq struct {

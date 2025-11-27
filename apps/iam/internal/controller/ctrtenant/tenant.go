@@ -4,7 +4,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/morehao/goark/apps/iam/internal/dto/dtotenant"
 	"github.com/morehao/goark/apps/iam/internal/service/svctenant"
-	"github.com/morehao/golib/gcontext/gincontext"
+	"github.com/morehao/golib/biz/gcontext/gincontext"
 )
 
 type TenantCtr interface {

@@ -3,12 +3,12 @@ package router
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/morehao/goark/apps/iam/config"
-	"github.com/morehao/golib/grouter/ginrouter"
+	"github.com/morehao/golib/biz/grouter/ginrouter"
 )
 
 type RouterGroups struct {
-	AuthGroup	*gin.RouterGroup
-	NoAuthGroup	*gin.RouterGroup
+	AuthGroup   *gin.RouterGroup
+	NoAuthGroup *gin.RouterGroup
 }
 
 func RegisterRouter(groups *RouterGroups, appName string) {

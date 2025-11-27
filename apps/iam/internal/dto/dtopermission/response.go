@@ -2,7 +2,7 @@ package dtopermission
 
 import (
 	"github.com/morehao/goark/apps/iam/object/objpermission"
-	"github.com/morehao/golib/gobject"
+	"github.com/morehao/golib/biz/gobject"
 )
 
 type MenuCreateResp struct {

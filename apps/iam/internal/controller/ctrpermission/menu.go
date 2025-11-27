@@ -4,7 +4,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/morehao/goark/apps/iam/internal/dto/dtopermission"
 	"github.com/morehao/goark/apps/iam/internal/service/svcpermission"
-	"github.com/morehao/golib/gcontext/gincontext"
+	"github.com/morehao/golib/biz/gcontext/gincontext"
 )
 
 type MenuCtr interface {

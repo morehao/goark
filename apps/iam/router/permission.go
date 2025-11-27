@@ -1,9 +1,8 @@
 package router
 
 import (
-	"github.com/morehao/goark/apps/iam/internal/controller/ctrpermission"
-
 	"github.com/gin-gonic/gin"
+	"github.com/morehao/goark/apps/iam/internal/controller/ctrpermission"
 )
 
 // menuRouter 初始化菜单管理路由信息

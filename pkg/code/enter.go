@@ -3,6 +3,7 @@ package code
 import (
 	"fmt"
 
+	"github.com/morehao/golib/biz/gconstant"
 	"github.com/morehao/golib/gerror"
 )
 
@@ -28,9 +29,9 @@ func GetError(code int) *gerror.Error {
 
 func init() {
 	// 业务错误码从110100开始
-	registerError(gerror.DBErrorMsgMap)
-	registerError(gerror.SystemErrorMsgMap)
-	registerError(gerror.AuthErrorMsgMap)
+	registerError(gconstant.DBErrorMsgMap)
+	registerError(gconstant.SystemErrorMsgMap)
+	registerError(gconstant.AuthErrorMsgMap)
 	registerError(tenantErrorMsgMap)
 	registerError(companyErrorMsgMap)
 	registerError(departmentErrorMsgMap)

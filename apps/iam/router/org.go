@@ -1,9 +1,8 @@
 package router
 
 import (
-	"github.com/morehao/goark/apps/iam/internal/controller/ctrorg"
-
 	"github.com/gin-gonic/gin"
+	"github.com/morehao/goark/apps/iam/internal/controller/ctrorg"
 )
 
 // companyRouter 初始化公司管理路由信息

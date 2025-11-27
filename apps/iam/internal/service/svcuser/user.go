@@ -7,9 +7,9 @@ import (
 	"github.com/morehao/goark/apps/iam/internal/dto/dtouser"
 	"github.com/morehao/goark/apps/iam/object/objuser"
 	"github.com/morehao/goark/pkg/code"
-	"github.com/morehao/golib/gcontext/gincontext"
+	"github.com/morehao/golib/biz/gcontext/gincontext"
+	"github.com/morehao/golib/biz/gobject"
 	"github.com/morehao/golib/glog"
-	"github.com/morehao/golib/gobject"
 	"github.com/morehao/golib/gutil"
 )
 
@@ -36,9 +36,7 @@ func (svc *userSvc) Create(ctx *gin.Context, req *dtouser.UserCreateReq) (*dtous
 		CompanyID:   req.CompanyID,
 		DeptID:      req.DeptID,
 		EmployeeNo:  req.EmployeeNo,
-		EntryDate:   time.Unix(req.EntryDate, 0),
 		JobLevel:    req.JobLevel,
-		LastLoginAt: time.Unix(req.LastLoginAt, 0),
 		LastLoginIp: req.LastLoginIp,
 		LoginCount:  req.LoginCount,
 		PersonID:    req.PersonID,
@@ -75,9 +73,7 @@ func (svc *userSvc) Update(ctx *gin.Context, req *dtouser.UserUpdateReq) error {
 		CompanyID:   req.CompanyID,
 		DeptID:      req.DeptID,
 		EmployeeNo:  req.EmployeeNo,
-		EntryDate:   time.Unix(req.EntryDate, 0),
 		JobLevel:    req.JobLevel,
-		LastLoginAt: time.Unix(req.LastLoginAt, 0),
 		LastLoginIp: req.LastLoginIp,
 		LoginCount:  req.LoginCount,
 		PersonID:    req.PersonID,

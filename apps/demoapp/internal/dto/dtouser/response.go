@@ -2,7 +2,7 @@ package dtouser
 
 import (
 	"github.com/morehao/goark/apps/demoapp/object/objuser"
-	"github.com/morehao/golib/gobject"
+	"github.com/morehao/golib/biz/gobject"
 )
 
 type UserCreateResp struct {
