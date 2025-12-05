@@ -11,7 +11,7 @@ type RoleEntity struct {
 	CreatedBy   uint   `gorm:"column:created_by;type:bigint;not null;default 0;comment: 创建人ID"`
 	DataScope   string `gorm:"column:data_scope;type:varchar(16);;default all;comment: 数据权限范围: all-全部 dept_and_sub-本部门及以下 dept-本部门 self-仅本人 custom-自定义"`
 	DeletedBy   uint   `gorm:"column:deleted_by;type:bigint;not null;default 0;comment: 删除人ID"`
-	Description string `gorm:"column:description;type:varchar(500);;default '';comment: 角色描述"`
+	Description string `gorm:"column:description;type:varchar(255);;default '';comment: 角色描述"`
 	RoleCode    string `gorm:"column:role_code;type:varchar(32);not null;default '';comment: 角色编码"`
 	RoleName    string `gorm:"column:role_name;type:varchar(64);not null;default '';comment: 角色名称"`
 	RoleType    string `gorm:"column:role_type;type:varchar(16);;default custom;comment: 角色类型: custom-自定义 system-系统内置"`
